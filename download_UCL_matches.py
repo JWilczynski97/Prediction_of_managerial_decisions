@@ -1,6 +1,6 @@
 # Copyright (c) Jakub Wilczyński 2020
 from time import asctime, localtime, sleep
-from os import mkdirs, path, getcwd
+from os import mkdir, path, getcwd
 from random import uniform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -22,8 +22,7 @@ number_of_downloaded_matches = 0  # it helps to number the downloaded files
 
 ########## functions ##########
 def create_directory_for_files(folder):
-    """This function creates directory (if doesn't exist) for the files included downloaded websites.
-
+    """This function creates directory (if doesn't exist) for the files included downloaded websites.\n
     :param folder: str, name of folder coming from current season name"""
     if not path.exists(getcwd() + folder):
         mkdirs(getcwd() + folder)
@@ -35,8 +34,7 @@ def cookies_accept():
     sleep(uniform(3, 5))  # time sleep generator
 
 def is_element_clickable(element):
-    """If the element isn't clickable, the current page waits next 3-4 seconds.
-
+    """If the element isn't clickable, the current page waits next 3-4 seconds.\n
     :param element: Element, the element from the current page"""
     if not element_to_be_clickable(element):
         print("The element is not yet clickable. Waiting...")
@@ -45,8 +43,7 @@ def is_element_clickable(element):
         raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
 
 def select_season(selected_season):
-    """This function selects the correct season from "ALL_SEASONS" in the drop down menu on the start page.
-
+    """This function selects the correct season from "ALL_SEASONS" in the drop down menu on the start page.\n
     :param selected_season: str, name of options in drop down menu 'season' """
     drop_down_menu = browser.find_element_by_name("seasons")
     is_element_clickable(drop_down_menu)
@@ -132,8 +129,7 @@ def download_websites():
 
 
 def save_file(is_preview, html_code):
-    """This function saves the html file with squad.
-
+    """This function saves the html file with squad.\n
     :param is_preview: bool, defines that currant website contains preview squad or not
     :param html_code: str, contains html code od current downloaded website
     """
@@ -156,8 +152,8 @@ browser.get(
     "https://www.whoscored.com/Regions/250/Tournaments/12/Europe-Champions-League")  # Program starts from this website
 sleep(uniform(8, 10))
 cookies_accept()
-for current_season in ALL_SEASONS:  # all UEFA Champions League matches from all seasons are downloaded
-    season = current_season.replace("/", "_")
+for current_season in ALL_SEASONS:              # all UEFA Champions League matches from all seasons are downloaded
+    season = current_season.replace("/", "_")   # name of directory can't include "/"
     create_directory_for_files(season)
     select_season(current_season)
     select_stage("Champions League Group Stages")

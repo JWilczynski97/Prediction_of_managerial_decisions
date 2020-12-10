@@ -3,17 +3,17 @@ from os import listdir
 from bs4 import BeautifulSoup
 
 ##### important structures #####
-list_of_websites = listdir("Matches")  # list of files with data
+ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 Results = {}  # dictionary included the IDs of players whose performance was correctly predicted {match : [list_of_players]}
 
 ########## functions ##########
-def get_preview_squads(match_number):
+def get_preview_squads(season, match_number):
     """This function gets predicted squad from correct file with match number.
-    Returns squads of both teams in tuple of lists (team_1_preview, team_2_preview)
-
+    Returns squads of both teams in tuple of lists (team_1_preview, team_2_preview)\n
     :param match_number: int, number of match included in the name of file
+    :param season: string, name of season for current match
     """
-    with open("Matches\Match_" + str(match_number) + "_preview.html", "r", encoding="utf-8") as file:
+    with open(f"Matches\\{season.replace('/', '_')}\\Match_{str(match_number)}_preview.html", "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
         all_elements = soup.find_all("ul", class_="player")
         all_players = []
@@ -23,12 +23,12 @@ def get_preview_squads(match_number):
         team_2_preview = all_players[11:]
         return team_1_preview, team_2_preview
 
-def get_lineup_squads(match_number):
+def get_lineup_squads(season, match_number):
     """This function gets line-up squad from correct file with match number.
-    Returns squads of both teams in tuple of lists (team_1_squad, team_2_squad)
-
-    :param match_number: int, number of match included in the name of file"""
-    with open("Matches\Match " + str(match_number) + " squad.html", "r", encoding="utf-8") as file:
+    Returns squads of both teams in tuple of lists (team_1_squad, team_2_squad)\n
+    :param match_number: int, number of match included in the name of file
+    :param season: string, name of season for current match"""
+    with open(f"Matches\\{season.replace('/', '_')}\\Match_{str(match_number)}_squad.html", "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
         pitch_element = soup.find_all("div", class_="pitch-field")
         team_1_squad = []
@@ -44,8 +44,7 @@ def get_lineup_squads(match_number):
 def compare_squad(preview, squad):
     """This function compares predicted and starting squad.
     Returns results of comparison in tuple of two lists (team_1_results, team_2_results).
-    Every list includes IDs of players who were in line-up and predicted squad of the match.
-
+    Every list includes IDs of players who were in line-up and predicted squad of the match.\n
     :param preview: tuple of two lists, predicted squads of both teams
     :param squad: tuple of two lists, line-up's of both teams"""
     team_1_results = []
@@ -64,15 +63,21 @@ def compare_squad(preview, squad):
 
 def check_squads():
     """This function appends results of squads comparison to the dirctionary Results."""
-    number_of_matches = 0
-    for file in list_of_websites:
-        if file.find("preview") != -1:
-            number_of_matches += 1
-    for num in range(1, number_of_matches+1):
-        team_1_results, team_2_results = compare_squad(get_preview_squads(num), get_lineup_squads(num))
-        Results[f"Match_{str(num)}_team1"] = team_1_results
-        Results[f"Match_{str(num)}_team2"] = team_2_results
-        print(f"Match {str(num)} checked!")
+    matches_of_season, next_matches = 0, 0
+    for season in ALL_SEASONS:
+        matches_of_season += len(list(      # number of matches in current directory/season
+            filter(lambda x: "preview" in x,
+                   listdir(f"Matches\\{season.replace('/', '_')}")
+                   )))
+        for num in range(next_matches+1, matches_of_season+1):
+            team_1_results, team_2_results = compare_squad(get_preview_squads(season, num),
+                                                           get_lineup_squads(season, num))
+            Results[f"Match_{str(num)}_team1"] = team_1_results
+            Results[f"Match_{str(num)}_team2"] = team_2_results
+            print(f"Match {str(num)} checked!")
+        next_matches = matches_of_season
+        print(f"----- Season {season} checked!")
+
 
 def show_results():
     """This function shows results:
@@ -82,10 +87,19 @@ def show_results():
         correct_predictions += int(len(Results[match]))
     all_predictions = (len(Results.keys())) * 11
     print(Results)
-    print("All predicted performances: " + str(all_predictions))
+    print("RESULTS:\nAll predicted performances: " + str(all_predictions))
     print("Correct predicted performances: " + str(correct_predictions))
     print("Result: " + str(correct_predictions / all_predictions))
 
 ##### SCRIPT #####
 check_squads()
 show_results()
+
+"""
+RESULTS:
+All predicted performances: 24508
+Correct predicted performances: 20052
+Result: 0.8181818181818182
+"""
+
+
