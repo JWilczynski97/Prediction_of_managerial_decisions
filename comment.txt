@@ -1,0 +1,29 @@
+Skrypt pobierający strony ze przewidywanymi i wyjściowymi składami - gotowy
+Skrypt pobierający składy z kodu html pobrannych stron - gotowy
+
+
+Pobrane mecze:
+[sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
+sezon 2019/2020 	    1-96			97-108			TAK
+sezon 2018/2019		    109-204			205-233			TAK
+sezon 2017/2018		    234-329			330-358			TAK
+sezon 2016/2017		    359-454			455-483			TAK
+sezon 2015/2016		    484-579			580-608			TAK
+sezon 2014/2015		    609-704			705-733			TAK
+sezon 2013/2014         734-829		    830-858		    TAK
+sezon 2012/2013		    859-914			915-942			TAK
+sezon 2011/2012		    943-998			999-1027		TAK
+sezon 2010/2011        1028-1073       1074-1102        TAK
+
+Pobrane mecze zmienione:
+[sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
+sezon 2019/2020 	    995-			  -1102		    TAK
+sezon 2018/2019		    870-               -994       	TAK
+sezon 2017/2018		    745-			   -869		    TAK
+sezon 2016/2017		    620-			   -744			TAK
+sezon 2015/2016		    495-    	       -619			TAK
+sezon 2014/2015		    370-			   -494			TAK
+sezon 2013/2014         245-		       -369		    TAK
+sezon 2012/2013		    161-			   -244			TAK
+sezon 2011/2012		    76-                -160 		TAK
+sezon 2010/2011         1-                 -76          TAK
