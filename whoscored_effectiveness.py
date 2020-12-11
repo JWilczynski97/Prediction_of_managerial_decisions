@@ -64,7 +64,9 @@ def compare_squad(preview, squad):
 def check_squads():
     """This function appends results of squads comparison to the dirctionary Results."""
     matches_of_season, next_matches = 0, 0
+    errors = []
     for season in ALL_SEASONS:
+    #for season in ['2012/2013']:
         matches_of_season += len(list(      # number of matches in current directory/season
             filter(lambda x: "preview" in x,
                    listdir(f"Matches\\{season.replace('/', '_')}")
@@ -72,11 +74,14 @@ def check_squads():
         for num in range(next_matches+1, matches_of_season+1):
             team_1_results, team_2_results = compare_squad(get_preview_squads(season, num),
                                                            get_lineup_squads(season, num))
+            if 0 in (team_1_results, team_2_results):
+                errors.append(num)
             Results[f"Match_{str(num)}_team1"] = team_1_results
             Results[f"Match_{str(num)}_team2"] = team_2_results
             print(f"Match {str(num)} checked!")
         next_matches = matches_of_season
         print(f"----- Season {season} checked!")
+        print(f"ERRORS: {errors}")
 
 
 def show_results():

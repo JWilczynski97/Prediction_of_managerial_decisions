@@ -1,8 +1,10 @@
-Skrypt pobierający strony ze przewidywanymi i wyjściowymi składami - gotowy
-Skrypt pobierający składy z kodu html pobrannych stron - gotowy
+1. Etap 1: skrypt pobierający strony ze przewidywanymi i wyjściowymi składami meczów Ligi Mistrzów- gotowy
+2. Etap 2: posegregowanie pobranych plików do folderów
+3. Etap 3: skrypt liczący skuteczność WhoScored z pobranych plików - gotowy
+4. Etap 4: zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - w trakcie
+5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL
 
-
-Pobrane mecze:
+Pobrane mecze na początku:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
 sezon 2019/2020 	    1-96			97-108			TAK
 sezon 2018/2019		    109-204			205-233			TAK
@@ -15,9 +17,11 @@ sezon 2012/2013		    859-914			915-942			TAK
 sezon 2011/2012		    943-998			999-1027		TAK
 sezon 2010/2011        1028-1073       1074-1102        TAK
 
-Pobrane mecze zmienione:
+(potem pobrałem jeszcze zaległe mecze z sezonu 2019/2020)
+
+Pobrane mecze posegregowane:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
-sezon 2019/2020 	    995-			  -1102		    TAK
+sezon 2019/2020 	    995-			  -1114		    TAK
 sezon 2018/2019		    870-               -994       	TAK
 sezon 2017/2018		    745-			   -869		    TAK
 sezon 2016/2017		    620-			   -744			TAK
@@ -27,3 +31,12 @@ sezon 2013/2014         245-		       -369		    TAK
 sezon 2012/2013		    161-			   -244			TAK
 sezon 2011/2012		    76-                -160 		TAK
 sezon 2010/2011         1-                 -76          TAK
+
+
+Ważne uwagi:
+- mecz 566 (Bayern - Olympiacos z sezonu 15/16) BRAK SKŁADU OLYMPIACOSU -> wyrzucę z puli spotkań
+- mecze 15, 45, 72, 162 - BŁĘDY (przypadkiem pobrano dwa razy centre zamiast centre i preview)
+- mecze 45 i 72 - pobrane strony centre zawierały błędy (nie dało się wczytać składów) - pobrałem ponownie
+
+
+
