@@ -34,9 +34,14 @@ sezon 2010/2011         1-                 -76          TAK
 
 
 Ważne uwagi:
-- mecz 566 (Bayern - Olympiacos z sezonu 15/16) BRAK SKŁADU OLYMPIACOSU -> wyrzucę z puli spotkań
+- mecz 566 (Bayern - Olympiacos z sezonu 15/16) BRAK SKŁADU OLYMPIACOSU -> poprawiłem HTML
 - mecze 15, 45, 72, 162 - BŁĘDY (przypadkiem pobrano dwa razy centre zamiast centre i preview)
 - mecze 45 i 72 - pobrane strony centre zawierały błędy (nie dało się wczytać składów) - pobrałem ponownie
 
+Ligi krajowe z sekcją Preview:
+Netherlands - od sezonu 2013/2014
+Portugal - od sezonu 2016/2017
+France, Spain, England, Germany, Italy - od sezonu 2010/2011
+Russia - od sezonu 2013/2014
 
 
