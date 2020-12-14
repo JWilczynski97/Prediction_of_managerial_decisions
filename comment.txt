@@ -21,7 +21,7 @@ sezon 2010/2011        1028-1073       1074-1102        TAK
 
 Pobrane mecze posegregowane:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
-sezon 2019/2020 	    995-			  -1114		    TAK
+sezon 2019/2020 	    995-			  -1113		    TAK
 sezon 2018/2019		    870-               -994       	TAK
 sezon 2017/2018		    745-			   -869		    TAK
 sezon 2016/2017		    620-			   -744			TAK
@@ -37,7 +37,8 @@ Ważne uwagi:
 - mecz 566 (Bayern - Olympiacos z sezonu 15/16) BRAK SKŁADU OLYMPIACOSU -> poprawiłem HTML
 - mecze 15, 45, 72, 162 - BŁĘDY (przypadkiem pobrano dwa razy centre zamiast centre i preview)
 - mecze 45 i 72 - pobrane strony centre zawierały błędy (nie dało się wczytać składów) - pobrałem ponownie
-
+- MANCHESTER UNITED - w meczu numer 15 z sezonu 2010/2011 występuje jeden raz inna nazwa ("Manchester United")
+                    reszta spotkań ma ("Man Utd")
 Ligi krajowe z sekcją Preview:
 Netherlands - od sezonu 2013/2014
 Portugal - od sezonu 2016/2017
