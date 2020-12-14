@@ -1,6 +1,6 @@
 ﻿/*
 Created: 13.12.2020
-Modified: 13.12.2020
+Modified: 14.12.2020
 Model: Physical Model
 Database: SQLite 3.7
 */
@@ -48,6 +48,8 @@ CREATE TABLE Teams
 (
   Team_ID INTEGER NOT NULL,
   Team_name TEXT NOT NULL,
+  League TEXT NOT NULL,
+  Link TEXT NOT NULL,
   CONSTRAINT Unique_Identifier4 PRIMARY KEY (Team_ID)
 )
 ;

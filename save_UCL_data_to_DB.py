@@ -1,4 +1,11 @@
 # Copyright (c) Jakub Wilczyński 2020
+# The task of this program is saving the data about UEFA Champions League matches into the database SQLite.
+# These data include in the html files in the directory "Matches" on the local disk. The script saves into the
+# local database into table "UCL_Matches" these informations about the UCL matches: index, team home, team away, season,
+# hoScored id of match, date, path to file with "Centre", path to file with "Preview", link to the website with "Centre".
+# Data about teams are saved into table "Team": Whoscored id of team, team name, league (country), link to webpage.
+# Tools used: Python 3.8, BeautifulSoup  4.9.1, SQLite 3.28.0
+
 from os import listdir, path
 from bs4 import BeautifulSoup
 import sqlite3 as lite
@@ -14,7 +21,7 @@ database = 'Matches_DB.db'
 
 
 ##### functions #####
-def matches_indexes(ucl_season: str) -> List[int]:
+def matches_indexes(ucl_season: str) -> [int]:
     """This function returns indexes of matches from given season.\n
         :param ucl_season: str, name of UEFA Champions League season"""
     squads_files = list(filter(lambda x: 'squad' in x, listdir(f"Matches\\{ucl_season.replace('/','_')}")))
@@ -33,16 +40,19 @@ def get_link_and_id(html_file: str) -> (str, str):
         return whoscored_link, match_id
 
 
-def get_teams(html_file: str) -> Dict[str, str]:
-    """This function returns WhoScored IDs and names of both teams in shape of dictionary.
-    Keys of the resulting dictionary: 'team1_name', 'team2_name', 'team1_id', 'team2_id'. \n
+def get_teams(html_file: str) -> {str}:
+    """This function returns WhoScored IDs, names and leagues of both teams in shape of dictionary.
+    Keys of the resulting dictionary: 'team1_name', 'team2_name', 'team1_id', 'team2_id',
+    'team1_league', 'team2_league'. \n
         :param html_file: str, path to the file with match centre"""
     with open(html_file, "r", encoding="utf-8") as f:
         soup = BeautifulSoup(f.read(), 'html.parser')
         teams_names = soup.find("div", id="match-header").find_all("a", class_="team-link")
         teams_ids = soup.find_all("div", class_="pitch-field")
         results = {"team1_name": teams_names[0].string, "team2_name": teams_names[1].string,
-                   "team1_id": teams_ids[0].get("data-team-id"), "team2_id": teams_ids[1].get("data-team-id")}
+                   "team1_id": teams_ids[0].get("data-team-id"), "team2_id": teams_ids[1].get("data-team-id"),
+                   "team1_league": teams_names[0].get("href").split("/")[-1].split("-")[0],
+                   "team2_league": teams_names[1].get("href").split("/")[-1].split("-")[0]}
         return results
 
 
@@ -64,7 +74,7 @@ def get_date(html_file: str) -> str:
         return str(game_date)
 
 
-def get_season(html_file):
+def get_season(html_file: str) -> str:
     """This function returns name of UCL season for the given match. \n
         :param html_file: str, path to the file with match centre"""
     with open(html_file, "r", encoding="utf-8") as f:
@@ -73,7 +83,7 @@ def get_season(html_file):
         return this_season
 
 
-def connection_to_db(file_db):
+def connection_to_db(file_db: str) -> lite.Connection:
     """This function connects program with SQLite database and returns connection object. \n
     :param file_db: str, path to the .db file with database"""
     if not path.exists(file_db):
@@ -84,7 +94,7 @@ def connection_to_db(file_db):
     return connection
 
 
-def is_element_in_db(cursor, element, table, column):
+def is_element_in_db(cursor: lite.Cursor, element: str, table: str, column: str) -> bool:
     """This function checks the given element is already in the database.
     Then it returns answer in bool object: True or False. \n
     :param cursor: cursor object, cursor using in the connection with the database
@@ -111,6 +121,8 @@ try:
             match_date = get_date(file)
             teams = get_teams(file)
             season = get_season(file)
+            link_team_1 = f"whoscored.com/Teams/{teams['team1_id']}"
+            link_team_2 = f"whoscored.com/Teams/{teams['team2_id']}"
 
             ### adding UCL match to the database ###
             row = (idx, teams["team1_id"], teams["team2_id"], season, whoscored_id, match_date, paths[0], paths[1], link)
@@ -120,11 +132,13 @@ try:
 
             ### adding team to the database if not exists ###
             if not is_element_in_db(sql, teams["team1_id"], "Teams", "Team_ID"):
-                sql.execute("INSERT INTO Teams VALUES(?, ?)", (teams["team1_id"], teams["team1_name"]))
+                sql.execute("INSERT INTO Teams VALUES(?, ?, ?, ?)", (teams["team1_id"], teams["team1_name"], teams["team1_league"], link_team_1))
                 print(f"{datetime.datetime.now()}          Team with ID {teams['team1_id']} saved in the database.")
+
             if not is_element_in_db(sql, teams["team2_id"], "Teams", "Team_ID"):
-                sql.execute("INSERT INTO Teams VALUES(?, ?)", (teams["team2_id"], teams["team2_name"]))
+                sql.execute("INSERT INTO Teams VALUES(?, ?, ?, ?)", (teams["team2_id"], teams["team2_name"], teams["team2_league"], link_team_2))
                 print(f"{datetime.datetime.now()}          Team with ID {teams['team2_id']} saved in the database.")
+
             conn.commit()
             print(f"{datetime.datetime.now()}          Changes in the database {database} saved.")
             print(f"{datetime.datetime.now()}          File {file} complete.")

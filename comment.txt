@@ -1,8 +1,8 @@
 1. Etap 1: skrypt pobierający strony ze przewidywanymi i wyjściowymi składami meczów Ligi Mistrzów- gotowy
 2. Etap 2: posegregowanie pobranych plików do folderów
 3. Etap 3: skrypt liczący skuteczność WhoScored z pobranych plików - gotowy
-4. Etap 4: zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - w trakcie
-5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL
+4. Etap 4: zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - gotowy
+5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL - w trakcie
 
 Pobrane mecze na początku:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
@@ -39,10 +39,13 @@ Ważne uwagi:
 - mecze 45 i 72 - pobrane strony centre zawierały błędy (nie dało się wczytać składów) - pobrałem ponownie
 - MANCHESTER UNITED - w meczu numer 15 z sezonu 2010/2011 występuje jeden raz inna nazwa ("Manchester United")
                     reszta spotkań ma ("Man Utd")
+
 Ligi krajowe z sekcją Preview:
+France, Spain, England, Germany, Italy - od sezonu 2010/2011
 Netherlands - od sezonu 2013/2014
 Portugal - od sezonu 2016/2017
-France, Spain, England, Germany, Italy - od sezonu 2010/2011
 Russia - od sezonu 2013/2014
+Turkey - od sezonu 2014/2015
+Scotland - od sezonu 2017/2018
 
 

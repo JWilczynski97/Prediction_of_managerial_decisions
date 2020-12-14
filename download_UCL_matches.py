@@ -1,6 +1,12 @@
 # Copyright (c) Jakub Wilczyński 2020
+# The task of this program is getting data about squads in all UEFA Champions League matches of the seasons
+# from 2010/2011 to 2019/2020. The script downloads the webpages from WhoScored.com. These websites include
+# the informations about starting line-ups and predicted line-ups for UEFA Champions League matches.
+# The html codes of these websites are saved to the html files on the local disk in specified folder.
+# Tools used: Python 3.8, Selenium Webdriver 3.141.0.
+
 from time import asctime, localtime, sleep
-from os import mkdir, path, getcwd
+from os import makedirs, path, getcwd
 from random import uniform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,7 +20,7 @@ options.add_experimental_option("excludeSwitches",
                                 ['enable-automation'])  # process without information about the automatic test
 options.add_argument("chrome.switches")
 options.add_argument("--disable-extensions")
-browser = webdriver.Chrome(executable_path='C:\Chromedriver\chromedriver.exe', options=options)
+browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
 
 ##### important structures #####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
@@ -25,10 +31,10 @@ def create_directory_for_files(folder):
     """This function creates directory (if doesn't exist) for the files included downloaded websites.\n
     :param folder: str, name of folder coming from current season name"""
     if not path.exists(getcwd() + folder):
-        mkdirs(getcwd() + folder)
+        makedirs(getcwd() + folder)
 
 def cookies_accept():
-    """Clicking the 'cookies accept' buttons"""
+    """Clicking the 'cookies accept' buttons on the start page"""
     more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
     more_options_cookies_button.click()
     sleep(uniform(3, 5))  # time sleep generator
@@ -131,15 +137,14 @@ def download_websites():
 def save_file(is_preview, html_code):
     """This function saves the html file with squad.\n
     :param is_preview: bool, defines that currant website contains preview squad or not
-    :param html_code: str, contains html code od current downloaded website
-    """
-    global number_of_downloaded_matches, season
+    :param html_code: str, contains html code od current downloaded website. """
+    global number_of_downloaded_matches
     if not is_preview:
-        with open(f"Matches_Test\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
+        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
     else:
-        with open(f"Matches_Test\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
+        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
             number_of_downloaded_matches += 1
@@ -154,7 +159,8 @@ sleep(uniform(8, 10))
 cookies_accept()
 for current_season in ALL_SEASONS:              # all UEFA Champions League matches from all seasons are downloaded
     season = current_season.replace("/", "_")   # name of directory can't include "/"
-    create_directory_for_files(season)
+    directory = f"\\Matches\\{season}"
+    create_directory_for_files(directory)
     select_season(current_season)
     select_stage("Champions League Group Stages")
     download_websites()
