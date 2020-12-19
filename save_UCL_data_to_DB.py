@@ -142,6 +142,7 @@ try:
             conn.commit()
             print(f"{datetime.datetime.now()}          Changes in the database {database} saved.")
             print(f"{datetime.datetime.now()}          File {file} complete.")
+    # add change row for Manchester United in Teams!
 except lite.Error as e:
     if conn:
         conn.rollback()
