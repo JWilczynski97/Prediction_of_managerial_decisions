@@ -20,7 +20,6 @@ options.add_experimental_option("excludeSwitches",
                                 ['enable-automation'])  # process without information about the automatic test
 options.add_argument("chrome.switches")
 options.add_argument("--disable-extensions")
-# browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
 
 ##### important structures ####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
@@ -37,14 +36,13 @@ LEAGUES = {'England': 'https://www.whoscored.com/Regions/252/Tournaments/2/',
            'Scotland': 'https://www.whoscored.com/Regions/253/Tournaments/20/'}
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-LOGS_FOLDER = 'Logs_test'
+LOGS_FOLDER = 'Logs'
 LINKS_FOLDER = 'Links'
-DATABASE = 'Matches_DB_copy.db'
+DATABASE = 'Matches_DB.db'
 
 
 class Logger:
-    """File-like object to log text using the `logging` module."""
-
+    """Object to log text using the `logging` module."""
     def __init__(self, folder):
         num, now = len(listdir(folder)) + 1, datetime.datetime.now()
         logging.basicConfig(filename=f'{folder}\\{now.date()}_Log_{num}.txt',
@@ -53,9 +51,8 @@ class Logger:
         self.write("Logger created.")
 
     def write(self, message, level=logging.INFO):
-        levels = {0: "NOTSET", 10: "DEBUG", 20: "INFO", 30: "WARNING", 40: "ERROR", 50: "CRITICAL"}
         self.log.log(level, message)
-        print(f'{asctime(localtime())} - {levels[level]} - {message}')
+        print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
 
 
 class Database:
@@ -75,6 +72,7 @@ class Database:
     def insert(self, table, *args):
         self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (args,))
         self.connection.commit()
+        log.write(f"table {table} -> new row added: {args}")
 
     def select(self, table, order_by='', **conditions):
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
@@ -86,6 +84,7 @@ class Database:
         found = self.select(table, **conditions)
         answer = False if len(found) == 0 else True
         return answer
+
 
 ##### functions #####
 def wait(x, y):
@@ -157,23 +156,21 @@ def select_stage():
     else:
         log.write(f"Probably problem! The correct option not found in drop down menu 'stages'. "
                   f"League: {league}, season: {season}.", level=logging.ERROR)
-        print("ERROR The correct option not found in drop down menu 'stages'. League: {league}, season: {season}.")
         sys.exit(1)
     wait(3, 4)
 
 
 def filtration_team_matches(team_id, links):
     row = db.select("Teams", Team_id=team_id)[0]
-    team_name = row['Team_name']
-    name_words = team_name.split(" ")
-    team_links = links[:]
-    for link in links:
+    name = row['Team_name']
+    name_words = name.strip().split(" ")
+    for link in links[:]:
         for word in name_words:
             if word not in link:
-                del team_links[team_links.index(link)]
+                del links[links.index(link)]
                 break
-    log.write(f"Found matches of team {team_id}.")
-    return team_links
+    log.write(f"Filtration ended. Found matches of team {team_id}.")
+    return links
 
 
 def get_link_and_id(html_code) -> (str, str):
@@ -196,16 +193,27 @@ def get_teams(html_code) -> {str}:
     return teams_ids[0].get("data-team-id"), teams_ids[1].get("data-team-id")  # team_1_ID, team_2_ID
 
 
-def download_all_links(league, season):
+def get_date(html_code):
+    """This function returns date of match in the format yyyy-mm-dd. \n
+        :param html_code: str"""
+    soup = BeautifulSoup(html_code, 'html.parser')
+    game_date = soup.find_all("div", class_="info-block cleared")[2].find_all("dd")[1].string[5:]
+    assert len(game_date) == 9
+    day, month, year = game_date.split("-")
+    game_date = datetime.date(int("20" + year), MONTHS[month], int(day))
+    return str(game_date)
+
+
+def download_all_links(league_name, season_name):
     """This function gets links to all matches of given league and season.
     Returns a list of links. Result of this function is saved in dictionary
     links_league_season and is used for all teams from given league."""
-    log.write(f"Starting downloading of matches {league} from season {season}...")
-    browser.get(LEAGUES[league])
+    log.write(f"Starting downloading of matches {league_name} from season {season_name}...")
+    browser.get(LEAGUES[league_name])
     wait(1, 2)
     cookies_accept()
     wait(1, 2)
-    select_season(season)
+    select_season(season_name)
     wait(2, 3)
     if len(browser.find_elements_by_name("stages")) != 0:
         select_stage()
@@ -235,8 +243,7 @@ def download_all_links(league, season):
             '//*[@id="tournament-fixture"]/div/div/div/a[@class="result-1 rc"]')
         all_links.extend([x.get_attribute("href") for x in week_matches])
         next_week.click()
-        print("All Links: ", all_links)
-        print("All Links len: ", len(all_links))
+        log.write()
         wait(4, 5)
         next_week = browser.find_element_by_xpath('//*[@id="date-controller"]/a[3]')
         print("next week")
@@ -244,30 +251,43 @@ def download_all_links(league, season):
     week_matches = browser.find_elements_by_xpath('//*[@id="tournament-fixture"]/div/div/div/a[@class="result-1 rc"]')
     all_links.extend([x.get_attribute("href") for x in week_matches])
     # select only matches for
-    with open(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv", "w", encoding="utf-8") as csvfile:
+    with open(f"{LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv", "w", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, dialect='excel')
         writer.writerow(links)  # all_links will be saved in case of program error
     log.write(
-        f"All links for {league} and {season} downloaded. Saved in file {LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv")
+        f"All links for {league_name} and {season_name} downloaded. Saved in file {LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv")
     log.write(f"Number of matches/links: {len(all_links)}")
     return all_links
 
 
-def get_links_from_file(league, season):
-    with open(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv", "r", encoding="utf-8") as csvfile:
+def get_links_from_file(league_name, season_name):
+    with open(f"{LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv", "r", encoding="utf-8") as csvfile:
         new_links = csvfile.read().strip().split(",")
-    log.write(f"Links for league {league} and season {season} downloaded from file.")
+    log.write(f"Links for league {league_name} and season {season_name} downloaded from file. Number of links: {len(new_links)}")
     return new_links
 
 
-def download_matches(team_links, ucl_matches, team_id):
-    """browser.execute_script(
-        "window.open('');")  # execute_script(script, *args) -> this function synchronously executes JavaScript in the current window/frame.
-    browser.switch_to.window(browser.window_handles[1])"""
-    log.write(f"Staring downloading of matches for team {team_id}.")
+def download_matches(season_, league_, team_links, ucl_matches, team_id):
+    log.write(f"Staring downloading of matches for team {team_id} in season {season_}.")
+    for link in team_links[:]:
+        # if match is already downloaded, we delete it from links and add new rows into 'UCL_Matches_Matches' table
+        if db.is_element_in_db("Matches", Link=link):
+            league_match = db.select("Matches", Link=link)[0]
+            for ucl_match in ucl_matches:
+                if ucl_match['Date'] > league_match['Date'] \
+                        and not db.is_element_in_db('UCL_Matches_Matches',
+                                                    UCL_Match_WhoScored_ID=ucl_match['UCL_Match_WhoScored_ID'],
+                                                    Match_WhoScored_ID=league_match['Match_WhoScored_ID'],
+                                                    Season=season_):
+                    db.insert('UCL_Matches_Matches', ucl_match['UCL_Match_WhoScored_ID'],
+                              league_match['Match_WhoScored_ID'], season_)
+            del team_links[team_links.index(link)]
+    create_directory_for_files(f"Matches\\{season_.replace('/','_')}\\{league_}")
+    last_ucl_match_date = ucl_matches[-1]['Date']
+
     for link in team_links:
         browser.get(link)
-        wait(4, 5)
+        wait(6, 7)
         log.write(f"The website {link} launched.")
         log.write(browser.title[:-5])
         print(browser.title[:-5])
@@ -279,83 +299,110 @@ def download_matches(team_links, ucl_matches, team_id):
             browser.find_element_by_link_text("Preview")
         except NoSuchElementException:
             browser.close()
-            log.error(f"Match in link {link} doesn't have 'Preview' section!")
-            print(f"WARNING - Match in link {link} doesn't have 'Preview' section!")
+            log.write(f"Match in link {link} doesn't have 'Preview' section!", logging.ERROR)
             wait(2, 3)
-            # browser.switch_to.window(browser.window_handles[0])
             continue
+
+        # taking data from html_code
         html_code = browser.page_source
+        match_date = get_date(html_code)
+        if match_date > last_ucl_match_date:
+            log.write(f"Match in link {link} is last important league match for team {team_id} in season {season_}")
+            wait(2, 3)
+            break
         team_1_id, team_2_id = get_teams(html_code)
+        match_link, whoscored_id = get_link_and_id(html_code)
         if team_id not in (team_1_id, team_2_id):
             global number_of_downloaded_matches
             log.write(
-                f"Error in match with ID {str(number_of_downloaded_matches + 1)}. Contradictory IDs of teams. ID {team_id} vs IDs from site: {team_1_id}, {team_2_id}",
+                f"Error in match with ID {str(number_of_downloaded_matches + 1)}. Link: {link}. Contradictory IDs of teams. ID {team_id} vs IDs from site: {team_1_id}, {team_2_id}",
                 level=logging.WARNING)
-        squad_file = save_file(False, html_code, team_id)  # saving the website with line-up
+
+        squad_file = save_file(False, html_code, season_, league_)  # saving the website with line-up
+        match_idx = squad_file.split("_")[1]
         log.write(f"File with Match Centre {squad_file} saved.")
         preview_button = browser.find_element_by_link_text("Preview")
         is_element_clickable(preview_button)
         preview_button.click()
         wait(10, 12)
         html_code_preview = browser.page_source
-        preview_file = save_file(True, html_code_preview, team_id)  # saving the website with preview
+        preview_file = save_file(True, html_code_preview, season_, league_)  # saving the website with preview
         log.write(f"File with Preview {preview_file} saved.")
+
+        # adding match to the table "Matches"
+        db.insert("Matches", match_idx, team_1_id, team_2_id, season_, league_, whoscored_id, match_date, squad_file,
+                  preview_file, match_link)
         wait(4, 5)
-    log.write(f"The end of matches downloading for team: {team_id}")
+        for ucl_match in ucl_matches:
+            if ucl_match['Date'] > match_date \
+                    and not db.is_element_in_db("UCL_Matches_Matches",
+                                                UCL_Match_WhoScored_ID=ucl_match['UCL_Match_WhoScored_ID'],
+                                                Match_WhoScored_ID=whoscored_id, Season=season_):
+                db.insert("UCL_Matches_Matches", ucl_match['UCL_Match_WhoScored_ID'], whoscored_id, season_)
+
+    log.write(f"The end of matches downloading for team: {team_id} in season {season_}")
 
 
-def save_file(is_preview, html_code, team_id):
+def save_file(is_preview, html_code, season__, league__):
     """This function saves the html file with squad.\n
     :param is_preview: bool, defines that currant website contains preview squad or not
-    :param html_code: str, contains html code od current downloaded website. """
+    :param html_code: str, contains html code od current downloaded website.
+    :param season__: str
+    :param league__: str"""
     global number_of_downloaded_matches
     if not is_preview:
-        with open(f"Matches\\{season.replace('/', '_')}\\{league}\\"
+        with open(f"Matches\\{season__.replace('/', '_')}\\{league__}\\"
                   f"Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
     else:
-        with open(f"Matches\\{season.replace('/', '_')}\\{league}\\"
+        with open(f"Matches\\{season__.replace('/', '_')}\\{league__}\\"
                   f"Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w', encoding="utf-8") as file:
             file.write(str(html_code))
         number_of_downloaded_matches += 1
-    print(f"File {file.name} saved.")
     return file.name
 
 
 ##### Script #####
+create_directory_for_files(LOGS_FOLDER)
 log = Logger(LOGS_FOLDER)
 create_directory_for_files(LINKS_FOLDER)
 db = Database(DATABASE)  # connecting to database
 number_of_downloaded_matches = len(db.select("Matches"))
+browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
-for season in ALL_SEASONS[0:9]:
-    wait(10, 12)
+
+for season in ALL_SEASONS[0:1]:
+    wait(5, 6)
     log.write(f"Current season: {season}")
-    all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season) # UCL matches of season sorted by id
+    all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
     for match in all_matches:  # for every UCL match in the season
         team_home = match["team_1_ID"]
         team_away = match["team_2_ID"]
 
-        league = db.select("Teams", Team_ID=team_home)[0]["League"]
-        log.write(f"Team: {team_home}. League: {league}")
+        team = db.select("Teams", Team_ID=team_home)[0]
+        league = team["League"]
+        team_name = team["Team_name"]
+        log.write(f"IDx: {match['UCL_Match_ID']}. UCL Match: {match['UCL_Match_WhoScored_ID']}. Team home: {team_name}. Team ID: {team_home}. League: {league}")
         if check_league_and_season(season, league):  # if for this league and season section Preview exists
             if path.exists(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv"):
                 links_league = get_links_from_file(league, season)
             else:
                 links_league = download_all_links(league, season)
             team_home_links = filtration_team_matches(team_home, links_league)
-            team_ucl_matches = list(filter(lambda game: game['Team_1_ID'] == team_home or
-                                                        game['Team_2_ID'] == team_home, all_matches))
+            team_ucl_matches = list(filter(lambda game: team_home in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
+            download_matches(season, league, team_home_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_home)
 
-            download_matches(team_home_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_home)
-
-        league = db.select("Teams", Team_ID=team_away)[0]["League"]
-        log.write(f"Team: {team_away}. League: {league}")
+        team = db.select("Teams", Team_ID=team_away)[0]
+        league = team["League"]
+        team_name = team["Team_name"]
+        log.write(f"IDx: {match['UCL_Match_ID']}. UCL Match: {match['UCL_Match_WhoScored_ID']}. Team away: {team_name}. Team ID: {team_away}. League: {league}")
         if check_league_and_season(season, league):
             if path.exists(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv"):
                 links_league = get_links_from_file(league, season)
             else:
                 links_league = download_all_links(league, season)
             team_away_links = filtration_team_matches(team_away, links_league)
+            team_ucl_matches = list(filter(lambda game: team_away in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
+            download_matches(season, league, team_away_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_away)
