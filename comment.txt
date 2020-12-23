@@ -2,7 +2,7 @@
 2. Etap 2: posegregowanie pobranych plików do folderów
 3. Etap 3: skrypt liczący skuteczność WhoScored z pobranych plików - gotowy
 4. Etap 4: zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - gotowy
-5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL - w trakcie
+5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL - skrypt gotowy (sezon 10/11 pobrany)
 
 Pobrane mecze na początku:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]
@@ -30,7 +30,20 @@ sezon 2014/2015		    370-			   -494			TAK
 sezon 2013/2014         245-		       -369		    TAK
 sezon 2012/2013		    161-			   -244			TAK
 sezon 2011/2012		    76-                -160 		TAK
-sezon 2010/2011         1-                 -76          TAK
+sezon 2010/2011         1-                 -75          TAK
+
+Pobrane mecze ligowe:
+[sezon]		           [mecze]	        [pobrany]
+sezon 2019/2020
+sezon 2018/2019
+sezon 2017/2018
+sezon 2016/2017
+sezon 2015/2016
+sezon 2014/2015
+sezon 2013/2014
+sezon 2012/2013
+sezon 2011/2012         434-
+sezon 2010/2011         1-433              TAK
 
 
 Ważne uwagi:

@@ -82,6 +82,17 @@ def get_season(html_file: str) -> str:
         this_season = soup.find("title").string.strip().split(" ")[-2]
         return this_season
 
+def change_team_name(team_id, team_name):
+    """This function changes tha names of few clubs.
+    The correct names are very importent for the next step of project.\n
+    :param team_id: str, WhoScored id of team
+    :param team_name: str, WhoScored id of team"""
+    change_names = {'32': 'Manchester United', '167': 'Manchester City', '7614': 'Leipzig', '134': 'Borussia M Gladbach',
+                   '296': 'Sporting CP', '560': 'Zenit St Petersburg', '304': 'Paris Saint Germain'}
+    if team_id in change_names:
+        return change_names[team_id]
+    return team_name
+
 
 def connection_to_db(file_db: str) -> lite.Connection:
     """This function connects program with SQLite database and returns connection object. \n
@@ -120,6 +131,8 @@ try:
             paths = get_paths(file)
             match_date = get_date(file)
             teams = get_teams(file)
+            teams["team1_name"] = change_team_name(teams["team1_id"], teams["team1_name"])
+            teams["team2_name"] = change_team_name(teams["team2_id"], teams["team2_name"])
             season = get_season(file)
             link_team_1 = f"whoscored.com/Teams/{teams['team1_id']}"
             link_team_2 = f"whoscored.com/Teams/{teams['team2_id']}"

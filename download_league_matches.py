@@ -8,6 +8,7 @@ from time import asctime, localtime, sleep
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException, Exception
 from bs4 import BeautifulSoup
 from random import uniform
 from selenium.webdriver.support.expected_conditions import element_to_be_clickable
@@ -70,7 +71,7 @@ class Database:
         self.connection.close()
 
     def insert(self, table, *args):
-        self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (args,))
+        self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (*args,))
         self.connection.commit()
         log.write(f"table {table} -> new row added: {args}")
 
@@ -100,9 +101,12 @@ def create_directory_for_files(folder):
 
 def cookies_accept():
     """Clicking the 'cookies accept' buttons on the start page"""
-    wait(6, 8)
-    more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
-    more_options_cookies_button.click()
+    try:
+        more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
+        is_element_clickable(more_options_cookies_button)
+        more_options_cookies_button.click()
+    except NoSuchElementException:
+        pass
     wait(3, 5)  # time sleep generator
 
 
@@ -110,8 +114,11 @@ def is_element_clickable(element):
     """If the element isn't clickable, the current page waits next 3-4 seconds.\n
     :param element: Element, the element from the current page"""
     if not element_to_be_clickable(element):
-        print("The element is not yet clickable. Waiting...")
-        wait(20, 30)
+        log.write("The element is not yet clickable. Waiting...")
+        wait(6, 7)
+    if not element_to_be_clickable(element):
+        log.write("The element is not yet clickable. Waiting...")
+        wait(30, 40)
     if not element_to_be_clickable(element):
         raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
 
@@ -164,12 +171,11 @@ def filtration_team_matches(team_id, links):
     row = db.select("Teams", Team_id=team_id)[0]
     name = row['Team_name']
     name_words = name.strip().split(" ")
+    name = "-".join(name_words)
     for link in links[:]:
-        for word in name_words:
-            if word not in link:
-                del links[links.index(link)]
-                break
-    log.write(f"Filtration ended. Found matches of team {team_id}.")
+        if str(name) not in link:
+            del links[links.index(link)]
+    log.write(f"Filtration ended. Found matches of team {team_id}. Number of matches: {len(links)}. Matches: {links}")
     return links
 
 
@@ -204,7 +210,7 @@ def get_date(html_code):
     return str(game_date)
 
 
-def download_all_links(league_name, season_name):
+def download_all_league_links(league_name, season_name):
     """This function gets links to all matches of given league and season.
     Returns a list of links. Result of this function is saved in dictionary
     links_league_season and is used for all teams from given league."""
@@ -212,9 +218,7 @@ def download_all_links(league_name, season_name):
     browser.get(LEAGUES[league_name])
     wait(1, 2)
     cookies_accept()
-    wait(1, 2)
     select_season(season_name)
-    wait(2, 3)
     if len(browser.find_elements_by_name("stages")) != 0:
         select_stage()
     menu_dates = browser.find_element_by_id("date-config-toggle-button")
@@ -238,22 +242,21 @@ def download_all_links(league_name, season_name):
     all_links = []
     next_week = browser.find_element_by_xpath('//*[@id="date-controller"]/a[3]')
     while next_week.get_attribute("title") != "No data for next week":
-        wait(4, 5)
+        wait(3, 4)
         week_matches = browser.find_elements_by_xpath(
             '//*[@id="tournament-fixture"]/div/div/div/a[@class="result-1 rc"]')
         all_links.extend([x.get_attribute("href") for x in week_matches])
         next_week.click()
-        log.write()
-        wait(4, 5)
+        log.write("Links downloading... Next week.")
+        wait(2, 3)
         next_week = browser.find_element_by_xpath('//*[@id="date-controller"]/a[3]')
-        print("next week")
     # iteration for last series of matches
     week_matches = browser.find_elements_by_xpath('//*[@id="tournament-fixture"]/div/div/div/a[@class="result-1 rc"]')
     all_links.extend([x.get_attribute("href") for x in week_matches])
     # select only matches for
     with open(f"{LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv", "w", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, dialect='excel')
-        writer.writerow(links)  # all_links will be saved in case of program error
+        writer.writerow(all_links)  # all_links will be saved in case of program error
     log.write(
         f"All links for {league_name} and {season_name} downloaded. Saved in file {LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv")
     log.write(f"Number of matches/links: {len(all_links)}")
@@ -266,9 +269,16 @@ def get_links_from_file(league_name, season_name):
     log.write(f"Links for league {league_name} and season {season_name} downloaded from file. Number of links: {len(new_links)}")
     return new_links
 
+def check_downloaded_teams(id_team, name_season):
+    with open(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt", "r", encoding="utf-8") as f:
+        answer = True if str(id_team) in f.read() else False
+        if answer is True:
+            log.write(f"The matches of team {id_team} in season {name_season} have already been downloaded. Skip!")
+        return answer
+
 
 def download_matches(season_, league_, team_links, ucl_matches, team_id):
-    log.write(f"Staring downloading of matches for team {team_id} in season {season_}.")
+    log.write(f"Starting downloading of matches for team {team_id} in season {season_}.")
     for link in team_links[:]:
         # if match is already downloaded, we delete it from links and add new rows into 'UCL_Matches_Matches' table
         if db.is_element_in_db("Matches", Link=link):
@@ -287,18 +297,14 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
 
     for link in team_links:
         browser.get(link)
-        wait(6, 7)
         log.write(f"The website {link} launched.")
+        wait(3, 4)
+        cookies_accept()
         log.write(browser.title[:-5])
-        print(browser.title[:-5])
-        match_centre_button = browser.find_element_by_link_text("Match Centre")
-        is_element_clickable(match_centre_button)
-        match_centre_button.click()
-        wait(4, 5)
+        wait(2, 3)
         try:
             browser.find_element_by_link_text("Preview")
         except NoSuchElementException:
-            browser.close()
             log.write(f"Match in link {link} doesn't have 'Preview' section!", logging.ERROR)
             wait(2, 3)
             continue
@@ -307,24 +313,24 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
         html_code = browser.page_source
         match_date = get_date(html_code)
         if match_date > last_ucl_match_date:
-            log.write(f"Match in link {link} is last important league match for team {team_id} in season {season_}")
+            log.write(f"The end. Match in link {link} isn't important league match for team {team_id} in season {season_}")
             wait(2, 3)
             break
         team_1_id, team_2_id = get_teams(html_code)
         match_link, whoscored_id = get_link_and_id(html_code)
-        if team_id not in (team_1_id, team_2_id):
+        if str(team_id) not in (team_1_id, team_2_id):
             global number_of_downloaded_matches
             log.write(
                 f"Error in match with ID {str(number_of_downloaded_matches + 1)}. Link: {link}. Contradictory IDs of teams. ID {team_id} vs IDs from site: {team_1_id}, {team_2_id}",
                 level=logging.WARNING)
 
         squad_file = save_file(False, html_code, season_, league_)  # saving the website with line-up
-        match_idx = squad_file.split("_")[1]
+        match_idx = squad_file.split("_")[2]
         log.write(f"File with Match Centre {squad_file} saved.")
         preview_button = browser.find_element_by_link_text("Preview")
         is_element_clickable(preview_button)
         preview_button.click()
-        wait(10, 12)
+        wait(8, 10)
         html_code_preview = browser.page_source
         preview_file = save_file(True, html_code_preview, season_, league_)  # saving the website with preview
         log.write(f"File with Preview {preview_file} saved.")
@@ -341,6 +347,8 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
                 db.insert("UCL_Matches_Matches", ucl_match['UCL_Match_WhoScored_ID'], whoscored_id, season_)
 
     log.write(f"The end of matches downloading for team: {team_id} in season {season_}")
+    with open(f"{LINKS_FOLDER}\\downloaded_teams_{season_.replace('/', '_')}.txt", "a", encoding="utf-8") as f:
+        f.write(f"{str(team_id)},")
 
 
 def save_file(is_preview, html_code, season__, league__):
@@ -364,20 +372,19 @@ def save_file(is_preview, html_code, season__, league__):
 
 
 ##### Script #####
-create_directory_for_files(LOGS_FOLDER)
+browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
 log = Logger(LOGS_FOLDER)
+create_directory_for_files(LOGS_FOLDER)
 create_directory_for_files(LINKS_FOLDER)
 db = Database(DATABASE)  # connecting to database
 number_of_downloaded_matches = len(db.select("Matches"))
-browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
 
-for season in ALL_SEASONS[0:1]:
-    wait(5, 6)
+for season in ALL_SEASONS[1:2]:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
-    for match in all_matches:  # for every UCL match in the season
+    for match in all_matches[:]:  # for every UCL match in the season
         team_home = match["team_1_ID"]
         team_away = match["team_2_ID"]
 
@@ -385,11 +392,11 @@ for season in ALL_SEASONS[0:1]:
         league = team["League"]
         team_name = team["Team_name"]
         log.write(f"IDx: {match['UCL_Match_ID']}. UCL Match: {match['UCL_Match_WhoScored_ID']}. Team home: {team_name}. Team ID: {team_home}. League: {league}")
-        if check_league_and_season(season, league):  # if for this league and season section Preview exists
+        if check_league_and_season(season, league) and not check_downloaded_teams(team_home, season):  # if for this league and season section Preview exists
             if path.exists(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv"):
                 links_league = get_links_from_file(league, season)
             else:
-                links_league = download_all_links(league, season)
+                links_league = download_all_league_links(league, season)
             team_home_links = filtration_team_matches(team_home, links_league)
             team_ucl_matches = list(filter(lambda game: team_home in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_home_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_home)
@@ -398,11 +405,11 @@ for season in ALL_SEASONS[0:1]:
         league = team["League"]
         team_name = team["Team_name"]
         log.write(f"IDx: {match['UCL_Match_ID']}. UCL Match: {match['UCL_Match_WhoScored_ID']}. Team away: {team_name}. Team ID: {team_away}. League: {league}")
-        if check_league_and_season(season, league):
+        if check_league_and_season(season, league) and not check_downloaded_teams(team_home, season):
             if path.exists(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv"):
                 links_league = get_links_from_file(league, season)
             else:
-                links_league = download_all_links(league, season)
+                links_league = download_all_league_links(league, season)
             team_away_links = filtration_team_matches(team_away, links_league)
             team_ucl_matches = list(filter(lambda game: team_away in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_away_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_away)
