@@ -8,7 +8,7 @@ from time import asctime, localtime, sleep
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException, Exception
+from selenium.common.exceptions import NoSuchElementException
 from bs4 import BeautifulSoup
 from random import uniform
 from selenium.webdriver.support.expected_conditions import element_to_be_clickable
@@ -270,12 +270,13 @@ def get_links_from_file(league_name, season_name):
     return new_links
 
 def check_downloaded_teams(id_team, name_season):
-    with open(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt", "r", encoding="utf-8") as f:
-        answer = True if str(id_team) in f.read() else False
-        if answer is True:
-            log.write(f"The matches of team {id_team} in season {name_season} have already been downloaded. Skip!")
-        return answer
-
+    if path.exists(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt"):
+        with open(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt", "r", encoding="utf-8") as f:
+            answer = True if f"--{str(id_team)}--" in f.read() else False
+            if answer is True:
+                log.write(f"The matches of team {id_team} in season {name_season} have already been downloaded. Skip!")
+            return answer
+    return False
 
 def download_matches(season_, league_, team_links, ucl_matches, team_id):
     log.write(f"Starting downloading of matches for team {team_id} in season {season_}.")
@@ -291,6 +292,7 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
                                                     Season=season_):
                     db.insert('UCL_Matches_Matches', ucl_match['UCL_Match_WhoScored_ID'],
                               league_match['Match_WhoScored_ID'], season_)
+            log.write(f"The match in {link} is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.")
             del team_links[team_links.index(link)]
     create_directory_for_files(f"Matches\\{season_.replace('/','_')}\\{league_}")
     last_ucl_match_date = ucl_matches[-1]['Date']
@@ -312,7 +314,7 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
         # taking data from html_code
         html_code = browser.page_source
         match_date = get_date(html_code)
-        if match_date > last_ucl_match_date:
+        if match_date >= last_ucl_match_date:
             log.write(f"The end. Match in link {link} isn't important league match for team {team_id} in season {season_}")
             wait(2, 3)
             break
@@ -345,10 +347,11 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
                                                 UCL_Match_WhoScored_ID=ucl_match['UCL_Match_WhoScored_ID'],
                                                 Match_WhoScored_ID=whoscored_id, Season=season_):
                 db.insert("UCL_Matches_Matches", ucl_match['UCL_Match_WhoScored_ID'], whoscored_id, season_)
+        log.write("The link downloaded. Next...")
 
     log.write(f"The end of matches downloading for team: {team_id} in season {season_}")
     with open(f"{LINKS_FOLDER}\\downloaded_teams_{season_.replace('/', '_')}.txt", "a", encoding="utf-8") as f:
-        f.write(f"{str(team_id)},")
+        f.write(f"--{str(team_id)}--|")
 
 
 def save_file(is_preview, html_code, season__, league__):
@@ -384,7 +387,7 @@ log.write("Start of matches downloading.")
 for season in ALL_SEASONS[1:2]:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
-    for match in all_matches[:]:  # for every UCL match in the season
+    for match in all_matches:  # for every UCL match in the season
         team_home = match["team_1_ID"]
         team_away = match["team_2_ID"]
 
@@ -405,7 +408,7 @@ for season in ALL_SEASONS[1:2]:
         league = team["League"]
         team_name = team["Team_name"]
         log.write(f"IDx: {match['UCL_Match_ID']}. UCL Match: {match['UCL_Match_WhoScored_ID']}. Team away: {team_name}. Team ID: {team_away}. League: {league}")
-        if check_league_and_season(season, league) and not check_downloaded_teams(team_home, season):
+        if check_league_and_season(season, league) and not check_downloaded_teams(team_away, season):
             if path.exists(f"{LINKS_FOLDER}\\{league}_{season.replace('/', '_')}.csv"):
                 links_league = get_links_from_file(league, season)
             else:

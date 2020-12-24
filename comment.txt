@@ -53,6 +53,9 @@ Ważne uwagi:
 - MANCHESTER UNITED - w meczu numer 15 z sezonu 2010/2011 występuje jeden raz inna nazwa ("Manchester United")
                     reszta spotkań ma ("Man Utd")
 
+- w sezonie 2011/2012 na poczatku pominieto Leverkusen w pierwszym meczu i pobrano następne mecze dla jednego zespołu
+(Valencii). Błąd poprawiony i poza kolejnością nic nie popsuł
+
 Ligi krajowe z sekcją Preview:
 France, Spain, England, Germany, Italy - od sezonu 2010/2011
 Netherlands - od sezonu 2013/2014
