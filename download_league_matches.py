@@ -1,3 +1,12 @@
+# Copyright (c) Jakub Wilczyński 2020
+# The task of this program is downloading of WhoScored.com webpages with starting and predicted line-ups in european
+# football leagues for teams playing in UEFA Champions League in seasons 2010/2011 to 2011/2012. Data about
+# these games will be used to predict of managerial decisions in the next steps of project. Data about matches
+# are saving into the SQLite database on the local disk. Every game is assigned to the correct UCL matches
+# taking place after this league match in the same season. The html codes of these websites are saved to
+# the html files on the local disk in specified folder.
+# Tools used: Python 3.8, Selenium Webdriver 3.141.0, BeautifulSoup  4.9.1, SQLite 3.28.0
+
 from os import listdir, path, getcwd, makedirs
 import logging
 import datetime
@@ -43,7 +52,8 @@ DATABASE = 'Matches_DB.db'
 
 
 class Logger:
-    """Object to log text using the `logging` module."""
+    """Object to log text using the `logging` module.
+    The messages are printed in the standard output and saved to the files on the local disk in directory LOGS_FOLDER."""
     def __init__(self, folder):
         num, now = len(listdir(folder)) + 1, datetime.datetime.now()
         logging.basicConfig(filename=f'{folder}\\{now.date()}_Log_{num}.txt',
@@ -57,6 +67,7 @@ class Logger:
 
 
 class Database:
+    """Object to represent the SQLite database in the file DATABASE."""
     def __init__(self, database_name):
         if not path.exists(database_name):
             log.write(f"Connection SQLite ERROR: impossible connecting to database. "
@@ -70,18 +81,19 @@ class Database:
     def __del__(self):
         self.connection.close()
 
-    def insert(self, table, *args):
+    def insert(self, table, *args): # (INSERT INTO <table> VALUES(?,?,?,?), <values>)
         self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (*args,))
         self.connection.commit()
         log.write(f"table {table} -> new row added: {args}")
 
-    def select(self, table, order_by='', **conditions):
+    def select(self, table, order_by='', **conditions): # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
         order = f' ORDER BY {order_by}' if order_by != '' else ''
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
         return rows.fetchall()
 
     def is_element_in_db(self, table, **conditions):
+        """The method to check the given element is already in the database."""
         found = self.select(table, **conditions)
         answer = False if len(found) == 0 else True
         return answer
@@ -89,6 +101,10 @@ class Database:
 
 ##### functions #####
 def wait(x, y):
+    """This function launches sleep function for a few seconds.
+    Number of seconds is a random floating point number x to y.\n
+    :param x: int, start of interval
+    :param y: int, end of interval"""
     sleep(uniform(x, y))
 
 
@@ -100,7 +116,7 @@ def create_directory_for_files(folder):
 
 
 def cookies_accept():
-    """Clicking the 'cookies accept' buttons on the start page"""
+    """Function to click the 'cookies accept' buttons on the start page if they exist."""
     try:
         more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
         is_element_clickable(more_options_cookies_button)
@@ -111,7 +127,7 @@ def cookies_accept():
 
 
 def is_element_clickable(element):
-    """If the element isn't clickable, the current page waits next 3-4 seconds.\n
+    """If the element isn't clickable, the current page waits two times or raises Exception..\n
     :param element: Element, the element from the current page"""
     if not element_to_be_clickable(element):
         log.write("The element is not yet clickable. Waiting...")
@@ -120,12 +136,16 @@ def is_element_clickable(element):
         log.write("The element is not yet clickable. Waiting...")
         wait(30, 40)
     if not element_to_be_clickable(element):
+        log.write("Unexpected error! The element is not clickable.")
         raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
+
 
 
 def check_league_and_season(ucl_season, league_name):
     """Preview section on whoscored.com ix available only for few league and correct seasons.
-    This function checks this condition and returns anser in bool."""
+    This function checks this condition and returns answer True/False. \n
+    :param ucl_season: str, name of checked season
+    :param league_name: str, name of checked league"""
     if league_name in ['England', 'Spain', 'Germany', 'Italy', 'France']:  # TOP 5 leagues - all seasons available
         return True
     if league_name in ['Netherlands', 'Russia'] and ucl_season in ALL_SEASONS[3:]:  # NED and RUS - from 2013/2014
@@ -141,7 +161,7 @@ def check_league_and_season(ucl_season, league_name):
 
 def select_season(selected_season):
     """This function selects the correct season from ALL_SEASONS in the drop down menu on the page.\n
-    :param selected_season: str, name of options in drop down menu 'season' """
+    :param selected_season: str, name of options in drop down menu 'season'"""
     drop_down_menu = browser.find_element_by_name("seasons")
     select = Select(drop_down_menu)
     is_element_clickable(drop_down_menu)
@@ -151,6 +171,7 @@ def select_season(selected_season):
 
 
 def select_stage():
+    """This function selects the stage in the drop down menu on the page (if element 'stage' exists)."""
     drop_down_menu = browser.find_element_by_name("stages")
     is_element_clickable(drop_down_menu)
     select = Select(drop_down_menu)
@@ -168,6 +189,7 @@ def select_stage():
 
 
 def filtration_team_matches(team_id, links):
+    """This function selects links to the webpages with matches of given team from list of all league links."""
     row = db.select("Teams", Team_id=team_id)[0]
     name = row['Team_name']
     name_words = name.strip().split(" ")
@@ -384,7 +406,7 @@ number_of_downloaded_matches = len(db.select("Matches"))
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
 
-for season in ALL_SEASONS[1:2]:
+for season in ALL_SEASONS[3:4]:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
     for match in all_matches:  # for every UCL match in the season
@@ -416,3 +438,5 @@ for season in ALL_SEASONS[1:2]:
             team_away_links = filtration_team_matches(team_away, links_league)
             team_ucl_matches = list(filter(lambda game: team_away in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_away_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_away)
+if browser:
+    browser.close()

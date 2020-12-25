@@ -17,7 +17,7 @@ ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
                '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-database = 'Matches_DB.db'
+DATABASE = 'Matches_DB.db'
 
 
 ##### functions #####
@@ -88,7 +88,7 @@ def change_team_name(team_id, team_name):
     :param team_id: str, WhoScored id of team
     :param team_name: str, WhoScored id of team"""
     change_names = {'32': 'Manchester United', '167': 'Manchester City', '7614': 'Leipzig', '134': 'Borussia M Gladbach',
-                   '296': 'Sporting CP', '560': 'Zenit St Petersburg', '304': 'Paris Saint Germain'}
+                    '296': 'Sporting CP', '560': 'Zenit St Petersburg', '304': 'Paris Saint Germain'}
     if team_id in change_names:
         return change_names[team_id]
     return team_name
@@ -120,7 +120,7 @@ def is_element_in_db(cursor: lite.Cursor, element: str, table: str, column: str)
 ##### Script #####
 conn = None
 try:
-    conn = connection_to_db(database)
+    conn = connection_to_db(DATABASE)
     sql = conn.cursor()
     for season in ALL_SEASONS:
         for idx in matches_indexes(season):       # for every saved UCL match
@@ -153,7 +153,7 @@ try:
                 print(f"{datetime.datetime.now()}          Team with ID {teams['team2_id']} saved in the database.")
 
             conn.commit()
-            print(f"{datetime.datetime.now()}          Changes in the database {database} saved.")
+            print(f"{datetime.datetime.now()}          Changes in the database {DATABASE} saved.")
             print(f"{datetime.datetime.now()}          File {file} complete.")
     # add change row for Manchester United in Teams!
 except lite.Error as e:
@@ -166,8 +166,8 @@ except Exception as e:
     print(f"{datetime.datetime.now()}          ERROR: {e}")
 else:
     conn.commit()
-    print(f"{datetime.datetime.now()}          All changes in the database {database} saved.")
+    print(f"{datetime.datetime.now()}          All changes in the database {DATABASE} saved.")
 finally:
     if conn:
         conn.close()
-    print(f"{datetime.datetime.now()}          Disconnected from the database {database}.")
+    print(f"{datetime.datetime.now()}          Disconnected from the database {DATABASE}.")
