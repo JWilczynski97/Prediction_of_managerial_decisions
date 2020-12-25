@@ -55,6 +55,11 @@ Ważne uwagi:
 
 - w sezonie 2011/2012 na poczatku pominieto Leverkusen w pierwszym meczu i pobrano następne mecze dla jednego zespołu
 (Valencii). Błąd poprawiony i poza kolejnością nic nie popsuł
+- w sezonie 2013/2014
+    -> nie pobrał się link do meczu Zenit - Dynamo Moskwa z 11 maja 2014 (mimo wyniku 2-4, 3 minuty przed końcem
+    na boisko wbiegli kibice i ostatecznie uznanno walkower 0-3, w związku z tym mecz został przez WhoScored opuszczony) -> mecz i tak bez wpływu na Ligę Mistrzów
+    -> nie pobrał się link do meczu Tom Tomsk - Ural (błąd whoscored, result-2 rc zamiast result-1 rc)
+
 
 Ligi krajowe z sekcją Preview:
 France, Spain, England, Germany, Italy - od sezonu 2010/2011

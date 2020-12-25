@@ -177,13 +177,15 @@ def select_stage():
     select = Select(drop_down_menu)
     wait(1.5, 2.5)
     all_options = drop_down_menu.find_elements_by_tag_name("option")
-    for option in all_options:
+    """for option in all_options:
         if str(option.get_attribute("text")) == 'Eredivisie':
             select.select_by_visible_text(option)
-            break
-    else:
-        log.write(f"Probably problem! The correct option not found in drop down menu 'stages'. "
-                  f"League: {league}, season: {season}.", level=logging.ERROR)
+            break"""
+    try:
+        select.select_by_visible_text('Eredivisie')
+    except NoSuchElementException as e:
+        log.write(f"League: {league}, season: {season}. Probably problem! The correct option can be not found in drop down menu 'stages'.", level=logging.ERROR)
+        log.write(f"Error: {e}.", level = logging.ERROR)
         sys.exit(1)
     wait(3, 4)
 
