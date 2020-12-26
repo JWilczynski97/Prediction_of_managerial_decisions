@@ -408,7 +408,7 @@ number_of_downloaded_matches = len(db.select("Matches"))
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
 
-for season in ALL_SEASONS[3:4]:
+for season in ALL_SEASONS[4:5]:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
     for match in all_matches:  # for every UCL match in the season

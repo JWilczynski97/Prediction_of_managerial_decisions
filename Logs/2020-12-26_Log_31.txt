@@ -1,0 +1,925 @@
+2020-12-26 06:29:52,962 - INFO - Logger created.
+2020-12-26 06:29:52,992 - INFO - Connected to the database Matches_DB.db.
+2020-12-26 06:29:53,044 - INFO - Number of already downloaded matches: 1968
+2020-12-26 06:29:53,045 - INFO - Start of matches downloading.
+2020-12-26 06:29:53,045 - INFO - Current season: 2014/2015
+2020-12-26 06:29:53,049 - INFO - IDx: 370. UCL Match: 885674. Team home: Juventus. Team ID: 87. League: Italy
+2020-12-26 06:29:53,061 - INFO - The matches of team 87 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,061 - INFO - IDx: 370. UCL Match: 885674. Team away: Malmoe FF. Team ID: 493. League: Sweden
+2020-12-26 06:29:53,062 - INFO - IDx: 371. UCL Match: 885675. Team home: Olympiacos. Team ID: 843. League: Greece
+2020-12-26 06:29:53,062 - INFO - IDx: 371. UCL Match: 885675. Team away: Atletico. Team ID: 63. League: Spain
+2020-12-26 06:29:53,063 - INFO - The matches of team 63 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,063 - INFO - IDx: 372. UCL Match: 885686. Team home: Liverpool. Team ID: 26. League: England
+2020-12-26 06:29:53,064 - INFO - The matches of team 26 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,064 - INFO - IDx: 372. UCL Match: 885686. Team away: Ludogorets Razgrad. Team ID: 9449. League: Bulgaria
+2020-12-26 06:29:53,065 - INFO - IDx: 373. UCL Match: 885687. Team home: Real Madrid. Team ID: 52. League: Spain
+2020-12-26 06:29:53,066 - INFO - The matches of team 52 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,066 - INFO - IDx: 373. UCL Match: 885687. Team away: FC Basel 1893. Team ID: 401. League: Switzerland
+2020-12-26 06:29:53,067 - INFO - IDx: 374. UCL Match: 885698. Team home: Monaco. Team ID: 248. League: France
+2020-12-26 06:29:53,067 - INFO - The matches of team 248 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,068 - INFO - IDx: 374. UCL Match: 885698. Team away: Leverkusen. Team ID: 36. League: Germany
+2020-12-26 06:29:53,068 - INFO - The matches of team 36 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,069 - INFO - IDx: 375. UCL Match: 885699. Team home: Benfica. Team ID: 299. League: Portugal
+2020-12-26 06:29:53,069 - INFO - IDx: 375. UCL Match: 885699. Team away: Zenit St Petersburg. Team ID: 560. League: Russia
+2020-12-26 06:29:53,069 - INFO - The matches of team 560 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,070 - INFO - IDx: 376. UCL Match: 885710. Team home: Galatasaray. Team ID: 294. League: Turkey
+2020-12-26 06:29:53,070 - INFO - The matches of team 294 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,070 - INFO - IDx: 376. UCL Match: 885710. Team away: Anderlecht. Team ID: 240. League: Belgium
+2020-12-26 06:29:53,071 - INFO - IDx: 377. UCL Match: 885711. Team home: Borussia Dortmund. Team ID: 44. League: Germany
+2020-12-26 06:29:53,071 - INFO - The matches of team 44 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,072 - INFO - IDx: 377. UCL Match: 885711. Team away: Arsenal. Team ID: 13. League: England
+2020-12-26 06:29:53,072 - INFO - The matches of team 13 in season 2014/2015 have already been downloaded. Skip!
+2020-12-26 06:29:53,072 - INFO - IDx: 378. UCL Match: 885734. Team home: Barcelona. Team ID: 65. League: Spain
+2020-12-26 06:29:53,091 - INFO - Links for league Spain and season 2014/2015 downloaded from file. Number of links: 380
+2020-12-26 06:29:53,093 - INFO - Filtration ended. Found matches of team 65. Number of matches: 38. Matches: ['https://www.whoscored.com/Matches/862059/Live/Spain-LaLiga-2014-2015-Barcelona-Elche', 'https://www.whoscored.com/Matches/862070/Live/Spain-LaLiga-2014-2015-Villarreal-Barcelona', 'https://www.whoscored.com/Matches/862080/Live/Spain-LaLiga-2014-2015-Barcelona-Athletic-Bilbao', 'https://www.whoscored.com/Matches/862110/Live/Spain-LaLiga-2014-2015-Levante-Barcelona', 'https://www.whoscored.com/Matches/862097/Live/Spain-LaLiga-2014-2015-Malaga-Barcelona', 'https://www.whoscored.com/Matches/862195/Live/Spain-LaLiga-2014-2015-Barcelona-Granada', 'https://www.whoscored.com/Matches/862147/Live/Spain-LaLiga-2014-2015-Rayo-Vallecano-Barcelona', 'https://www.whoscored.com/Matches/862177/Live/Spain-LaLiga-2014-2015-Barcelona-Eibar', 'https://www.whoscored.com/Matches/862204/Live/Spain-LaLiga-2014-2015-Real-Madrid-Barcelona', 'https://www.whoscored.com/Matches/862121/Live/Spain-LaLiga-2014-2015-Barcelona-Celta-Vigo', 'https://www.whoscored.com/Matches/862149/Live/Spain-LaLiga-2014-2015-Almeria-Barcelona', 'https://www.whoscored.com/Matches/862179/Live/Spain-LaLiga-2014-2015-Barcelona-Sevilla', 'https://www.whoscored.com/Matches/862102/Live/Spain-LaLiga-2014-2015-Valencia-Barcelona', 'https://www.whoscored.com/Matches/862133/Live/Spain-LaLiga-2014-2015-Barcelona-Espanyol', 'https://www.whoscored.com/Matches/862160/Live/Spain-LaLiga-2014-2015-Getafe-Barcelona', 'https://www.whoscored.com/Matches/862192/Live/Spain-LaLiga-2014-2015-Barcelona-Cordoba', 'https://www.whoscored.com/Matches/862273/Live/Spain-LaLiga-2014-2015-Real-Sociedad-Barcelona', 'https://www.whoscored.com/Matches/862302/Live/Spain-LaLiga-2014-2015-Barcelona-Atletico-Madrid', 'https://www.whoscored.com/Matches/862270/Live/Spain-LaLiga-2014-2015-Deportivo-La-Coruna-Barcelona', 'https://www.whoscored.com/Matches/862290/Live/Spain-LaLiga-2014-2015-Elche-Barcelona', 'https://www.whoscored.com/Matches/862409/Live/Spain-LaLiga-2014-2015-Barcelona-Villarreal', 'https://www.whoscored.com/Matches/862422/Live/Spain-LaLiga-2014-2015-Athletic-Bilbao-Barcelona', 'https://www.whoscored.com/Matches/862419/Live/Spain-LaLiga-2014-2015-Barcelona-Levante', 'https://www.whoscored.com/Matches/862391/Live/Spain-LaLiga-2014-2015-Barcelona-Malaga', 'https://www.whoscored.com/Matches/862380/Live/Spain-LaLiga-2014-2015-Granada-Barcelona', 'https://www.whoscored.com/Matches/862395/Live/Spain-LaLiga-2014-2015-Barcelona-Rayo-Vallecano', 'https://www.whoscored.com/Matches/862382/Live/Spain-LaLiga-2014-2015-Eibar-Barcelona', 'https://www.whoscored.com/Matches/862378/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Madrid', 'https://www.whoscored.com/Matches/862318/Live/Spain-LaLiga-2014-2015-Celta-Vigo-Barcelona', 'https://www.whoscored.com/Matches/862329/Live/Spain-LaLiga-2014-2015-Barcelona-Almeria', 'https://www.whoscored.com/Matches/862339/Live/Spain-LaLiga-2014-2015-Sevilla-Barcelona', 'https://www.whoscored.com/Matches/862348/Live/Spain-LaLiga-2014-2015-Barcelona-Valencia', 'https://www.whoscored.com/Matches/862217/Live/Spain-LaLiga-2014-2015-Espanyol-Barcelona', 'https://www.whoscored.com/Matches/862235/Live/Spain-LaLiga-2014-2015-Barcelona-Getafe', 'https://www.whoscored.com/Matches/862255/Live/Spain-LaLiga-2014-2015-Cordoba-Barcelona', 'https://www.whoscored.com/Matches/862266/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Sociedad', 'https://www.whoscored.com/Matches/862226/Live/Spain-LaLiga-2014-2015-Atletico-Madrid-Barcelona', 'https://www.whoscored.com/Matches/862244/Live/Spain-LaLiga-2014-2015-Barcelona-Deportivo-La-Coruna']
+2020-12-26 06:29:53,140 - INFO - Starting downloading of matches for team 65 in season 2014/2015.
+2020-12-26 06:29:53,246 - INFO - The match in https://www.whoscored.com/Matches/862059/Live/Spain-LaLiga-2014-2015-Barcelona-Elche is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,269 - INFO - The match in https://www.whoscored.com/Matches/862070/Live/Spain-LaLiga-2014-2015-Villarreal-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,286 - INFO - The match in https://www.whoscored.com/Matches/862080/Live/Spain-LaLiga-2014-2015-Barcelona-Athletic-Bilbao is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,304 - INFO - The match in https://www.whoscored.com/Matches/862110/Live/Spain-LaLiga-2014-2015-Levante-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,405 - INFO - The match in https://www.whoscored.com/Matches/862097/Live/Spain-LaLiga-2014-2015-Malaga-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,487 - INFO - The match in https://www.whoscored.com/Matches/862195/Live/Spain-LaLiga-2014-2015-Barcelona-Granada is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,527 - INFO - The match in https://www.whoscored.com/Matches/862147/Live/Spain-LaLiga-2014-2015-Rayo-Vallecano-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,562 - INFO - The match in https://www.whoscored.com/Matches/862177/Live/Spain-LaLiga-2014-2015-Barcelona-Eibar is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,593 - INFO - The match in https://www.whoscored.com/Matches/862204/Live/Spain-LaLiga-2014-2015-Real-Madrid-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,616 - INFO - The match in https://www.whoscored.com/Matches/862121/Live/Spain-LaLiga-2014-2015-Barcelona-Celta-Vigo is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,635 - INFO - The match in https://www.whoscored.com/Matches/862149/Live/Spain-LaLiga-2014-2015-Almeria-Barcelona is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,653 - INFO - The match in https://www.whoscored.com/Matches/862302/Live/Spain-LaLiga-2014-2015-Barcelona-Atletico-Madrid is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,673 - INFO - The match in https://www.whoscored.com/Matches/862378/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Madrid is already downloaded. Added rows with this match to to 'UCL_Matches_Matches'. Skip.
+2020-12-26 06:29:53,683 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862179/Live/Spain-LaLiga-2014-2015-Barcelona-Sevilla"}
+2020-12-26 06:30:01,718 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:30:01,719 - DEBUG - Finished Request
+2020-12-26 06:30:01,719 - INFO - The website https://www.whoscored.com/Matches/862179/Live/Spain-LaLiga-2014-2015-Barcelona-Sevilla launched.
+2020-12-26 06:30:05,669 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:30:05,696 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:30:05,696 - DEBUG - Finished Request
+2020-12-26 06:30:05,696 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/e8efae3a-a5c5-4daf-b029-ac28241bda24/click {"id": "e8efae3a-a5c5-4daf-b029-ac28241bda24"}
+2020-12-26 06:30:05,908 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/e8efae3a-a5c5-4daf-b029-ac28241bda24/click HTTP/1.1" 200 14
+2020-12-26 06:30:05,909 - DEBUG - Finished Request
+2020-12-26 06:30:09,739 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:30:09,765 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:30:09,766 - DEBUG - Finished Request
+2020-12-26 06:30:09,766 - INFO - Barcelona 5-1 Sevilla - LaLiga 2014/2015
+2020-12-26 06:30:11,799 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:30:13,538 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:30:13,539 - DEBUG - Finished Request
+2020-12-26 06:30:13,539 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:30:13,845 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1868220
+2020-12-26 06:30:13,903 - DEBUG - Finished Request
+2020-12-26 06:30:15,768 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1969_squad.html saved.
+2020-12-26 06:30:15,769 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:30:15,822 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:30:15,823 - DEBUG - Finished Request
+2020-12-26 06:30:15,823 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/a28d8327-ca04-4196-a53d-395b80a2c16a/click {"id": "a28d8327-ca04-4196-a53d-395b80a2c16a"}
+2020-12-26 06:30:18,118 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/a28d8327-ca04-4196-a53d-395b80a2c16a/click HTTP/1.1" 200 14
+2020-12-26 06:30:18,120 - DEBUG - Finished Request
+2020-12-26 06:30:26,250 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:30:29,777 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 412631
+2020-12-26 06:30:29,780 - DEBUG - Finished Request
+2020-12-26 06:30:29,783 - INFO - File with Preview Matches\2014_2015\Spain\Match_1969_preview.html saved.
+2020-12-26 06:30:29,793 - INFO - table Matches -> new row added: ('1969', '65', '67', '2014/2015', 'Spain', '862179', '2014-11-22', 'Matches\\2014_2015\\Spain\\Match_1969_squad.html', 'Matches\\2014_2015\\Spain\\Match_1969_preview.html', 'https://www.whoscored.com/Matches/862179/Live/Spain-LaLiga-2014-2015-Barcelona-Sevilla')
+2020-12-26 06:30:33,848 - INFO - table UCL_Matches_Matches -> new row added: (885743, '862179', '2014/2015')
+2020-12-26 06:30:33,857 - INFO - table UCL_Matches_Matches -> new row added: (885744, '862179', '2014/2015')
+2020-12-26 06:30:33,865 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862179', '2014/2015')
+2020-12-26 06:30:33,878 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862179', '2014/2015')
+2020-12-26 06:30:33,885 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862179', '2014/2015')
+2020-12-26 06:30:33,897 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862179', '2014/2015')
+2020-12-26 06:30:33,904 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862179', '2014/2015')
+2020-12-26 06:30:33,912 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862179', '2014/2015')
+2020-12-26 06:30:33,926 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862179', '2014/2015')
+2020-12-26 06:30:33,926 - INFO - The link downloaded. Next...
+2020-12-26 06:30:33,926 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862102/Live/Spain-LaLiga-2014-2015-Valencia-Barcelona"}
+2020-12-26 06:30:37,069 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:30:37,070 - DEBUG - Finished Request
+2020-12-26 06:30:37,070 - INFO - The website https://www.whoscored.com/Matches/862102/Live/Spain-LaLiga-2014-2015-Valencia-Barcelona launched.
+2020-12-26 06:30:40,692 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:30:43,892 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:30:43,892 - DEBUG - Finished Request
+2020-12-26 06:30:48,290 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:30:48,305 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 58
+2020-12-26 06:30:48,305 - DEBUG - Finished Request
+2020-12-26 06:30:48,305 - INFO - Valencia 0-1 Barcelona - LaLiga 2014/2015
+2020-12-26 06:30:50,986 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:30:51,425 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:30:51,426 - DEBUG - Finished Request
+2020-12-26 06:30:51,426 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:30:51,681 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1884222
+2020-12-26 06:30:51,734 - DEBUG - Finished Request
+2020-12-26 06:30:52,772 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1970_squad.html saved.
+2020-12-26 06:30:52,772 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:30:52,851 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:30:52,852 - DEBUG - Finished Request
+2020-12-26 06:30:52,852 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/40d438ec-6300-4bbb-b1eb-d15d49a3e41d/click {"id": "40d438ec-6300-4bbb-b1eb-d15d49a3e41d"}
+2020-12-26 06:30:55,396 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/40d438ec-6300-4bbb-b1eb-d15d49a3e41d/click HTTP/1.1" 200 14
+2020-12-26 06:30:55,396 - DEBUG - Finished Request
+2020-12-26 06:31:05,274 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:31:05,705 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 411418
+2020-12-26 06:31:05,710 - DEBUG - Finished Request
+2020-12-26 06:31:05,714 - INFO - File with Preview Matches\2014_2015\Spain\Match_1970_preview.html saved.
+2020-12-26 06:31:05,727 - INFO - table Matches -> new row added: ('1970', '55', '65', '2014/2015', 'Spain', '862102', '2014-11-30', 'Matches\\2014_2015\\Spain\\Match_1970_squad.html', 'Matches\\2014_2015\\Spain\\Match_1970_preview.html', 'https://www.whoscored.com/Matches/862102/Live/Spain-LaLiga-2014-2015-Valencia-Barcelona')
+2020-12-26 06:31:10,452 - INFO - table UCL_Matches_Matches -> new row added: (885744, '862102', '2014/2015')
+2020-12-26 06:31:10,470 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862102', '2014/2015')
+2020-12-26 06:31:10,483 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862102', '2014/2015')
+2020-12-26 06:31:10,490 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862102', '2014/2015')
+2020-12-26 06:31:10,498 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862102', '2014/2015')
+2020-12-26 06:31:10,512 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862102', '2014/2015')
+2020-12-26 06:31:10,520 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862102', '2014/2015')
+2020-12-26 06:31:10,528 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862102', '2014/2015')
+2020-12-26 06:31:10,529 - INFO - The link downloaded. Next...
+2020-12-26 06:31:10,529 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862133/Live/Spain-LaLiga-2014-2015-Barcelona-Espanyol"}
+2020-12-26 06:31:12,099 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:31:12,099 - DEBUG - Finished Request
+2020-12-26 06:31:12,100 - INFO - The website https://www.whoscored.com/Matches/862133/Live/Spain-LaLiga-2014-2015-Barcelona-Espanyol launched.
+2020-12-26 06:31:15,573 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:31:15,604 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:31:15,604 - DEBUG - Finished Request
+2020-12-26 06:31:19,347 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:31:19,373 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 58
+2020-12-26 06:31:19,373 - DEBUG - Finished Request
+2020-12-26 06:31:19,374 - INFO - Barcelona 5-1 Espanyol - LaLiga 2014/2015
+2020-12-26 06:31:21,396 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:31:21,448 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:31:21,449 - DEBUG - Finished Request
+2020-12-26 06:31:21,449 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:31:21,648 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1979330
+2020-12-26 06:31:21,701 - DEBUG - Finished Request
+2020-12-26 06:31:22,832 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1971_squad.html saved.
+2020-12-26 06:31:22,833 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:31:22,878 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:31:22,878 - DEBUG - Finished Request
+2020-12-26 06:31:22,878 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/e375facf-afcd-4f25-99ad-c7d26cd657a7/click {"id": "e375facf-afcd-4f25-99ad-c7d26cd657a7"}
+2020-12-26 06:31:24,737 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/e375facf-afcd-4f25-99ad-c7d26cd657a7/click HTTP/1.1" 200 14
+2020-12-26 06:31:24,738 - DEBUG - Finished Request
+2020-12-26 06:31:34,065 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:31:34,152 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 461777
+2020-12-26 06:31:34,158 - DEBUG - Finished Request
+2020-12-26 06:31:34,161 - INFO - File with Preview Matches\2014_2015\Spain\Match_1971_preview.html saved.
+2020-12-26 06:31:34,166 - INFO - table Matches -> new row added: ('1971', '65', '70', '2014/2015', 'Spain', '862133', '2014-12-07', 'Matches\\2014_2015\\Spain\\Match_1971_squad.html', 'Matches\\2014_2015\\Spain\\Match_1971_preview.html', 'https://www.whoscored.com/Matches/862133/Live/Spain-LaLiga-2014-2015-Barcelona-Espanyol')
+2020-12-26 06:31:38,581 - INFO - table UCL_Matches_Matches -> new row added: (885744, '862133', '2014/2015')
+2020-12-26 06:31:38,589 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862133', '2014/2015')
+2020-12-26 06:31:38,598 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862133', '2014/2015')
+2020-12-26 06:31:38,604 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862133', '2014/2015')
+2020-12-26 06:31:38,616 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862133', '2014/2015')
+2020-12-26 06:31:38,627 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862133', '2014/2015')
+2020-12-26 06:31:38,634 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862133', '2014/2015')
+2020-12-26 06:31:38,646 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862133', '2014/2015')
+2020-12-26 06:31:38,646 - INFO - The link downloaded. Next...
+2020-12-26 06:31:38,646 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862160/Live/Spain-LaLiga-2014-2015-Getafe-Barcelona"}
+2020-12-26 06:31:40,713 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:31:40,714 - DEBUG - Finished Request
+2020-12-26 06:31:40,714 - INFO - The website https://www.whoscored.com/Matches/862160/Live/Spain-LaLiga-2014-2015-Getafe-Barcelona launched.
+2020-12-26 06:31:44,712 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:31:46,684 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:31:46,684 - DEBUG - Finished Request
+2020-12-26 06:31:50,299 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:31:50,307 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 56
+2020-12-26 06:31:50,307 - DEBUG - Finished Request
+2020-12-26 06:31:50,307 - INFO - Getafe 0-0 Barcelona - LaLiga 2014/2015
+2020-12-26 06:31:53,124 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:31:53,194 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:31:53,195 - DEBUG - Finished Request
+2020-12-26 06:31:53,195 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:31:53,408 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1997302
+2020-12-26 06:31:53,486 - DEBUG - Finished Request
+2020-12-26 06:31:54,662 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1972_squad.html saved.
+2020-12-26 06:31:54,662 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:31:54,703 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:31:54,704 - DEBUG - Finished Request
+2020-12-26 06:31:54,704 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/cf0459e2-a11f-410d-abc1-123abf2d3ff3/click {"id": "cf0459e2-a11f-410d-abc1-123abf2d3ff3"}
+2020-12-26 06:31:56,787 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/cf0459e2-a11f-410d-abc1-123abf2d3ff3/click HTTP/1.1" 200 14
+2020-12-26 06:31:56,789 - DEBUG - Finished Request
+2020-12-26 06:32:05,588 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:32:05,643 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 519202
+2020-12-26 06:32:05,650 - DEBUG - Finished Request
+2020-12-26 06:32:05,660 - INFO - File with Preview Matches\2014_2015\Spain\Match_1972_preview.html saved.
+2020-12-26 06:32:05,668 - INFO - table Matches -> new row added: ('1972', '819', '65', '2014/2015', 'Spain', '862160', '2014-12-13', 'Matches\\2014_2015\\Spain\\Match_1972_squad.html', 'Matches\\2014_2015\\Spain\\Match_1972_preview.html', 'https://www.whoscored.com/Matches/862160/Live/Spain-LaLiga-2014-2015-Getafe-Barcelona')
+2020-12-26 06:32:10,450 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862160', '2014/2015')
+2020-12-26 06:32:10,469 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862160', '2014/2015')
+2020-12-26 06:32:10,482 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862160', '2014/2015')
+2020-12-26 06:32:10,490 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862160', '2014/2015')
+2020-12-26 06:32:10,503 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862160', '2014/2015')
+2020-12-26 06:32:10,515 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862160', '2014/2015')
+2020-12-26 06:32:10,536 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862160', '2014/2015')
+2020-12-26 06:32:10,537 - INFO - The link downloaded. Next...
+2020-12-26 06:32:10,537 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862192/Live/Spain-LaLiga-2014-2015-Barcelona-Cordoba"}
+2020-12-26 06:32:11,876 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:32:11,876 - DEBUG - Finished Request
+2020-12-26 06:32:11,876 - INFO - The website https://www.whoscored.com/Matches/862192/Live/Spain-LaLiga-2014-2015-Barcelona-Cordoba launched.
+2020-12-26 06:32:15,102 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:32:15,390 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:32:15,390 - DEBUG - Finished Request
+2020-12-26 06:32:19,503 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:32:19,544 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:32:19,545 - DEBUG - Finished Request
+2020-12-26 06:32:19,545 - INFO - Barcelona 5-0 Cordoba - LaLiga 2014/2015
+2020-12-26 06:32:22,411 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:32:22,462 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:32:22,463 - DEBUG - Finished Request
+2020-12-26 06:32:22,463 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:32:22,679 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1857713
+2020-12-26 06:32:22,737 - DEBUG - Finished Request
+2020-12-26 06:32:23,771 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1973_squad.html saved.
+2020-12-26 06:32:23,772 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:32:23,805 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:32:23,806 - DEBUG - Finished Request
+2020-12-26 06:32:23,806 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/fbe4dc61-588a-4564-823f-73c0e6173ee0/click {"id": "fbe4dc61-588a-4564-823f-73c0e6173ee0"}
+2020-12-26 06:32:26,779 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/fbe4dc61-588a-4564-823f-73c0e6173ee0/click HTTP/1.1" 200 14
+2020-12-26 06:32:26,780 - DEBUG - Finished Request
+2020-12-26 06:32:36,549 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:32:36,595 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 368446
+2020-12-26 06:32:36,601 - DEBUG - Finished Request
+2020-12-26 06:32:36,604 - INFO - File with Preview Matches\2014_2015\Spain\Match_1973_preview.html saved.
+2020-12-26 06:32:36,611 - INFO - table Matches -> new row added: ('1973', '65', '820', '2014/2015', 'Spain', '862192', '2014-12-20', 'Matches\\2014_2015\\Spain\\Match_1973_squad.html', 'Matches\\2014_2015\\Spain\\Match_1973_preview.html', 'https://www.whoscored.com/Matches/862192/Live/Spain-LaLiga-2014-2015-Barcelona-Cordoba')
+2020-12-26 06:32:40,828 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862192', '2014/2015')
+2020-12-26 06:32:40,836 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862192', '2014/2015')
+2020-12-26 06:32:40,844 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862192', '2014/2015')
+2020-12-26 06:32:40,852 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862192', '2014/2015')
+2020-12-26 06:32:40,861 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862192', '2014/2015')
+2020-12-26 06:32:40,870 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862192', '2014/2015')
+2020-12-26 06:32:40,879 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862192', '2014/2015')
+2020-12-26 06:32:40,879 - INFO - The link downloaded. Next...
+2020-12-26 06:32:40,879 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862273/Live/Spain-LaLiga-2014-2015-Real-Sociedad-Barcelona"}
+2020-12-26 06:32:42,377 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:32:42,378 - DEBUG - Finished Request
+2020-12-26 06:32:42,378 - INFO - The website https://www.whoscored.com/Matches/862273/Live/Spain-LaLiga-2014-2015-Real-Sociedad-Barcelona launched.
+2020-12-26 06:32:45,547 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:32:45,573 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:32:45,573 - DEBUG - Finished Request
+2020-12-26 06:32:50,531 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:32:50,537 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 63
+2020-12-26 06:32:50,537 - DEBUG - Finished Request
+2020-12-26 06:32:50,537 - INFO - Real Sociedad 1-0 Barcelona - LaLiga 2014/2015
+2020-12-26 06:32:53,334 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:32:53,384 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:32:53,384 - DEBUG - Finished Request
+2020-12-26 06:32:53,385 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:32:53,556 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1917082
+2020-12-26 06:32:53,607 - DEBUG - Finished Request
+2020-12-26 06:32:54,471 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1974_squad.html saved.
+2020-12-26 06:32:54,472 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:32:54,503 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:32:54,503 - DEBUG - Finished Request
+2020-12-26 06:32:54,504 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/cbe4b5fc-d080-49fd-97e9-d7a61bf269c8/click {"id": "cbe4b5fc-d080-49fd-97e9-d7a61bf269c8"}
+2020-12-26 06:32:56,596 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/cbe4b5fc-d080-49fd-97e9-d7a61bf269c8/click HTTP/1.1" 200 14
+2020-12-26 06:32:56,597 - DEBUG - Finished Request
+2020-12-26 06:33:05,875 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:33:05,928 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 482786
+2020-12-26 06:33:05,935 - DEBUG - Finished Request
+2020-12-26 06:33:05,938 - INFO - File with Preview Matches\2014_2015\Spain\Match_1974_preview.html saved.
+2020-12-26 06:33:05,946 - INFO - table Matches -> new row added: ('1974', '68', '65', '2014/2015', 'Spain', '862273', '2015-01-04', 'Matches\\2014_2015\\Spain\\Match_1974_squad.html', 'Matches\\2014_2015\\Spain\\Match_1974_preview.html', 'https://www.whoscored.com/Matches/862273/Live/Spain-LaLiga-2014-2015-Real-Sociedad-Barcelona')
+2020-12-26 06:33:10,804 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862273', '2014/2015')
+2020-12-26 06:33:10,812 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862273', '2014/2015')
+2020-12-26 06:33:10,820 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862273', '2014/2015')
+2020-12-26 06:33:10,827 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862273', '2014/2015')
+2020-12-26 06:33:10,846 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862273', '2014/2015')
+2020-12-26 06:33:10,863 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862273', '2014/2015')
+2020-12-26 06:33:10,872 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862273', '2014/2015')
+2020-12-26 06:33:10,872 - INFO - The link downloaded. Next...
+2020-12-26 06:33:10,873 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862270/Live/Spain-LaLiga-2014-2015-Deportivo-La-Coruna-Barcelona"}
+2020-12-26 06:33:12,409 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:33:12,410 - DEBUG - Finished Request
+2020-12-26 06:33:12,410 - INFO - The website https://www.whoscored.com/Matches/862270/Live/Spain-LaLiga-2014-2015-Deportivo-La-Coruna-Barcelona launched.
+2020-12-26 06:33:15,431 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:33:16,523 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:33:16,524 - DEBUG - Finished Request
+2020-12-26 06:33:21,058 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:33:21,075 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 69
+2020-12-26 06:33:21,076 - DEBUG - Finished Request
+2020-12-26 06:33:21,076 - INFO - Deportivo La Coruna 0-4 Barcelona - LaLiga 2014/2015
+2020-12-26 06:33:24,064 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:33:24,118 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:33:24,118 - DEBUG - Finished Request
+2020-12-26 06:33:24,118 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:33:24,292 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1916470
+2020-12-26 06:33:24,353 - DEBUG - Finished Request
+2020-12-26 06:33:25,385 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1975_squad.html saved.
+2020-12-26 06:33:25,386 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:33:25,442 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:33:25,443 - DEBUG - Finished Request
+2020-12-26 06:33:25,443 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/d8b44bd6-3dd9-45a4-9448-ac01f6033821/click {"id": "d8b44bd6-3dd9-45a4-9448-ac01f6033821"}
+2020-12-26 06:33:27,476 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/d8b44bd6-3dd9-45a4-9448-ac01f6033821/click HTTP/1.1" 200 14
+2020-12-26 06:33:27,477 - DEBUG - Finished Request
+2020-12-26 06:33:35,665 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:33:35,711 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 405140
+2020-12-26 06:33:35,716 - DEBUG - Finished Request
+2020-12-26 06:33:35,719 - INFO - File with Preview Matches\2014_2015\Spain\Match_1975_preview.html saved.
+2020-12-26 06:33:35,735 - INFO - table Matches -> new row added: ('1975', '59', '65', '2014/2015', 'Spain', '862270', '2015-01-18', 'Matches\\2014_2015\\Spain\\Match_1975_squad.html', 'Matches\\2014_2015\\Spain\\Match_1975_preview.html', 'https://www.whoscored.com/Matches/862270/Live/Spain-LaLiga-2014-2015-Deportivo-La-Coruna-Barcelona')
+2020-12-26 06:33:39,748 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862270', '2014/2015')
+2020-12-26 06:33:39,757 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862270', '2014/2015')
+2020-12-26 06:33:39,765 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862270', '2014/2015')
+2020-12-26 06:33:39,773 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862270', '2014/2015')
+2020-12-26 06:33:39,781 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862270', '2014/2015')
+2020-12-26 06:33:39,789 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862270', '2014/2015')
+2020-12-26 06:33:39,802 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862270', '2014/2015')
+2020-12-26 06:33:39,802 - INFO - The link downloaded. Next...
+2020-12-26 06:33:39,802 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862290/Live/Spain-LaLiga-2014-2015-Elche-Barcelona"}
+2020-12-26 06:33:41,488 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:33:41,489 - DEBUG - Finished Request
+2020-12-26 06:33:41,489 - INFO - The website https://www.whoscored.com/Matches/862290/Live/Spain-LaLiga-2014-2015-Elche-Barcelona launched.
+2020-12-26 06:33:45,040 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:33:45,068 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:33:45,069 - DEBUG - Finished Request
+2020-12-26 06:33:49,055 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:33:49,061 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 55
+2020-12-26 06:33:49,061 - DEBUG - Finished Request
+2020-12-26 06:33:49,062 - INFO - Elche 0-6 Barcelona - LaLiga 2014/2015
+2020-12-26 06:33:51,864 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:33:51,909 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:33:51,909 - DEBUG - Finished Request
+2020-12-26 06:33:51,909 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:33:52,082 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1845876
+2020-12-26 06:33:52,141 - DEBUG - Finished Request
+2020-12-26 06:33:53,159 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1976_squad.html saved.
+2020-12-26 06:33:53,159 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:33:53,192 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:33:53,192 - DEBUG - Finished Request
+2020-12-26 06:33:53,192 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/7a43be10-9522-429e-8daa-b1f56ae72b2b/click {"id": "7a43be10-9522-429e-8daa-b1f56ae72b2b"}
+2020-12-26 06:33:55,604 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/7a43be10-9522-429e-8daa-b1f56ae72b2b/click HTTP/1.1" 200 14
+2020-12-26 06:33:55,604 - DEBUG - Finished Request
+2020-12-26 06:34:05,411 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:34:05,473 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 442193
+2020-12-26 06:34:05,478 - DEBUG - Finished Request
+2020-12-26 06:34:05,482 - INFO - File with Preview Matches\2014_2015\Spain\Match_1976_preview.html saved.
+2020-12-26 06:34:05,524 - INFO - table Matches -> new row added: ('1976', '833', '65', '2014/2015', 'Spain', '862290', '2015-01-24', 'Matches\\2014_2015\\Spain\\Match_1976_squad.html', 'Matches\\2014_2015\\Spain\\Match_1976_preview.html', 'https://www.whoscored.com/Matches/862290/Live/Spain-LaLiga-2014-2015-Elche-Barcelona')
+2020-12-26 06:34:10,519 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862290', '2014/2015')
+2020-12-26 06:34:10,563 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862290', '2014/2015')
+2020-12-26 06:34:10,608 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862290', '2014/2015')
+2020-12-26 06:34:10,653 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862290', '2014/2015')
+2020-12-26 06:34:10,701 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862290', '2014/2015')
+2020-12-26 06:34:10,745 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862290', '2014/2015')
+2020-12-26 06:34:10,791 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862290', '2014/2015')
+2020-12-26 06:34:10,791 - INFO - The link downloaded. Next...
+2020-12-26 06:34:10,791 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862409/Live/Spain-LaLiga-2014-2015-Barcelona-Villarreal"}
+2020-12-26 06:34:12,671 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:34:12,672 - DEBUG - Finished Request
+2020-12-26 06:34:12,672 - INFO - The website https://www.whoscored.com/Matches/862409/Live/Spain-LaLiga-2014-2015-Barcelona-Villarreal launched.
+2020-12-26 06:34:16,644 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:34:16,665 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:34:16,665 - DEBUG - Finished Request
+2020-12-26 06:34:20,205 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:34:20,210 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 60
+2020-12-26 06:34:20,211 - DEBUG - Finished Request
+2020-12-26 06:34:20,211 - INFO - Barcelona 3-2 Villarreal - LaLiga 2014/2015
+2020-12-26 06:34:22,489 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:34:22,530 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:34:22,530 - DEBUG - Finished Request
+2020-12-26 06:34:22,530 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:34:22,706 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1915465
+2020-12-26 06:34:22,758 - DEBUG - Finished Request
+2020-12-26 06:34:23,538 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1977_squad.html saved.
+2020-12-26 06:34:23,538 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:34:23,572 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:34:23,572 - DEBUG - Finished Request
+2020-12-26 06:34:23,572 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/d3fea634-bdf0-4e32-a631-9378cd10d774/click {"id": "d3fea634-bdf0-4e32-a631-9378cd10d774"}
+2020-12-26 06:34:25,254 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/d3fea634-bdf0-4e32-a631-9378cd10d774/click HTTP/1.1" 200 14
+2020-12-26 06:34:25,254 - DEBUG - Finished Request
+2020-12-26 06:34:33,658 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:34:33,720 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 435298
+2020-12-26 06:34:33,728 - DEBUG - Finished Request
+2020-12-26 06:34:33,730 - INFO - File with Preview Matches\2014_2015\Spain\Match_1977_preview.html saved.
+2020-12-26 06:34:33,774 - INFO - table Matches -> new row added: ('1977', '65', '839', '2014/2015', 'Spain', '862409', '2015-02-01', 'Matches\\2014_2015\\Spain\\Match_1977_squad.html', 'Matches\\2014_2015\\Spain\\Match_1977_preview.html', 'https://www.whoscored.com/Matches/862409/Live/Spain-LaLiga-2014-2015-Barcelona-Villarreal')
+2020-12-26 06:34:38,085 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862409', '2014/2015')
+2020-12-26 06:34:38,131 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862409', '2014/2015')
+2020-12-26 06:34:38,174 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862409', '2014/2015')
+2020-12-26 06:34:38,221 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862409', '2014/2015')
+2020-12-26 06:34:38,266 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862409', '2014/2015')
+2020-12-26 06:34:38,310 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862409', '2014/2015')
+2020-12-26 06:34:38,356 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862409', '2014/2015')
+2020-12-26 06:34:38,356 - INFO - The link downloaded. Next...
+2020-12-26 06:34:38,356 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862422/Live/Spain-LaLiga-2014-2015-Athletic-Bilbao-Barcelona"}
+2020-12-26 06:34:39,735 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:34:39,736 - DEBUG - Finished Request
+2020-12-26 06:34:39,736 - INFO - The website https://www.whoscored.com/Matches/862422/Live/Spain-LaLiga-2014-2015-Athletic-Bilbao-Barcelona launched.
+2020-12-26 06:34:42,874 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:34:44,243 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:34:44,243 - DEBUG - Finished Request
+2020-12-26 06:34:49,029 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:34:49,036 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 65
+2020-12-26 06:34:49,036 - DEBUG - Finished Request
+2020-12-26 06:34:49,036 - INFO - Athletic Bilbao 2-5 Barcelona - LaLiga 2014/2015
+2020-12-26 06:34:51,589 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:34:51,653 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:34:51,654 - DEBUG - Finished Request
+2020-12-26 06:34:51,654 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:34:51,921 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2202436
+2020-12-26 06:34:51,998 - DEBUG - Finished Request
+2020-12-26 06:34:53,821 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1978_squad.html saved.
+2020-12-26 06:34:53,821 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:34:53,929 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:34:53,929 - DEBUG - Finished Request
+2020-12-26 06:34:53,930 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/9462fcdb-8c0e-48b8-b646-41f619378019/click {"id": "9462fcdb-8c0e-48b8-b646-41f619378019"}
+2020-12-26 06:34:56,503 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/9462fcdb-8c0e-48b8-b646-41f619378019/click HTTP/1.1" 200 14
+2020-12-26 06:34:56,503 - DEBUG - Finished Request
+2020-12-26 06:35:05,474 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:35:05,557 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 606589
+2020-12-26 06:35:05,565 - DEBUG - Finished Request
+2020-12-26 06:35:05,568 - INFO - File with Preview Matches\2014_2015\Spain\Match_1978_preview.html saved.
+2020-12-26 06:35:05,610 - INFO - table Matches -> new row added: ('1978', '53', '65', '2014/2015', 'Spain', '862422', '2015-02-08', 'Matches\\2014_2015\\Spain\\Match_1978_squad.html', 'Matches\\2014_2015\\Spain\\Match_1978_preview.html', 'https://www.whoscored.com/Matches/862422/Live/Spain-LaLiga-2014-2015-Athletic-Bilbao-Barcelona')
+2020-12-26 06:35:10,205 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862422', '2014/2015')
+2020-12-26 06:35:10,250 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862422', '2014/2015')
+2020-12-26 06:35:10,296 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862422', '2014/2015')
+2020-12-26 06:35:10,348 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862422', '2014/2015')
+2020-12-26 06:35:10,396 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862422', '2014/2015')
+2020-12-26 06:35:12,861 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862422', '2014/2015')
+2020-12-26 06:35:12,906 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862422', '2014/2015')
+2020-12-26 06:35:12,907 - INFO - The link downloaded. Next...
+2020-12-26 06:35:12,907 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862419/Live/Spain-LaLiga-2014-2015-Barcelona-Levante"}
+2020-12-26 06:35:14,850 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:35:14,851 - DEBUG - Finished Request
+2020-12-26 06:35:14,851 - INFO - The website https://www.whoscored.com/Matches/862419/Live/Spain-LaLiga-2014-2015-Barcelona-Levante launched.
+2020-12-26 06:35:18,509 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:35:21,802 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:35:21,802 - DEBUG - Finished Request
+2020-12-26 06:35:25,469 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:35:25,491 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:35:25,492 - DEBUG - Finished Request
+2020-12-26 06:35:25,493 - INFO - Barcelona 5-0 Levante - LaLiga 2014/2015
+2020-12-26 06:35:27,573 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:35:27,737 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:35:27,738 - DEBUG - Finished Request
+2020-12-26 06:35:27,740 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:35:28,169 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1959514
+2020-12-26 06:35:28,337 - DEBUG - Finished Request
+2020-12-26 06:35:31,343 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1979_squad.html saved.
+2020-12-26 06:35:31,343 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:35:31,397 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:35:31,398 - DEBUG - Finished Request
+2020-12-26 06:35:31,398 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/854502c9-29d6-4488-8c88-40833633d182/click {"id": "854502c9-29d6-4488-8c88-40833633d182"}
+2020-12-26 06:35:33,316 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/854502c9-29d6-4488-8c88-40833633d182/click HTTP/1.1" 200 14
+2020-12-26 06:35:33,316 - DEBUG - Finished Request
+2020-12-26 06:35:41,961 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:35:42,115 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 528008
+2020-12-26 06:35:42,124 - DEBUG - Finished Request
+2020-12-26 06:35:42,127 - INFO - File with Preview Matches\2014_2015\Spain\Match_1979_preview.html saved.
+2020-12-26 06:35:42,194 - INFO - table Matches -> new row added: ('1979', '65', '832', '2014/2015', 'Spain', '862419', '2015-02-15', 'Matches\\2014_2015\\Spain\\Match_1979_squad.html', 'Matches\\2014_2015\\Spain\\Match_1979_preview.html', 'https://www.whoscored.com/Matches/862419/Live/Spain-LaLiga-2014-2015-Barcelona-Levante')
+2020-12-26 06:35:46,550 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862419', '2014/2015')
+2020-12-26 06:35:46,593 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862419', '2014/2015')
+2020-12-26 06:35:46,638 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862419', '2014/2015')
+2020-12-26 06:35:46,680 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862419', '2014/2015')
+2020-12-26 06:35:46,724 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862419', '2014/2015')
+2020-12-26 06:35:46,774 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862419', '2014/2015')
+2020-12-26 06:35:46,820 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862419', '2014/2015')
+2020-12-26 06:35:46,820 - INFO - The link downloaded. Next...
+2020-12-26 06:35:46,820 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862391/Live/Spain-LaLiga-2014-2015-Barcelona-Malaga"}
+2020-12-26 06:35:49,432 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:35:49,432 - DEBUG - Finished Request
+2020-12-26 06:35:49,432 - INFO - The website https://www.whoscored.com/Matches/862391/Live/Spain-LaLiga-2014-2015-Barcelona-Malaga launched.
+2020-12-26 06:35:52,608 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:35:55,151 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:35:55,151 - DEBUG - Finished Request
+2020-12-26 06:35:59,186 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:35:59,200 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 56
+2020-12-26 06:35:59,201 - DEBUG - Finished Request
+2020-12-26 06:35:59,201 - INFO - Barcelona 0-1 Malaga - LaLiga 2014/2015
+2020-12-26 06:36:01,451 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:36:01,541 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:36:01,541 - DEBUG - Finished Request
+2020-12-26 06:36:01,542 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:36:01,804 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1918894
+2020-12-26 06:36:01,895 - DEBUG - Finished Request
+2020-12-26 06:36:03,502 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1980_squad.html saved.
+2020-12-26 06:36:03,503 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:36:03,560 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:36:03,560 - DEBUG - Finished Request
+2020-12-26 06:36:03,561 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/16ca04e2-d11e-4eb9-9b5e-c3d28ff9f805/click {"id": "16ca04e2-d11e-4eb9-9b5e-c3d28ff9f805"}
+2020-12-26 06:36:06,366 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/16ca04e2-d11e-4eb9-9b5e-c3d28ff9f805/click HTTP/1.1" 200 14
+2020-12-26 06:36:06,367 - DEBUG - Finished Request
+2020-12-26 06:36:15,781 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:36:15,988 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 479308
+2020-12-26 06:36:15,999 - DEBUG - Finished Request
+2020-12-26 06:36:16,003 - INFO - File with Preview Matches\2014_2015\Spain\Match_1980_preview.html saved.
+2020-12-26 06:36:16,049 - INFO - table Matches -> new row added: ('1980', '65', '69', '2014/2015', 'Spain', '862391', '2015-02-21', 'Matches\\2014_2015\\Spain\\Match_1980_squad.html', 'Matches\\2014_2015\\Spain\\Match_1980_preview.html', 'https://www.whoscored.com/Matches/862391/Live/Spain-LaLiga-2014-2015-Barcelona-Malaga')
+2020-12-26 06:36:20,422 - INFO - table UCL_Matches_Matches -> new row added: (904242, '862391', '2014/2015')
+2020-12-26 06:36:20,470 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862391', '2014/2015')
+2020-12-26 06:36:20,517 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862391', '2014/2015')
+2020-12-26 06:36:20,562 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862391', '2014/2015')
+2020-12-26 06:36:20,607 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862391', '2014/2015')
+2020-12-26 06:36:20,655 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862391', '2014/2015')
+2020-12-26 06:36:20,707 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862391', '2014/2015')
+2020-12-26 06:36:20,708 - INFO - The link downloaded. Next...
+2020-12-26 06:36:20,708 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862380/Live/Spain-LaLiga-2014-2015-Granada-Barcelona"}
+2020-12-26 06:36:22,200 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:36:22,200 - DEBUG - Finished Request
+2020-12-26 06:36:22,200 - INFO - The website https://www.whoscored.com/Matches/862380/Live/Spain-LaLiga-2014-2015-Granada-Barcelona launched.
+2020-12-26 06:36:25,438 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:36:26,748 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:36:26,748 - DEBUG - Finished Request
+2020-12-26 06:36:30,890 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:36:30,898 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:36:30,898 - DEBUG - Finished Request
+2020-12-26 06:36:30,898 - INFO - Granada 1-3 Barcelona - LaLiga 2014/2015
+2020-12-26 06:36:33,657 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:36:33,725 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:36:33,725 - DEBUG - Finished Request
+2020-12-26 06:36:33,726 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:36:33,968 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1724130
+2020-12-26 06:36:34,050 - DEBUG - Finished Request
+2020-12-26 06:36:35,685 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1981_squad.html saved.
+2020-12-26 06:36:35,686 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:36:35,722 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:36:35,724 - DEBUG - Finished Request
+2020-12-26 06:36:35,724 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/d9e1a2da-b36e-4911-9aad-05d22f66a2ce/click {"id": "d9e1a2da-b36e-4911-9aad-05d22f66a2ce"}
+2020-12-26 06:36:37,921 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/d9e1a2da-b36e-4911-9aad-05d22f66a2ce/click HTTP/1.1" 200 14
+2020-12-26 06:36:37,922 - DEBUG - Finished Request
+2020-12-26 06:36:47,281 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:36:47,340 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 477416
+2020-12-26 06:36:47,350 - DEBUG - Finished Request
+2020-12-26 06:36:47,353 - INFO - File with Preview Matches\2014_2015\Spain\Match_1981_preview.html saved.
+2020-12-26 06:36:47,395 - INFO - table Matches -> new row added: ('1981', '925', '65', '2014/2015', 'Spain', '862380', '2015-02-28', 'Matches\\2014_2015\\Spain\\Match_1981_squad.html', 'Matches\\2014_2015\\Spain\\Match_1981_preview.html', 'https://www.whoscored.com/Matches/862380/Live/Spain-LaLiga-2014-2015-Granada-Barcelona')
+2020-12-26 06:36:52,385 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862380', '2014/2015')
+2020-12-26 06:36:52,432 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862380', '2014/2015')
+2020-12-26 06:36:52,476 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862380', '2014/2015')
+2020-12-26 06:36:52,523 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862380', '2014/2015')
+2020-12-26 06:36:52,568 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862380', '2014/2015')
+2020-12-26 06:36:52,613 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862380', '2014/2015')
+2020-12-26 06:36:52,613 - INFO - The link downloaded. Next...
+2020-12-26 06:36:52,613 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862395/Live/Spain-LaLiga-2014-2015-Barcelona-Rayo-Vallecano"}
+2020-12-26 06:36:55,245 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:36:55,246 - DEBUG - Finished Request
+2020-12-26 06:36:55,246 - INFO - The website https://www.whoscored.com/Matches/862395/Live/Spain-LaLiga-2014-2015-Barcelona-Rayo-Vallecano launched.
+2020-12-26 06:36:58,376 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:36:58,415 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:36:58,415 - DEBUG - Finished Request
+2020-12-26 06:37:01,634 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:37:01,640 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 64
+2020-12-26 06:37:01,641 - DEBUG - Finished Request
+2020-12-26 06:37:01,641 - INFO - Barcelona 6-1 Rayo Vallecano - LaLiga 2014/2015
+2020-12-26 06:37:04,169 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:37:04,214 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:37:04,214 - DEBUG - Finished Request
+2020-12-26 06:37:04,214 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:37:04,399 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2011955
+2020-12-26 06:37:04,496 - DEBUG - Finished Request
+2020-12-26 06:37:05,636 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1982_squad.html saved.
+2020-12-26 06:37:05,636 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:37:05,668 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:37:05,668 - DEBUG - Finished Request
+2020-12-26 06:37:05,668 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/5f41a4ce-fe88-45e4-8d8b-59f47ad0e41c/click {"id": "5f41a4ce-fe88-45e4-8d8b-59f47ad0e41c"}
+2020-12-26 06:37:07,502 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/5f41a4ce-fe88-45e4-8d8b-59f47ad0e41c/click HTTP/1.1" 200 14
+2020-12-26 06:37:07,503 - DEBUG - Finished Request
+2020-12-26 06:37:17,268 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:37:17,346 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 619700
+2020-12-26 06:37:17,357 - DEBUG - Finished Request
+2020-12-26 06:37:17,362 - INFO - File with Preview Matches\2014_2015\Spain\Match_1982_preview.html saved.
+2020-12-26 06:37:17,437 - INFO - table Matches -> new row added: ('1982', '65', '64', '2014/2015', 'Spain', '862395', '2015-03-08', 'Matches\\2014_2015\\Spain\\Match_1982_squad.html', 'Matches\\2014_2015\\Spain\\Match_1982_preview.html', 'https://www.whoscored.com/Matches/862395/Live/Spain-LaLiga-2014-2015-Barcelona-Rayo-Vallecano')
+2020-12-26 06:37:22,354 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862395', '2014/2015')
+2020-12-26 06:37:22,399 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862395', '2014/2015')
+2020-12-26 06:37:22,443 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862395', '2014/2015')
+2020-12-26 06:37:22,490 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862395', '2014/2015')
+2020-12-26 06:37:22,534 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862395', '2014/2015')
+2020-12-26 06:37:22,578 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862395', '2014/2015')
+2020-12-26 06:37:22,578 - INFO - The link downloaded. Next...
+2020-12-26 06:37:22,579 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862382/Live/Spain-LaLiga-2014-2015-Eibar-Barcelona"}
+2020-12-26 06:37:24,367 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:37:24,367 - DEBUG - Finished Request
+2020-12-26 06:37:24,367 - INFO - The website https://www.whoscored.com/Matches/862382/Live/Spain-LaLiga-2014-2015-Eibar-Barcelona launched.
+2020-12-26 06:37:27,959 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:37:28,007 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:37:28,007 - DEBUG - Finished Request
+2020-12-26 06:37:32,506 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:37:32,510 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 55
+2020-12-26 06:37:32,511 - DEBUG - Finished Request
+2020-12-26 06:37:32,511 - INFO - Eibar 0-2 Barcelona - LaLiga 2014/2015
+2020-12-26 06:37:34,959 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:37:35,010 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:37:35,011 - DEBUG - Finished Request
+2020-12-26 06:37:35,011 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:37:35,188 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1946500
+2020-12-26 06:37:35,241 - DEBUG - Finished Request
+2020-12-26 06:37:36,062 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1983_squad.html saved.
+2020-12-26 06:37:36,062 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:37:36,095 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:37:36,095 - DEBUG - Finished Request
+2020-12-26 06:37:36,095 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/c101118f-ea54-4204-81ec-4c91ed464201/click {"id": "c101118f-ea54-4204-81ec-4c91ed464201"}
+2020-12-26 06:37:38,133 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/c101118f-ea54-4204-81ec-4c91ed464201/click HTTP/1.1" 200 14
+2020-12-26 06:37:38,134 - DEBUG - Finished Request
+2020-12-26 06:37:47,513 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:37:47,589 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 463002
+2020-12-26 06:37:47,601 - DEBUG - Finished Request
+2020-12-26 06:37:47,605 - INFO - File with Preview Matches\2014_2015\Spain\Match_1983_preview.html saved.
+2020-12-26 06:37:47,649 - INFO - table Matches -> new row added: ('1983', '824', '65', '2014/2015', 'Spain', '862382', '2015-03-14', 'Matches\\2014_2015\\Spain\\Match_1983_squad.html', 'Matches\\2014_2015\\Spain\\Match_1983_preview.html', 'https://www.whoscored.com/Matches/862382/Live/Spain-LaLiga-2014-2015-Eibar-Barcelona')
+2020-12-26 06:37:52,211 - INFO - table UCL_Matches_Matches -> new row added: (904243, '862382', '2014/2015')
+2020-12-26 06:37:52,256 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862382', '2014/2015')
+2020-12-26 06:37:52,302 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862382', '2014/2015')
+2020-12-26 06:37:52,349 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862382', '2014/2015')
+2020-12-26 06:37:52,392 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862382', '2014/2015')
+2020-12-26 06:37:52,436 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862382', '2014/2015')
+2020-12-26 06:37:52,437 - INFO - The link downloaded. Next...
+2020-12-26 06:37:52,437 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862318/Live/Spain-LaLiga-2014-2015-Celta-Vigo-Barcelona"}
+2020-12-26 06:37:53,996 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:37:53,997 - DEBUG - Finished Request
+2020-12-26 06:37:53,997 - INFO - The website https://www.whoscored.com/Matches/862318/Live/Spain-LaLiga-2014-2015-Celta-Vigo-Barcelona launched.
+2020-12-26 06:37:57,991 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:37:58,326 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:37:58,326 - DEBUG - Finished Request
+2020-12-26 06:38:02,727 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:38:02,733 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 60
+2020-12-26 06:38:02,733 - DEBUG - Finished Request
+2020-12-26 06:38:02,733 - INFO - Celta Vigo 0-1 Barcelona - LaLiga 2014/2015
+2020-12-26 06:38:05,159 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:38:05,216 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:38:05,217 - DEBUG - Finished Request
+2020-12-26 06:38:05,217 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:38:05,396 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1839984
+2020-12-26 06:38:05,447 - DEBUG - Finished Request
+2020-12-26 06:38:06,416 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1984_squad.html saved.
+2020-12-26 06:38:06,416 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:38:06,456 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:38:06,456 - DEBUG - Finished Request
+2020-12-26 06:38:06,456 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/aa1f09cc-9881-4d63-a145-d9d04536f261/click {"id": "aa1f09cc-9881-4d63-a145-d9d04536f261"}
+2020-12-26 06:38:08,251 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/aa1f09cc-9881-4d63-a145-d9d04536f261/click HTTP/1.1" 200 14
+2020-12-26 06:38:08,254 - DEBUG - Finished Request
+2020-12-26 06:38:17,543 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:38:17,598 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 437471
+2020-12-26 06:38:17,603 - DEBUG - Finished Request
+2020-12-26 06:38:17,606 - INFO - File with Preview Matches\2014_2015\Spain\Match_1984_preview.html saved.
+2020-12-26 06:38:17,656 - INFO - table Matches -> new row added: ('1984', '62', '65', '2014/2015', 'Spain', '862318', '2015-04-05', 'Matches\\2014_2015\\Spain\\Match_1984_squad.html', 'Matches\\2014_2015\\Spain\\Match_1984_preview.html', 'https://www.whoscored.com/Matches/862318/Live/Spain-LaLiga-2014-2015-Celta-Vigo-Barcelona')
+2020-12-26 06:38:22,324 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862318', '2014/2015')
+2020-12-26 06:38:22,368 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862318', '2014/2015')
+2020-12-26 06:38:22,415 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862318', '2014/2015')
+2020-12-26 06:38:22,460 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862318', '2014/2015')
+2020-12-26 06:38:22,504 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862318', '2014/2015')
+2020-12-26 06:38:22,505 - INFO - The link downloaded. Next...
+2020-12-26 06:38:22,505 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862329/Live/Spain-LaLiga-2014-2015-Barcelona-Almeria"}
+2020-12-26 06:38:24,132 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:38:24,133 - DEBUG - Finished Request
+2020-12-26 06:38:24,133 - INFO - The website https://www.whoscored.com/Matches/862329/Live/Spain-LaLiga-2014-2015-Barcelona-Almeria launched.
+2020-12-26 06:38:27,626 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:38:28,199 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:38:28,200 - DEBUG - Finished Request
+2020-12-26 06:38:32,488 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:38:32,496 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:38:32,496 - DEBUG - Finished Request
+2020-12-26 06:38:32,496 - INFO - Barcelona 4-0 Almeria - LaLiga 2014/2015
+2020-12-26 06:38:34,910 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:38:34,961 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:38:34,961 - DEBUG - Finished Request
+2020-12-26 06:38:34,962 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:38:35,160 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1859910
+2020-12-26 06:38:35,215 - DEBUG - Finished Request
+2020-12-26 06:38:36,281 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1985_squad.html saved.
+2020-12-26 06:38:36,281 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:38:36,317 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:38:36,317 - DEBUG - Finished Request
+2020-12-26 06:38:36,317 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/354e9dc2-ad7b-4afa-a2dd-b004553d83d1/click {"id": "354e9dc2-ad7b-4afa-a2dd-b004553d83d1"}
+2020-12-26 06:38:38,427 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/354e9dc2-ad7b-4afa-a2dd-b004553d83d1/click HTTP/1.1" 200 14
+2020-12-26 06:38:38,427 - DEBUG - Finished Request
+2020-12-26 06:38:47,788 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:38:47,847 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 495552
+2020-12-26 06:38:47,853 - DEBUG - Finished Request
+2020-12-26 06:38:47,856 - INFO - File with Preview Matches\2014_2015\Spain\Match_1985_preview.html saved.
+2020-12-26 06:38:47,945 - INFO - table Matches -> new row added: ('1985', '65', '1799', '2014/2015', 'Spain', '862329', '2015-04-08', 'Matches\\2014_2015\\Spain\\Match_1985_squad.html', 'Matches\\2014_2015\\Spain\\Match_1985_preview.html', 'https://www.whoscored.com/Matches/862329/Live/Spain-LaLiga-2014-2015-Barcelona-Almeria')
+2020-12-26 06:38:52,097 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862329', '2014/2015')
+2020-12-26 06:38:52,215 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862329', '2014/2015')
+2020-12-26 06:38:52,566 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862329', '2014/2015')
+2020-12-26 06:38:52,816 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862329', '2014/2015')
+2020-12-26 06:38:52,861 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862329', '2014/2015')
+2020-12-26 06:38:52,861 - INFO - The link downloaded. Next...
+2020-12-26 06:38:52,862 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862339/Live/Spain-LaLiga-2014-2015-Sevilla-Barcelona"}
+2020-12-26 06:38:55,685 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:38:55,685 - DEBUG - Finished Request
+2020-12-26 06:38:55,685 - INFO - The website https://www.whoscored.com/Matches/862339/Live/Spain-LaLiga-2014-2015-Sevilla-Barcelona launched.
+2020-12-26 06:38:59,300 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:38:59,343 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:38:59,343 - DEBUG - Finished Request
+2020-12-26 06:39:03,454 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:39:03,460 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:39:03,460 - DEBUG - Finished Request
+2020-12-26 06:39:03,460 - INFO - Sevilla 2-2 Barcelona - LaLiga 2014/2015
+2020-12-26 06:39:05,578 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:39:05,626 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:39:05,627 - DEBUG - Finished Request
+2020-12-26 06:39:05,627 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:39:05,824 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2133720
+2020-12-26 06:39:05,888 - DEBUG - Finished Request
+2020-12-26 06:39:07,106 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1986_squad.html saved.
+2020-12-26 06:39:07,106 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:39:07,145 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:39:07,145 - DEBUG - Finished Request
+2020-12-26 06:39:07,145 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/7b619a4c-1968-4048-9918-8eacea184712/click {"id": "7b619a4c-1968-4048-9918-8eacea184712"}
+2020-12-26 06:39:09,526 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/7b619a4c-1968-4048-9918-8eacea184712/click HTTP/1.1" 200 14
+2020-12-26 06:39:09,526 - DEBUG - Finished Request
+2020-12-26 06:39:18,912 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:39:18,991 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 640491
+2020-12-26 06:39:19,001 - DEBUG - Finished Request
+2020-12-26 06:39:19,004 - INFO - File with Preview Matches\2014_2015\Spain\Match_1986_preview.html saved.
+2020-12-26 06:39:19,048 - INFO - table Matches -> new row added: ('1986', '67', '65', '2014/2015', 'Spain', '862339', '2015-04-11', 'Matches\\2014_2015\\Spain\\Match_1986_squad.html', 'Matches\\2014_2015\\Spain\\Match_1986_preview.html', 'https://www.whoscored.com/Matches/862339/Live/Spain-LaLiga-2014-2015-Sevilla-Barcelona')
+2020-12-26 06:39:23,441 - INFO - table UCL_Matches_Matches -> new row added: (944814, '862339', '2014/2015')
+2020-12-26 06:39:23,485 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862339', '2014/2015')
+2020-12-26 06:39:23,532 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862339', '2014/2015')
+2020-12-26 06:39:23,577 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862339', '2014/2015')
+2020-12-26 06:39:23,624 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862339', '2014/2015')
+2020-12-26 06:39:23,625 - INFO - The link downloaded. Next...
+2020-12-26 06:39:23,625 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862348/Live/Spain-LaLiga-2014-2015-Barcelona-Valencia"}
+2020-12-26 06:39:25,506 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:39:25,507 - DEBUG - Finished Request
+2020-12-26 06:39:25,507 - INFO - The website https://www.whoscored.com/Matches/862348/Live/Spain-LaLiga-2014-2015-Barcelona-Valencia launched.
+2020-12-26 06:39:28,600 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:39:29,575 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:39:29,575 - DEBUG - Finished Request
+2020-12-26 06:39:33,023 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:39:33,028 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 58
+2020-12-26 06:39:33,028 - DEBUG - Finished Request
+2020-12-26 06:39:33,028 - INFO - Barcelona 2-0 Valencia - LaLiga 2014/2015
+2020-12-26 06:39:35,215 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:39:35,260 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:39:35,261 - DEBUG - Finished Request
+2020-12-26 06:39:35,261 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:39:35,507 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2151066
+2020-12-26 06:39:35,637 - DEBUG - Finished Request
+2020-12-26 06:39:39,375 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1987_squad.html saved.
+2020-12-26 06:39:39,376 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:39:39,415 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:39:39,415 - DEBUG - Finished Request
+2020-12-26 06:39:39,416 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/eea44e29-1368-4891-9bbd-843fce725a07/click {"id": "eea44e29-1368-4891-9bbd-843fce725a07"}
+2020-12-26 06:39:41,031 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/eea44e29-1368-4891-9bbd-843fce725a07/click HTTP/1.1" 200 14
+2020-12-26 06:39:41,033 - DEBUG - Finished Request
+2020-12-26 06:39:49,984 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:39:50,156 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 731218
+2020-12-26 06:39:50,168 - DEBUG - Finished Request
+2020-12-26 06:39:50,173 - INFO - File with Preview Matches\2014_2015\Spain\Match_1987_preview.html saved.
+2020-12-26 06:39:50,218 - INFO - table Matches -> new row added: ('1987', '65', '55', '2014/2015', 'Spain', '862348', '2015-04-18', 'Matches\\2014_2015\\Spain\\Match_1987_squad.html', 'Matches\\2014_2015\\Spain\\Match_1987_preview.html', 'https://www.whoscored.com/Matches/862348/Live/Spain-LaLiga-2014-2015-Barcelona-Valencia')
+2020-12-26 06:39:54,380 - INFO - table UCL_Matches_Matches -> new row added: (944815, '862348', '2014/2015')
+2020-12-26 06:39:54,451 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862348', '2014/2015')
+2020-12-26 06:39:54,496 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862348', '2014/2015')
+2020-12-26 06:39:54,543 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862348', '2014/2015')
+2020-12-26 06:39:54,543 - INFO - The link downloaded. Next...
+2020-12-26 06:39:54,543 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862217/Live/Spain-LaLiga-2014-2015-Espanyol-Barcelona"}
+2020-12-26 06:39:58,944 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:39:58,944 - DEBUG - Finished Request
+2020-12-26 06:39:58,945 - INFO - The website https://www.whoscored.com/Matches/862217/Live/Spain-LaLiga-2014-2015-Espanyol-Barcelona launched.
+2020-12-26 06:40:02,542 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:40:02,571 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:40:02,571 - DEBUG - Finished Request
+2020-12-26 06:40:06,054 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:40:06,059 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 58
+2020-12-26 06:40:06,059 - DEBUG - Finished Request
+2020-12-26 06:40:06,059 - INFO - Espanyol 0-2 Barcelona - LaLiga 2014/2015
+2020-12-26 06:40:08,715 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:40:08,763 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:40:08,764 - DEBUG - Finished Request
+2020-12-26 06:40:08,764 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:40:09,002 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1897066
+2020-12-26 06:40:09,074 - DEBUG - Finished Request
+2020-12-26 06:40:10,484 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1988_squad.html saved.
+2020-12-26 06:40:10,485 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:40:10,536 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:40:10,537 - DEBUG - Finished Request
+2020-12-26 06:40:10,537 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/2c4a590a-c761-49aa-ae87-a29449c78c04/click {"id": "2c4a590a-c761-49aa-ae87-a29449c78c04"}
+2020-12-26 06:40:13,162 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/2c4a590a-c761-49aa-ae87-a29449c78c04/click HTTP/1.1" 200 14
+2020-12-26 06:40:13,163 - DEBUG - Finished Request
+2020-12-26 06:40:21,630 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:40:21,678 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 457251
+2020-12-26 06:40:21,685 - DEBUG - Finished Request
+2020-12-26 06:40:21,688 - INFO - File with Preview Matches\2014_2015\Spain\Match_1988_preview.html saved.
+2020-12-26 06:40:21,736 - INFO - table Matches -> new row added: ('1988', '70', '65', '2014/2015', 'Spain', '862217', '2015-04-25', 'Matches\\2014_2015\\Spain\\Match_1988_squad.html', 'Matches\\2014_2015\\Spain\\Match_1988_preview.html', 'https://www.whoscored.com/Matches/862217/Live/Spain-LaLiga-2014-2015-Espanyol-Barcelona')
+2020-12-26 06:40:26,494 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862217', '2014/2015')
+2020-12-26 06:40:26,539 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862217', '2014/2015')
+2020-12-26 06:40:26,600 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862217', '2014/2015')
+2020-12-26 06:40:26,600 - INFO - The link downloaded. Next...
+2020-12-26 06:40:26,600 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862235/Live/Spain-LaLiga-2014-2015-Barcelona-Getafe"}
+2020-12-26 06:40:28,577 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:40:28,578 - DEBUG - Finished Request
+2020-12-26 06:40:28,578 - INFO - The website https://www.whoscored.com/Matches/862235/Live/Spain-LaLiga-2014-2015-Barcelona-Getafe launched.
+2020-12-26 06:40:31,709 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:40:31,722 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:40:31,723 - DEBUG - Finished Request
+2020-12-26 06:40:36,065 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:40:36,070 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 56
+2020-12-26 06:40:36,070 - DEBUG - Finished Request
+2020-12-26 06:40:36,070 - INFO - Barcelona 6-0 Getafe - LaLiga 2014/2015
+2020-12-26 06:40:38,796 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:40:38,904 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:40:38,905 - DEBUG - Finished Request
+2020-12-26 06:40:38,905 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:40:39,149 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2062521
+2020-12-26 06:40:39,237 - DEBUG - Finished Request
+2020-12-26 06:40:40,303 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1989_squad.html saved.
+2020-12-26 06:40:40,303 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:40:40,337 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:40:40,337 - DEBUG - Finished Request
+2020-12-26 06:40:40,338 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/a6d69431-a8c1-4772-b8d3-3541a703908e/click {"id": "a6d69431-a8c1-4772-b8d3-3541a703908e"}
+2020-12-26 06:40:43,190 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/a6d69431-a8c1-4772-b8d3-3541a703908e/click HTTP/1.1" 200 14
+2020-12-26 06:40:43,190 - DEBUG - Finished Request
+2020-12-26 06:40:52,368 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:40:52,621 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 579706
+2020-12-26 06:40:52,631 - DEBUG - Finished Request
+2020-12-26 06:40:52,637 - INFO - File with Preview Matches\2014_2015\Spain\Match_1989_preview.html saved.
+2020-12-26 06:40:52,679 - INFO - table Matches -> new row added: ('1989', '65', '819', '2014/2015', 'Spain', '862235', '2015-04-28', 'Matches\\2014_2015\\Spain\\Match_1989_squad.html', 'Matches\\2014_2015\\Spain\\Match_1989_preview.html', 'https://www.whoscored.com/Matches/862235/Live/Spain-LaLiga-2014-2015-Barcelona-Getafe')
+2020-12-26 06:40:56,809 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862235', '2014/2015')
+2020-12-26 06:40:56,854 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862235', '2014/2015')
+2020-12-26 06:40:56,900 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862235', '2014/2015')
+2020-12-26 06:40:56,900 - INFO - The link downloaded. Next...
+2020-12-26 06:40:56,900 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862255/Live/Spain-LaLiga-2014-2015-Cordoba-Barcelona"}
+2020-12-26 06:40:59,305 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:40:59,305 - DEBUG - Finished Request
+2020-12-26 06:40:59,305 - INFO - The website https://www.whoscored.com/Matches/862255/Live/Spain-LaLiga-2014-2015-Cordoba-Barcelona launched.
+2020-12-26 06:41:02,704 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:41:02,727 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:41:02,727 - DEBUG - Finished Request
+2020-12-26 06:41:07,031 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:41:07,039 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 57
+2020-12-26 06:41:07,040 - DEBUG - Finished Request
+2020-12-26 06:41:07,040 - INFO - Cordoba 0-8 Barcelona - LaLiga 2014/2015
+2020-12-26 06:41:09,405 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:41:09,507 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:41:09,507 - DEBUG - Finished Request
+2020-12-26 06:41:09,508 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:41:09,760 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 2270607
+2020-12-26 06:41:09,838 - DEBUG - Finished Request
+2020-12-26 06:41:11,224 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1990_squad.html saved.
+2020-12-26 06:41:11,224 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:41:11,259 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:41:11,260 - DEBUG - Finished Request
+2020-12-26 06:41:11,260 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/c619cac2-9253-45ad-8887-b2b8c96fa730/click {"id": "c619cac2-9253-45ad-8887-b2b8c96fa730"}
+2020-12-26 06:41:13,925 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/c619cac2-9253-45ad-8887-b2b8c96fa730/click HTTP/1.1" 200 14
+2020-12-26 06:41:13,926 - DEBUG - Finished Request
+2020-12-26 06:41:23,684 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:41:23,757 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 805932
+2020-12-26 06:41:23,766 - DEBUG - Finished Request
+2020-12-26 06:41:23,769 - INFO - File with Preview Matches\2014_2015\Spain\Match_1990_preview.html saved.
+2020-12-26 06:41:23,813 - INFO - table Matches -> new row added: ('1990', '820', '65', '2014/2015', 'Spain', '862255', '2015-05-02', 'Matches\\2014_2015\\Spain\\Match_1990_squad.html', 'Matches\\2014_2015\\Spain\\Match_1990_preview.html', 'https://www.whoscored.com/Matches/862255/Live/Spain-LaLiga-2014-2015-Cordoba-Barcelona')
+2020-12-26 06:41:28,043 - INFO - table UCL_Matches_Matches -> new row added: (951410, '862255', '2014/2015')
+2020-12-26 06:41:28,088 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862255', '2014/2015')
+2020-12-26 06:41:28,133 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862255', '2014/2015')
+2020-12-26 06:41:28,133 - INFO - The link downloaded. Next...
+2020-12-26 06:41:28,133 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862266/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Sociedad"}
+2020-12-26 06:41:31,425 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:41:31,426 - DEBUG - Finished Request
+2020-12-26 06:41:31,426 - INFO - The website https://www.whoscored.com/Matches/862266/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Sociedad launched.
+2020-12-26 06:41:34,722 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:41:34,742 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:41:34,742 - DEBUG - Finished Request
+2020-12-26 06:41:39,521 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:41:39,526 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 63
+2020-12-26 06:41:39,527 - DEBUG - Finished Request
+2020-12-26 06:41:39,527 - INFO - Barcelona 2-0 Real Sociedad - LaLiga 2014/2015
+2020-12-26 06:41:42,131 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:41:42,189 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:41:42,190 - DEBUG - Finished Request
+2020-12-26 06:41:42,190 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:41:42,373 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1798026
+2020-12-26 06:41:42,427 - DEBUG - Finished Request
+2020-12-26 06:41:44,019 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1991_squad.html saved.
+2020-12-26 06:41:44,019 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:41:44,095 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:41:44,095 - DEBUG - Finished Request
+2020-12-26 06:41:44,096 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/bd371196-d332-4b9e-aab0-0be729ea4b21/click {"id": "bd371196-d332-4b9e-aab0-0be729ea4b21"}
+2020-12-26 06:41:46,821 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/bd371196-d332-4b9e-aab0-0be729ea4b21/click HTTP/1.1" 200 14
+2020-12-26 06:41:46,821 - DEBUG - Finished Request
+2020-12-26 06:41:56,675 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:41:56,725 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 465045
+2020-12-26 06:41:56,732 - DEBUG - Finished Request
+2020-12-26 06:41:56,736 - INFO - File with Preview Matches\2014_2015\Spain\Match_1991_preview.html saved.
+2020-12-26 06:41:56,778 - INFO - table Matches -> new row added: ('1991', '65', '68', '2014/2015', 'Spain', '862266', '2015-05-09', 'Matches\\2014_2015\\Spain\\Match_1991_squad.html', 'Matches\\2014_2015\\Spain\\Match_1991_preview.html', 'https://www.whoscored.com/Matches/862266/Live/Spain-LaLiga-2014-2015-Barcelona-Real-Sociedad')
+2020-12-26 06:42:01,366 - INFO - table UCL_Matches_Matches -> new row added: (951411, '862266', '2014/2015')
+2020-12-26 06:42:01,411 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862266', '2014/2015')
+2020-12-26 06:42:01,411 - INFO - The link downloaded. Next...
+2020-12-26 06:42:01,412 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862226/Live/Spain-LaLiga-2014-2015-Atletico-Madrid-Barcelona"}
+2020-12-26 06:42:05,640 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:42:05,641 - DEBUG - Finished Request
+2020-12-26 06:42:05,641 - INFO - The website https://www.whoscored.com/Matches/862226/Live/Spain-LaLiga-2014-2015-Atletico-Madrid-Barcelona launched.
+2020-12-26 06:42:08,961 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:42:08,980 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:42:08,980 - DEBUG - Finished Request
+2020-12-26 06:42:13,134 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:42:13,144 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 65
+2020-12-26 06:42:13,144 - DEBUG - Finished Request
+2020-12-26 06:42:13,144 - INFO - Atletico Madrid 0-1 Barcelona - LaLiga 2014/2015
+2020-12-26 06:42:15,930 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:42:15,991 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:42:15,991 - DEBUG - Finished Request
+2020-12-26 06:42:15,992 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:42:16,177 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1950311
+2020-12-26 06:42:16,253 - DEBUG - Finished Request
+2020-12-26 06:42:17,691 - INFO - File with Match Centre Matches\2014_2015\Spain\Match_1992_squad.html saved.
+2020-12-26 06:42:17,691 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:42:17,725 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:42:17,725 - DEBUG - Finished Request
+2020-12-26 06:42:17,725 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element/425d2163-aca3-4217-bcc9-1b9d66b7f4c3/click {"id": "425d2163-aca3-4217-bcc9-1b9d66b7f4c3"}
+2020-12-26 06:42:19,962 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element/425d2163-aca3-4217-bcc9-1b9d66b7f4c3/click HTTP/1.1" 200 14
+2020-12-26 06:42:19,962 - DEBUG - Finished Request
+2020-12-26 06:42:28,017 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:42:28,195 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 617906
+2020-12-26 06:42:28,203 - DEBUG - Finished Request
+2020-12-26 06:42:28,207 - INFO - File with Preview Matches\2014_2015\Spain\Match_1992_preview.html saved.
+2020-12-26 06:42:28,250 - INFO - table Matches -> new row added: ('1992', '63', '65', '2014/2015', 'Spain', '862226', '2015-05-17', 'Matches\\2014_2015\\Spain\\Match_1992_squad.html', 'Matches\\2014_2015\\Spain\\Match_1992_preview.html', 'https://www.whoscored.com/Matches/862226/Live/Spain-LaLiga-2014-2015-Atletico-Madrid-Barcelona')
+2020-12-26 06:42:32,529 - INFO - table UCL_Matches_Matches -> new row added: (953394, '862226', '2014/2015')
+2020-12-26 06:42:32,530 - INFO - The link downloaded. Next...
+2020-12-26 06:42:32,530 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/url {"url": "https://www.whoscored.com/Matches/862244/Live/Spain-LaLiga-2014-2015-Barcelona-Deportivo-La-Coruna"}
+2020-12-26 06:42:34,542 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/url HTTP/1.1" 200 14
+2020-12-26 06:42:34,543 - DEBUG - Finished Request
+2020-12-26 06:42:34,543 - INFO - The website https://www.whoscored.com/Matches/862244/Live/Spain-LaLiga-2014-2015-Barcelona-Deportivo-La-Coruna launched.
+2020-12-26 06:42:37,817 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "xpath", "value": "//*[@id=\"qc-cmp2-ui\"]/div[2]/div/button[2]"}
+2020-12-26 06:42:37,832 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 404 1075
+2020-12-26 06:42:37,832 - DEBUG - Finished Request
+2020-12-26 06:42:42,648 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/title {}
+2020-12-26 06:42:42,653 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/title HTTP/1.1" 200 69
+2020-12-26 06:42:42,654 - DEBUG - Finished Request
+2020-12-26 06:42:42,654 - INFO - Barcelona 2-2 Deportivo La Coruna - LaLiga 2014/2015
+2020-12-26 06:42:45,054 - DEBUG - POST http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/element {"using": "link text", "value": "Preview"}
+2020-12-26 06:42:45,646 - DEBUG - http://127.0.0.1:57417 "POST /session/0936a57fcc762f683778a0621762881a/element HTTP/1.1" 200 88
+2020-12-26 06:42:45,646 - DEBUG - Finished Request
+2020-12-26 06:42:45,647 - DEBUG - GET http://127.0.0.1:57417/session/0936a57fcc762f683778a0621762881a/source {}
+2020-12-26 06:42:45,898 - DEBUG - http://127.0.0.1:57417 "GET /session/0936a57fcc762f683778a0621762881a/source HTTP/1.1" 200 1683217
+2020-12-26 06:42:45,962 - DEBUG - Finished Request
