@@ -24,12 +24,13 @@ from selenium.webdriver.support.expected_conditions import element_to_be_clickab
 import pandas as pd
 
 ###### WEB DRIVER OPTIONS #####
-options = Options()
-options.add_argument('start-maximized')  # maximize of the browser window
-options.add_experimental_option("excludeSwitches",
+OPTIONS = Options()
+OPTIONS.add_argument('start-maximized')  # maximize of the browser window
+OPTIONS.add_experimental_option("excludeSwitches",
                                 ['enable-automation'])  # process without information about the automatic test
-options.add_argument("chrome.switches")
-options.add_argument("--disable-extensions")
+OPTIONS.add_argument("chrome.switches")
+OPTIONS.add_argument("--disable-extensions")
+DRIVER_PATH = 'Chromedriver\chromedriver.exe'
 
 ##### important structures ####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
@@ -46,9 +47,9 @@ LEAGUES = {'England': 'https://www.whoscored.com/Regions/252/Tournaments/2/',
            'Scotland': 'https://www.whoscored.com/Regions/253/Tournaments/20/'}
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-LOGS_FOLDER = 'Logs'
-LINKS_FOLDER = 'Links'
-DATABASE = 'Matches_DB.db'
+LOGS_FOLDER = 'Logs'        # directory for files with logs of program
+LINKS_FOLDER = 'Links'      # directory for text files with links to matches of european leagues
+DATABASE = 'Matches_DB.db'  # .db file with SQLite database
 
 
 class Logger:
@@ -69,6 +70,8 @@ class Logger:
 class Database:
     """Object to represent the SQLite database in the file DATABASE."""
     def __init__(self, database_name):
+        """ Function to create connection to the database and cursor. \n
+        :param database_name: str, name of .db file"""
         if not path.exists(database_name):
             log.write(f"Connection SQLite ERROR: impossible connecting to database. "
                       f"The file {database_name} doesn't exist.", level=logging.ERROR)
@@ -79,6 +82,7 @@ class Database:
         log.write(f"Connected to the database {database_name}.")
 
     def __del__(self):
+        """Fuction to"""
         self.connection.close()
 
     def insert(self, table, *args): # (INSERT INTO <table> VALUES(?,?,?,?), <values>)
@@ -97,7 +101,6 @@ class Database:
         found = self.select(table, **conditions)
         answer = False if len(found) == 0 else True
         return answer
-
 
 ##### functions #####
 def wait(x, y):
@@ -140,7 +143,6 @@ def is_element_clickable(element):
         raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
 
 
-
 def check_league_and_season(ucl_season, league_name):
     """Preview section on whoscored.com ix available only for few league and correct seasons.
     This function checks this condition and returns answer True/False. \n
@@ -176,16 +178,11 @@ def select_stage():
     is_element_clickable(drop_down_menu)
     select = Select(drop_down_menu)
     wait(1.5, 2.5)
-    all_options = drop_down_menu.find_elements_by_tag_name("option")
-    """for option in all_options:
-        if str(option.get_attribute("text")) == 'Eredivisie':
-            select.select_by_visible_text(option)
-            break"""
     try:
         select.select_by_visible_text('Eredivisie')
     except NoSuchElementException as e:
         log.write(f"League: {league}, season: {season}. Probably problem! The correct option can be not found in drop down menu 'stages'.", level=logging.ERROR)
-        log.write(f"Error: {e}.", level = logging.ERROR)
+        log.write(f"Error: {e}.", level=logging.ERROR)
         sys.exit(1)
     wait(3, 4)
 
@@ -399,7 +396,7 @@ def save_file(is_preview, html_code, season__, league__):
 
 
 ##### Script #####
-browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
+browser = webdriver.Chrome(executable_path=DRIVER_PATH, options=OPTIONS)
 log = Logger(LOGS_FOLDER)
 create_directory_for_files(LOGS_FOLDER)
 create_directory_for_files(LINKS_FOLDER)
@@ -407,8 +404,9 @@ db = Database(DATABASE)  # connecting to database
 number_of_downloaded_matches = len(db.select("Matches"))
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
+counter = 0
 
-for season in ALL_SEASONS[4:5]:
+for season in ALL_SEASONS[6:7]:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
     for match in all_matches:  # for every UCL match in the season
@@ -427,6 +425,7 @@ for season in ALL_SEASONS[4:5]:
             team_home_links = filtration_team_matches(team_home, links_league)
             team_ucl_matches = list(filter(lambda game: team_home in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_home_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_home)
+            counter += 1
 
         team = db.select("Teams", Team_ID=team_away)[0]
         league = team["League"]
@@ -440,5 +439,15 @@ for season in ALL_SEASONS[4:5]:
             team_away_links = filtration_team_matches(team_away, links_league)
             team_ucl_matches = list(filter(lambda game: team_away in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_away_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_away)
+            counter += 1
+
+        if counter > 2:     # restart browser after matches downloading of 3 teams
+            counter = 0
+            browser.close()
+            log.write("Stop! Restart browser. Wait 1 minute...")
+            wait(50, 60)
+            browser = webdriver.Chrome(executable_path=DRIVER_PATH, options=OPTIONS)
+
+
 if browser:
     browser.close()
