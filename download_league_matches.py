@@ -82,22 +82,31 @@ class Database:
         log.write(f"Connected to the database {database_name}.")
 
     def __del__(self):
-        """Fuction to"""
+        """Method to close the connection to the database."""
         self.connection.close()
 
     def insert(self, table, *args): # (INSERT INTO <table> VALUES(?,?,?,?), <values>)
+        """Method to add new row of data into the given table into the database.\n
+        :param table: name of table in the database
+        :param args: tuple, <column_name>=<value> conditions"""
         self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (*args,))
         self.connection.commit()
         log.write(f"table {table} -> new row added: {args}")
 
     def select(self, table, order_by='', **conditions): # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
+        """Method to execute SELECT statement in the database with given conditions.\n
+        :param table: str, name of table
+        :param order_by: str, data are sorted by this column name
+        :param conditions: tuple, <column_name>=<value> conditions"""
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
         order = f' ORDER BY {order_by}' if order_by != '' else ''
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
         return rows.fetchall()
 
     def is_element_in_db(self, table, **conditions):
-        """The method to check the given element is already in the database."""
+        """The method to check the given element is already in the database.\n
+        :param table: str, name of table in the database
+        :param conditions: tuple, <column_name>=<value> conditions"""
         found = self.select(table, **conditions)
         answer = False if len(found) == 0 else True
         return answer
