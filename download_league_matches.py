@@ -1,10 +1,10 @@
 # Copyright (c) Jakub Wilczyński 2020
 # The task of this program is downloading of WhoScored.com webpages with starting and predicted line-ups in european
-# football leagues for teams playing in UEFA Champions League in seasons 2010/2011 to 2011/2012. Data about
+# football leagues for teams playing in UEFA Champions League in seasons 2010/2011 to 2019/2020. Data about
 # these games will be used to predict of managerial decisions in the next steps of project. Data about matches
 # are saving into the SQLite database on the local disk. Every game is assigned to the correct UCL matches
 # taking place after this league match in the same season. The html codes of these websites are saved to
-# the html files on the local disk in specified folder.
+# the html files in specified folders on the local disk.
 # Tools used: Python 3.8, Selenium Webdriver 3.141.0, BeautifulSoup  4.9.1, SQLite 3.28.0
 
 from os import listdir, path, getcwd, makedirs
@@ -23,14 +23,14 @@ from random import uniform
 from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 import pandas as pd
 
-###### WEB DRIVER OPTIONS #####
+###### WEBDRIVER OPTIONS #####
 OPTIONS = Options()
 OPTIONS.add_argument('start-maximized')  # maximize of the browser window
 OPTIONS.add_experimental_option("excludeSwitches",
                                 ['enable-automation'])  # process without information about the automatic test
 OPTIONS.add_argument("chrome.switches")
 OPTIONS.add_argument("--disable-extensions")
-DRIVER_PATH = 'Chromedriver\chromedriver.exe'
+DRIVER_PATH = 'Chromedriver\chromedriver.exe'   # path to the webdriver file
 
 ##### important structures ####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
@@ -128,7 +128,7 @@ def create_directory_for_files(folder):
 
 
 def cookies_accept():
-    """Function to click the 'cookies accept' buttons on the start page if they exist."""
+    """Function to click the 'cookies accept' buttons on the page if they exist."""
     try:
         more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
         is_element_clickable(more_options_cookies_button)
@@ -139,25 +139,22 @@ def cookies_accept():
 
 
 def is_element_clickable(element):
-    """If the element isn't clickable, the current page waits two times or raises Exception..\n
+    """If the element isn't clickable, the current page waits one time or raises Exception..\n
     :param element: Element, the element from the current page"""
     if not element_to_be_clickable(element):
         log.write("The element is not yet clickable. Waiting...")
-        wait(6, 7)
-    if not element_to_be_clickable(element):
-        log.write("The element is not yet clickable. Waiting...")
-        wait(30, 40)
+        wait(8, 10)
     if not element_to_be_clickable(element):
         log.write("Unexpected error! The element is not clickable.")
-        raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
+        raise Exception("Unexpected error! The element is not clickable.")
 
 
 def check_league_and_season(ucl_season, league_name):
-    """Preview section on whoscored.com ix available only for few league and correct seasons.
+    """Preview section on whoscored.com is available only for few league and correct seasons.
     This function checks this condition and returns answer True/False. \n
     :param ucl_season: str, name of checked season
     :param league_name: str, name of checked league"""
-    if league_name in ['England', 'Spain', 'Germany', 'Italy', 'France']:  # TOP 5 leagues - all seasons available
+    if league_name in ['England', 'Spain', 'Germany', 'Italy', 'France']:  # TOP 5 leagues - all seasons with available Preview section
         return True
     if league_name in ['Netherlands', 'Russia'] and ucl_season in ALL_SEASONS[3:]:  # NED and RUS - from 2013/2014
         return True
@@ -166,7 +163,7 @@ def check_league_and_season(ucl_season, league_name):
     if league_name == 'Portugal' and ucl_season in ALL_SEASONS[-4:]:  # Portugal - from 2016/2017
         return True
     if league_name == 'Scotland' and ucl_season in ALL_SEASONS[-3:]:  # Scotland - from 2017/2018
-        return True
+        return True     # update: no matches of scotisch teams in UCL in these seasons == no downloaded matches
     return False
 
 
@@ -188,7 +185,7 @@ def select_stage():
     select = Select(drop_down_menu)
     wait(1.5, 2.5)
     try:
-        select.select_by_visible_text('Eredivisie')
+        select.select_by_visible_text('Eredivisie') # only case with 'stage' element existing is dutch league Eredivisie
     except NoSuchElementException as e:
         log.write(f"League: {league}, season: {season}. Probably problem! The correct option can be not found in drop down menu 'stages'.", level=logging.ERROR)
         log.write(f"Error: {e}.", level=logging.ERROR)
@@ -209,7 +206,7 @@ def filtration_team_matches(team_id, links):
     return links
 
 
-def get_link_and_id(html_code) -> (str, str):
+def get_link_and_id(html_code):
     """ This function returns link to webpage with match centre and WhoScored ID of the given match
         in form od two-element tuple. \n
         :param html_code: str, path to the file with match centre"""
@@ -219,7 +216,7 @@ def get_link_and_id(html_code) -> (str, str):
     return whoscored_link, match_id
 
 
-def get_teams(html_code) -> {str}:
+def get_teams(html_code):
     """This function returns WhoScored IDs, names and leagues of both teams in shape of dictionary.
     Keys of the resulting dictionary: 'team1_name', 'team2_name', 'team1_id', 'team2_id',
     'team1_league', 'team2_league'. \n
@@ -230,7 +227,7 @@ def get_teams(html_code) -> {str}:
 
 
 def get_date(html_code):
-    """This function returns date of match in the format yyyy-mm-dd. \n
+    """This function returns date of match from Match Centre webpage in the format yyyy-mm-dd. \n
         :param html_code: str"""
     soup = BeautifulSoup(html_code, 'html.parser')
     game_date = soup.find_all("div", class_="info-block cleared")[2].find_all("dd")[1].string[5:]
@@ -242,8 +239,8 @@ def get_date(html_code):
 
 def download_all_league_links(league_name, season_name):
     """This function gets links to all matches of given league and season.
-    Returns a list of links. Result of this function is saved in dictionary
-    links_league_season and is used for all teams from given league."""
+    Returns a list of links. Results of this function are saved in files
+     <league>_<season>.csv in directory LINKS_FOLDER and are used for all teams from given league."""
     log.write(f"Starting downloading of matches {league_name} from season {season_name}...")
     browser.get(LEAGUES[league_name])
     wait(1, 2)
@@ -294,12 +291,15 @@ def download_all_league_links(league_name, season_name):
 
 
 def get_links_from_file(league_name, season_name):
+    """This function gets a list of links to the matches for given league and season from files on the local disk."""
     with open(f"{LINKS_FOLDER}\\{league_name}_{season_name.replace('/', '_')}.csv", "r", encoding="utf-8") as csvfile:
         new_links = csvfile.read().strip().split(",")
     log.write(f"Links for league {league_name} and season {season_name} downloaded from file. Number of links: {len(new_links)}")
     return new_links
 
 def check_downloaded_teams(id_team, name_season):
+    """This function checks that the matches of given team from given season are already downloaded.
+    Returns the answer as True/False"""
     if path.exists(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt"):
         with open(f"{LINKS_FOLDER}\\downloaded_teams_{name_season.replace('/', '_')}.txt", "r", encoding="utf-8") as f:
             answer = True if f"--{str(id_team)}--" in f.read() else False
@@ -309,9 +309,16 @@ def check_downloaded_teams(id_team, name_season):
     return False
 
 def download_matches(season_, league_, team_links, ucl_matches, team_id):
+    """This function downloads webpages with Preview and Match Centre sections of every league match for given team.
+    The data about every match are saved into the DATABASE. \n
+    :param season_: str, current analyzed season
+    :param league_: str, name of league
+    :param team_links: list, links of league matches for given team
+    :param ucl_matches: list, list of UCL matches for given team
+    :param team_id: WhoScored ID of the team"""
     log.write(f"Starting downloading of matches for team {team_id} in season {season_}.")
     for link in team_links[:]:
-        # if match is already downloaded, we delete it from links and add new rows into 'UCL_Matches_Matches' table
+        # if the match is already downloaded, we delete it from links and add new rows into 'UCL_Matches_Matches' table (if don't exist)
         if db.is_element_in_db("Matches", Link=link):
             league_match = db.select("Matches", Link=link)[0]
             for ucl_match in ucl_matches:
@@ -381,15 +388,15 @@ def download_matches(season_, league_, team_links, ucl_matches, team_id):
 
     log.write(f"The end of matches downloading for team: {team_id} in season {season_}")
     with open(f"{LINKS_FOLDER}\\downloaded_teams_{season_.replace('/', '_')}.txt", "a", encoding="utf-8") as f:
-        f.write(f"--{str(team_id)}--|")
+        f.write(f"--{str(team_id)}--|") # ID of team with already downloaded matches is writing to the file
 
 
 def save_file(is_preview, html_code, season__, league__):
-    """This function saves the html file with squad.\n
+    """This function saves the html code of webpage to the file.\n
     :param is_preview: bool, defines that currant website contains preview squad or not
-    :param html_code: str, contains html code od current downloaded website.
-    :param season__: str
-    :param league__: str"""
+    :param html_code: str, contains html code of current downloaded website.
+    :param season__: str, current analyzed season
+    :param league__: str, current analyzed league"""
     global number_of_downloaded_matches
     if not is_preview:
         with open(f"Matches\\{season__.replace('/', '_')}\\{league__}\\"
@@ -413,9 +420,9 @@ db = Database(DATABASE)  # connecting to database
 number_of_downloaded_matches = len(db.select("Matches"))
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
 log.write("Start of matches downloading.")
-counter = 0
+restart_counter = 0
 
-for season in ALL_SEASONS[8:9]:
+for season in ALL_SEASONS:
     log.write(f"Current season: {season}")
     all_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season)  # UCL matches of season sorted by id
     for match in all_matches:  # for every UCL match in the season
@@ -434,7 +441,7 @@ for season in ALL_SEASONS[8:9]:
             team_home_links = filtration_team_matches(team_home, links_league)
             team_ucl_matches = list(filter(lambda game: team_home in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_home_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_home)
-            counter += 1
+            restart_counter += 1
 
         team = db.select("Teams", Team_ID=team_away)[0]
         league = team["League"]
@@ -448,15 +455,14 @@ for season in ALL_SEASONS[8:9]:
             team_away_links = filtration_team_matches(team_away, links_league)
             team_ucl_matches = list(filter(lambda game: team_away in (game['Team_1_ID'], game['Team_2_ID']), all_matches))
             download_matches(season, league, team_away_links, sorted(team_ucl_matches, key=lambda game: game['Date']), team_away)
-            counter += 1
+            restart_counter += 1
 
-        if counter > 2:     # restart browser after matches downloading of 3 teams
-            counter = 0
+        if restart_counter > 2:     # restart browser after matches downloading of 3 teams -> for improved program performance
+            restart_counter = 0
             browser.close()
             log.write("Stop! Restart browser. Wait 1 minute...")
             wait(50, 60)
             browser = webdriver.Chrome(executable_path=DRIVER_PATH, options=OPTIONS)
-
 
 if browser:
     browser.close()
