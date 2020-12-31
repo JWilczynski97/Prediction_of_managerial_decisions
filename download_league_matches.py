@@ -464,5 +464,4 @@ for season in ALL_SEASONS:
             wait(50, 60)
             browser = webdriver.Chrome(executable_path=DRIVER_PATH, options=OPTIONS)
 
-if browser:
-    browser.close()
+browser.close()
