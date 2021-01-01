@@ -1,6 +1,6 @@
 # Copyright (c) Jakub Wilczyński 2020
 # Module with helpful classes in the project.
-# Classes: Database, Logger
+# classes: Database, Logger
 
 import sqlite3 as lite
 import logging
