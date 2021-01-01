@@ -6,8 +6,10 @@
 # Data about teams are saved into table "Team": Whoscored id of team, team name, league (country), link to webpage.
 # Tools used: Python 3.8, BeautifulSoup  4.9.1, SQLite 3.28.0
 
+from tools import Database, Logger
 from os import listdir, path
 from bs4 import BeautifulSoup
+import logging
 import sqlite3 as lite
 from sys import exit
 import datetime
@@ -17,14 +19,15 @@ ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
                '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-DATABASE = 'Matches_DB.db'
+MATCHES_FOLDER = 'Matches'
+DATABASE = 'Matches_DB_test.db'
 
 
 ##### functions #####
 def matches_indexes(ucl_season: str) -> [int]:
     """This function returns indexes of matches from given season.\n
         :param ucl_season: str, name of UEFA Champions League season"""
-    squads_files = list(filter(lambda x: 'squad' in x, listdir(f"Matches\\{ucl_season.replace('/','_')}")))
+    squads_files = list(filter(lambda x: 'squad' in x, listdir(f"Matches\\{ucl_season.replace('/', '_')}")))
     ids = [int(x.split("_")[1]) for x in squads_files]
     return sorted(ids)
 
@@ -82,12 +85,14 @@ def get_season(html_file: str) -> str:
         this_season = soup.find("title").string.strip().split(" ")[-2]
         return this_season
 
+
 def change_team_name(team_id, team_name):
     """This function changes tha names of few clubs.
     The correct names are very importent for the next step of project.\n
     :param team_id: str, WhoScored id of team
     :param team_name: str, WhoScored id of team"""
-    change_names = {'32': 'Manchester United', '167': 'Manchester City', '7614': 'Leipzig', '134': 'Borussia M Gladbach',
+    change_names = {'32': 'Manchester United', '167': 'Manchester City', '7614': 'Leipzig',
+                    '134': 'Borussia M Gladbach',
                     '296': 'Sporting CP', '560': 'Zenit St Petersburg', '304': 'Paris Saint Germain'}
     if team_id in change_names:
         return change_names[team_id]
@@ -98,7 +103,8 @@ def connection_to_db(file_db: str) -> lite.Connection:
     """This function connects program with SQLite database and returns connection object. \n
     :param file_db: str, path to the .db file with database"""
     if not path.exists(file_db):
-        print(f"{datetime.datetime.now()}          Connection ERROR: impossible connecting to database. The file {file_db} doesn't exist.")
+        print(
+            f"{datetime.datetime.now()}          Connection ERROR: impossible connecting to database. The file {file_db} doesn't exist.")
         sys.exit(1)
     connection = lite.connect(file_db)
     print(f"{datetime.datetime.now()}          Connected to the database {file_db}")
@@ -113,20 +119,20 @@ def is_element_in_db(cursor: lite.Cursor, element: str, table: str, column: str)
     :param table: str, name of correct table in the database
     :param column: str, name of correct column in the database"""
     cursor.execute(f"SELECT * FROM {table} WHERE {column}= ?", (element,))
-    found = cursor.fetchall()   # it returns a list of rows (tuples)
+    found = cursor.fetchall()  # it returns a list of rows (tuples)
     result = True if len(found) != 0 else False
     return result
 
+
 ##### Script #####
-conn = None
+logger = Logger(log_folder=None, std_output=True)
+db = Database(DATABASE, logger)
 try:
-    conn = connection_to_db(DATABASE)
-    sql = conn.cursor()
     for season in ALL_SEASONS:
-        for idx in matches_indexes(season):       # for every saved UCL match
+        for idx in matches_indexes(season):  # for every saved UCL match
 
             ### downloading data from html files ###
-            file = f"Matches/{season.replace('/', '_')}/Match_{idx}_squad.html"
+            file = f"{MATCHES_FOLDER}/{season.replace('/', '_')}/Match_{idx}_squad.html"
             link, whoscored_id = get_link_and_id(file)
             paths = get_paths(file)
             match_date = get_date(file)
@@ -139,35 +145,30 @@ try:
 
             ### adding UCL match to the database ###
             row = (idx, teams["team1_id"], teams["team2_id"], season, whoscored_id, match_date, paths[0], paths[1], link)
-            print(f"{datetime.datetime.now()}          Data downloaded from file {file}.")
-            sql.execute("INSERT INTO UCL_Matches VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", row)
-            print(f"{datetime.datetime.now()}          Match with ID {whoscored_id} saved in the database.")
+            logger.write(f"Data downloaded from file {file}.")
+            db.insert('UCL_Matches', False, *row)
+            logger.write(f"Match with ID {whoscored_id} saved in the database.")
 
-            ### adding team to the database if not exists ###
-            if not is_element_in_db(sql, teams["team1_id"], "Teams", "Team_ID"):
-                sql.execute("INSERT INTO Teams VALUES(?, ?, ?, ?)", (teams["team1_id"], teams["team1_name"], teams["team1_league"], link_team_1))
-                print(f"{datetime.datetime.now()}          Team with ID {teams['team1_id']} saved in the database.")
+            ### adding team to the database if not exists ###te
+            if not db.is_element_in_db("Teams", Team_ID=teams["team1_id"]):
+                db.insert('Teams', False, teams["team1_id"], teams["team1_name"], teams["team1_league"], link_team_1)
+                logger.write(f"Team with ID {teams['team1_id']} saved in the database.")
 
-            if not is_element_in_db(sql, teams["team2_id"], "Teams", "Team_ID"):
-                sql.execute("INSERT INTO Teams VALUES(?, ?, ?, ?)", (teams["team2_id"], teams["team2_name"], teams["team2_league"], link_team_2))
-                print(f"{datetime.datetime.now()}          Team with ID {teams['team2_id']} saved in the database.")
+            if not db.is_element_in_db("Teams", Team_ID=teams["team2_id"]):
+                db.insert('Teams', False, teams["team2_id"], teams["team2_name"], teams["team2_league"], link_team_2)
+                logger.write(f"Team with ID {teams['team2_id']} saved in the database.")
 
-            conn.commit()
-            print(f"{datetime.datetime.now()}          Changes in the database {DATABASE} saved.")
-            print(f"{datetime.datetime.now()}          File {file} complete.")
-    # add change row for Manchester United in Teams!
+            db.commit()
+            logger.write(f"Changes in the database {DATABASE} saved.")
+            logger.write(f"File {file} complete.")
 except lite.Error as e:
-    if conn:
-        conn.rollback()
-    print(f"{datetime.datetime.now()}          SQLite ERROR: {e}")
+    if db:
+        db.rollback()
+    logger.write(f"SQLite ERROR: {e}", level=logging.ERROR)
 except Exception as e:
-    if conn:
-        conn.rollback()
-    print(f"{datetime.datetime.now()}          ERROR: {e}")
+    if db:
+        db.rollback()
+    logger.write(f"ERROR: {e}")
 else:
-    conn.commit()
-    print(f"{datetime.datetime.now()}          All changes in the database {DATABASE} saved.")
-finally:
-    if conn:
-        conn.close()
-    print(f"{datetime.datetime.now()}          Disconnected from the database {DATABASE}.")
+    db.commit()
+    logger.write(f"All changes in the database {DATABASE} saved.")

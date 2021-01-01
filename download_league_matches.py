@@ -7,7 +7,9 @@
 # the html files in specified folders on the local disk.
 # Tools used: Python 3.8, Selenium Webdriver 3.141.0, BeautifulSoup  4.9.1, SQLite 3.28.0
 
-from os import listdir, path, getcwd, makedirs
+from tools import Database, Logger
+
+from os import path, getcwd, makedirs
 import logging
 import datetime
 from sys import stdout
@@ -18,10 +20,9 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 from bs4 import BeautifulSoup
 from random import uniform
-from selenium.webdriver.support.expected_conditions import element_to_be_clickable
-import pandas as pd
 
 ###### WEBDRIVER OPTIONS #####
 OPTIONS = Options()
@@ -47,69 +48,10 @@ LEAGUES = {'England': 'https://www.whoscored.com/Regions/252/Tournaments/2/',
            'Scotland': 'https://www.whoscored.com/Regions/253/Tournaments/20/'}
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
+MATCHES_FOLDER = 'Matches'
 LOGS_FOLDER = 'Logs'        # directory for files with logs of program
 LINKS_FOLDER = 'Links'      # directory for text files with links to matches of european leagues
-DATABASE = 'Matches_DB.db'  # .db file with SQLite database
-
-
-class Logger:
-    """Object to log text using the `logging` module.
-    The messages are printed in the standard output and saved to the files on the local disk in directory LOGS_FOLDER."""
-    def __init__(self, folder):
-        num, now = len(listdir(folder)) + 1, datetime.datetime.now()
-        logging.basicConfig(filename=f'{folder}\\{now.date()}_Log_{num}.txt',
-                            filemode='w', format=f'%(asctime)s - %(levelname)s - %(message)s', level="NOTSET")
-        self.log = logging.getLogger('')
-        self.write("Logger created.")
-
-    def write(self, message, level=logging.INFO):
-        self.log.log(level, message)
-        print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
-
-
-class Database:
-    """Object to represent the SQLite database in the file DATABASE."""
-    def __init__(self, database_name):
-        """ Function to create connection to the database and cursor. \n
-        :param database_name: str, name of .db file"""
-        if not path.exists(database_name):
-            log.write(f"Connection SQLite ERROR: impossible connecting to database. "
-                      f"The file {database_name} doesn't exist.", level=logging.ERROR)
-            sys.exit(1)
-        self.connection = lite.connect(database_name)
-        self.connection.row_factory = lite.Row
-        self.cursor = self.connection.cursor()
-        log.write(f"Connected to the database {database_name}.")
-
-    def __del__(self):
-        """Method to close the connection to the database."""
-        self.connection.close()
-
-    def insert(self, table, *args): # (INSERT INTO <table> VALUES(?,?,?,?), <values>)
-        """Method to add new row of data into the given table into the database.\n
-        :param table: name of table in the database
-        :param args: tuple, <column_name>=<value> conditions"""
-        self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (*args,))
-        self.connection.commit()
-        log.write(f"table {table} -> new row added: {args}")
-
-    def select(self, table, order_by='', **conditions): # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
-        """Method to execute SELECT statement in the database with given conditions.\n
-        :param table: str, name of table
-        :param order_by: str, data are sorted by this column name
-        :param conditions: tuple, <column_name>=<value> conditions"""
-        where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
-        order = f' ORDER BY {order_by}' if order_by != '' else ''
-        rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
-        return rows.fetchall()
-
-    def is_element_in_db(self, table, **conditions):
-        """The method to check the given element is already in the database.\n
-        :param table: str, name of table in the database
-        :param conditions: tuple, <column_name>=<value> conditions"""
-        found = self.select(table, **conditions)
-        answer = False if len(found) == 0 else True
-        return answer
+DATABASE = 'Matches_DB_copy.db'  # .db file with SQLite database
 
 ##### functions #####
 def wait(x, y):
@@ -399,12 +341,12 @@ def save_file(is_preview, html_code, season__, league__):
     :param league__: str, current analyzed league"""
     global number_of_downloaded_matches
     if not is_preview:
-        with open(f"Matches\\{season__.replace('/', '_')}\\{league__}\\"
+        with open(f"{MATCHES_FOLDER}\\{season__.replace('/', '_')}\\{league__}\\"
                   f"Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
     else:
-        with open(f"Matches\\{season__.replace('/', '_')}\\{league__}\\"
+        with open(f"{MATCHES_FOLDER}\\{season__.replace('/', '_')}\\{league__}\\"
                   f"Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w', encoding="utf-8") as file:
             file.write(str(html_code))
         number_of_downloaded_matches += 1
@@ -413,13 +355,13 @@ def save_file(is_preview, html_code, season__, league__):
 
 ##### Script #####
 browser = webdriver.Chrome(executable_path=DRIVER_PATH, options=OPTIONS)
-log = Logger(LOGS_FOLDER)
+log = Logger(LOGS_FOLDER, std_output=True)
 create_directory_for_files(LOGS_FOLDER)
 create_directory_for_files(LINKS_FOLDER)
-db = Database(DATABASE)  # connecting to database
+db = Database(DATABASE, logger=log)  # connecting to database
 number_of_downloaded_matches = len(db.select("Matches"))
 log.write(f"Number of already downloaded matches: {number_of_downloaded_matches}")
-log.write("Start of matches downloading.")
+log.write("Start of league matches downloading.")
 restart_counter = 0
 
 for season in ALL_SEASONS:

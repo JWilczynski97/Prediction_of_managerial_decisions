@@ -1,8 +1,7 @@
-1. Etap 1: skrypt pobierający strony ze przewidywanymi i wyjściowymi składami meczów Ligi Mistrzów- gotowy
-2. Etap 2: posegregowanie pobranych plików do folderów
-3. Etap 3: skrypt liczący skuteczność WhoScored z pobranych plików - gotowy
-4. Etap 4: zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - gotowy
-5. Etap 5: pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL - skrypt gotowy (sezon 10/11 pobrany)
+- skrypt pobierający strony ze przewidywanymi i wyjściowymi składami meczów Ligi Mistrzów - gotowy
+- skrypt liczący skuteczność WhoScored z pobranych plików - gotowy
+- zapisanie danych o pobranych spotkaniach UCL do bazy danych SQLite - gotowy
+- pobranie spotkań ligowych dla każdej drużyny ze spotkań UCL - skrypt gotowy (sezon 10/11 pobrany)
 
 Pobrane mecze na początku:
 [sezon]		    [mecze grupowe]		[mecze play-off]	[pobrany]

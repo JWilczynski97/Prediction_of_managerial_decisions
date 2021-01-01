@@ -5,6 +5,7 @@
 # The html codes of these websites are saved to the html files on the local disk in specified folder.
 # Tools used: Python 3.8, Selenium Webdriver 3.141.0.
 
+from tools import Logger
 from time import asctime, localtime, sleep
 from os import makedirs, path, getcwd
 from random import uniform
@@ -25,6 +26,7 @@ browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', opti
 ##### important structures #####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 number_of_downloaded_matches = 0  # it helps to number the downloaded files
+MATCHES_FOLDER = 'Games'
 
 ########## functions ##########
 def create_directory_for_files(folder):
@@ -32,6 +34,8 @@ def create_directory_for_files(folder):
     :param folder: str, name of folder coming from current season name"""
     if not path.exists(getcwd() + folder):
         makedirs(getcwd() + folder)
+        log.write(f"Directory {folder} created.")
+
 
 def cookies_accept():
     """Clicking the 'cookies accept' buttons on the start page"""
@@ -39,14 +43,16 @@ def cookies_accept():
     more_options_cookies_button.click()
     sleep(uniform(3, 5))  # time sleep generator
 
+
 def is_element_clickable(element):
     """If the element isn't clickable, the current page waits next 3-4 seconds.\n
     :param element: Element, the element from the current page"""
     if not element_to_be_clickable(element):
-        print("The element is not yet clickable. Waiting...")
+        log.write("The element is not yet clickable. Waiting...")
         sleep(uniform(8, 10))
     if not element_to_be_clickable(element):
-        raise Exception("Unexpected error! The element is not clickable. Script ends: {}".format(asctime(localtime())))
+        raise Exception("Unexpected error! The element is not clickable. The end of program.")
+
 
 def select_season(selected_season):
     """This function selects the correct season from "ALL_SEASONS" in the drop down menu on the start page.\n
@@ -61,8 +67,10 @@ def select_season(selected_season):
             drop_down_menu.click()
             sleep(uniform(1.5, 2.5))
             option.click()
+            log.write(f"Option {selected_season} selected.")
             sleep(uniform(1.5, 2.5))
             break
+
 
 def select_stage(stage):
     """This function selects and runs the website with games of the interesting stage."""
@@ -75,6 +83,7 @@ def select_stage(stage):
             menu.click()
             sleep(uniform(1.5, 2.5))
             option.click()
+            log.write(f"Option {stage} selected.")
             sleep(uniform(1.5, 2.5))
             break
 
@@ -83,6 +92,7 @@ def select_stage(stage):
     is_element_clickable(fixtures_button)
     fixtures_button.click()
     sleep(uniform(3, 4))
+
 
 def download_match():
     """The match downloading function starts in "Match Center" section of the match website, then comes to the Preview."""
@@ -99,6 +109,7 @@ def download_match():
     save_file(is_preview, html_code_preview)  # saving the website with preview
     print(browser.title[:-19])
     sleep(uniform(4, 5))
+
 
 def download_websites():
     """The match websites downloading from Group or Final Stage website."""
@@ -127,7 +138,6 @@ def download_websites():
             browser.switch_to.window(browser.window_handles[0])
             continue
         download_match()
-        sleep(uniform(2, 3))
         browser.close()
         sleep(uniform(2, 3))
         browser.switch_to.window(browser.window_handles[0])
@@ -138,28 +148,29 @@ def save_file(is_preview, html_code):
     """This function saves the html file with squad.\n
     :param is_preview: bool, defines that currant website contains preview squad or not
     :param html_code: str, contains html code od current downloaded website. """
-    global number_of_downloaded_matches
+    global number_of_downloaded_matches, directory
     if not is_preview:
-        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
+        with open(f"{directory}\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
     else:
-        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
+        with open(f"{directory}\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
             number_of_downloaded_matches += 1
-    print(asctime(localtime()) + "    " + file.name + " saved!")
+    log.write(f"File {file.name} saved.")
 
 
 ##### Script #####
-print("Script started: " + asctime(localtime()))
+log = Logger(log_folder=None, std_output=True)
+log.write("Start of UCL matches downloading.")
 browser.get(
     "https://www.whoscored.com/Regions/250/Tournaments/12/Europe-Champions-League")  # Program starts from this website
 sleep(uniform(8, 10))
 cookies_accept()
 for current_season in ALL_SEASONS:              # all UEFA Champions League matches from all seasons are downloaded
     season = current_season.replace("/", "_")   # name of directory can't include "/"
-    directory = f"\\Matches\\{season}"
+    directory = f"\\{MATCHES_FOLDER}\\{season}"
     create_directory_for_files(directory)
     select_season(current_season)
     select_stage("Champions League Group Stages")
@@ -168,5 +179,7 @@ for current_season in ALL_SEASONS:              # all UEFA Champions League matc
     download_websites()
     print("Downloading season " + current_season + " complete.")
     sleep(uniform(8, 10))
+    log.write(f"Matches from season {season} downloaded.")
 browser.close()
-print("Script done: " + asctime(localtime()))
+log.write("Closing the browser.")
+log.write("The End.")
