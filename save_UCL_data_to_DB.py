@@ -20,7 +20,7 @@ ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
 MATCHES_FOLDER = 'Matches'
-DATABASE = 'Matches_DB_test.db'
+DATABASE = 'Matches_DB.db'
 
 
 ##### functions #####
@@ -97,32 +97,6 @@ def change_team_name(team_id, team_name):
     if team_id in change_names:
         return change_names[team_id]
     return team_name
-
-
-def connection_to_db(file_db: str) -> lite.Connection:
-    """This function connects program with SQLite database and returns connection object. \n
-    :param file_db: str, path to the .db file with database"""
-    if not path.exists(file_db):
-        print(
-            f"{datetime.datetime.now()}          Connection ERROR: impossible connecting to database. The file {file_db} doesn't exist.")
-        sys.exit(1)
-    connection = lite.connect(file_db)
-    print(f"{datetime.datetime.now()}          Connected to the database {file_db}")
-    return connection
-
-
-def is_element_in_db(cursor: lite.Cursor, element: str, table: str, column: str) -> bool:
-    """This function checks the given element is already in the database.
-    Then it returns answer in bool object: True or False. \n
-    :param cursor: cursor object, cursor using in the connection with the database
-    :param element: str, element whose presence in the database is checked
-    :param table: str, name of correct table in the database
-    :param column: str, name of correct column in the database"""
-    cursor.execute(f"SELECT * FROM {table} WHERE {column}= ?", (element,))
-    found = cursor.fetchall()  # it returns a list of rows (tuples)
-    result = True if len(found) != 0 else False
-    return result
-
 
 ##### Script #####
 logger = Logger(log_folder=None, std_output=True)

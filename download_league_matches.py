@@ -51,7 +51,7 @@ MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
 MATCHES_FOLDER = 'Matches'
 LOGS_FOLDER = 'Logs'        # directory for files with logs of program
 LINKS_FOLDER = 'Links'      # directory for text files with links to matches of european leagues
-DATABASE = 'Matches_DB_copy.db'  # .db file with SQLite database
+DATABASE = 'Matches_DB.db'  # .db file with SQLite database
 
 ##### functions #####
 def wait(x, y):
