@@ -1,6 +1,6 @@
 *.html linguist-detectable=false
-<<<<<<< HEAD
+*.csv linguist-detectable=false
+*.txt linguist-detectable=false
 *.txl linguist-detectable=false
-=======
-*.txl linguist-detectable=false
->>>>>>> 82ceb4bd4894f37bb10614aa8224359a6b6ce728
+*.txp linguist-detectable=false
+*.sql linguist-detectable=false
