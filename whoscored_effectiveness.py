@@ -9,6 +9,8 @@
 from tools import Database, Logger
 from os import listdir
 from bs4 import BeautifulSoup
+from sklearn.metrics import log_loss
+import random
 
 ##### important structures #####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018',
@@ -85,24 +87,34 @@ log = Logger(log_folder=None, std_output=True)
 db = Database(DATABASE, logger=log)
 for season in ALL_SEASONS:
     ucl_matches = db.select("UCL_Matches", order_by='UCL_Match_ID', Season=season,)
-    for match in ucl_matches[:1]:
+    for match in ucl_matches:
         team_1_results, team_2_results = compare_squads(get_preview_squads(match['Preview_file']),
                                                         get_lineup_squads(match['Centre_file']))
         results[f"Match_{match['UCL_Match_ID']}_team1"] = team_1_results
         results[f"Match_{match['UCL_Match_ID']}_team2"] = team_2_results
         log.write(f"Downloading squads of match {match['UCL_Match_ID']} complete.")
     log.write(f"----- Season {season} complete.")
+del db
 
 correct_predictions = sum([int(len(res)) for res in results.values()])
 all_predictions = (len(results.keys())) * 11
-del db
+whoscored_effectiveness = correct_predictions / all_predictions
 print(results)
 log.write("Checking WhoScored effectiveness complete.\n")
-print("RESULTS:\nAll predicted performances: " + str(all_predictions))
-print("Correct predicted performances: " + str(correct_predictions))
-print("WhoScored.com effectiveness: " + str(correct_predictions / all_predictions))
+log.write("RESULTS:\nAll predicted performances: " + str(all_predictions))
+log.write("Correct predicted performances: " + str(correct_predictions))
+log.write("WhoScored.com effectiveness: " + str(correct_predictions / all_predictions))
+
+y_true = [1]*correct_predictions + [0]*(all_predictions - correct_predictions)
+random.shuffle(y_true)
+y_pred = len(y_true)*[whoscored_effectiveness]
+
+score_WhoScored = log_loss(y_true, y_pred)
+log.write(f"Evaluation of WhoScored predictions with loss function: {score_WhoScored}")
+#used loss function is Log Loss function from sklearn library
 
 # RESULTS:
 # All predicted performances: 24486
 # Correct predicted performances: 20109
 # Result: 0.8212447929429062
+# Evaluation of WhoScored predictions with Log Loss function: 0.46950068966188735
