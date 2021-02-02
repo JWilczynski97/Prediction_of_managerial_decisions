@@ -22,10 +22,21 @@ class Database:
                      f"The file {file} doesn't exist.", level=logging.ERROR)
             sys.exit(1)
         self.name = file
-        self.connection = lite.connect(self.name)
-        self.connection.row_factory = lite.Row
-        self.cursor = self.connection.cursor()
+        self.connection = lite.connect(self.name)  # Connection object
+        self.connection.row_factory = lite.Row  # to access valeus by column name
+        self.cursor = self.connection.cursor()  # Cursor object
         self.log(f"Connected to the database {self.name}.")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, ext_type, exc_value, traceback):
+        self.cursor.close()
+        if isinstance(exc_value, Exception):
+            self.rollback()
+        else:
+            self.commit()
+        self.close()
 
     def commit(self):
         self.connection.commit()
@@ -35,6 +46,7 @@ class Database:
 
     def __del__(self):
         """Method to close the connection to the database."""
+        self.cursor.close()
         self.connection.close()
         self.log(f"Disconnected from the database {self.name}.")
 
@@ -53,6 +65,15 @@ class Database:
         if commit is True:
             self.commit()
 
+    def update(self, table, column, value, **condition):
+        self.cursor.execute(f"UPDATE {table} SET {column} = {value} WHERE {condition} = ?", (*condition.values(),))
+        self.commit()
+
+    def many_columns_update(self, table, column, condition, **values):
+        query_set = f" SET {' AND '.join([f'{value}=?' for value in values])}" if len(values) != 0 else ''
+        self.cursor.execute(f"UPDATE {table} {query_set} WHERE {column} = {condition}", (*values.values(),))
+        self.commit()
+
     def select(self, table, order_by='',
                **conditions):  # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
         """Method to execute SELECT statement in the database with given conditions.\n
@@ -63,6 +84,13 @@ class Database:
         order = f' ORDER BY {order_by}' if order_by != '' else ''
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
         return rows.fetchall()
+
+    def create_table(self, table_name, *columns):
+        self.cursor.execute(f"CREATE TABLE if not exists {table_name} ({','.join(['?' for _ in columns])})",
+                            (*columns,))
+        self.commit()
+
+
 
     def is_element_in_db(self, table, **conditions):
         """The method to check the given element is already in the database.\n
@@ -75,16 +103,17 @@ class Database:
 
 class Logger:
     """Object to log text using the `logging` module.
-    The messages can be printed in the standard output and saved to the files on the local disk in directory log_folder."""
+    The messages can be wrote to the standard output and saved to the files on the local disk in directory log_folder."""
+
     def __init__(self, log_folder=None, std_output=False):
         self.log_folder = log_folder
+        self.std_output = std_output
         if log_folder:
             num, now = len(listdir(log_folder)) + 1, datetime.datetime.now()
             logging.basicConfig(filename=f'{log_folder}\\{now.date()}_Log_{num}.txt',
                                 filemode='w', format=f'%(asctime)s - %(levelname)s - %(message)s', level="NOTSET")
             self.log = logging.getLogger('')
             self.write("Logger created.")
-        self.std_output = std_output
 
     def write(self, message, level=logging.INFO):
         if self.log_folder:

@@ -48,7 +48,7 @@ LEAGUES = {'England': 'https://www.whoscored.com/Regions/252/Tournaments/2/',
            'Scotland': 'https://www.whoscored.com/Regions/253/Tournaments/20/'}
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-MATCHES_FOLDER = 'Matches'
+MATCHES_FOLDER = 'FakeMatches'
 LOGS_FOLDER = 'Logs'        # directory for files with logs of program
 LINKS_FOLDER = 'Links'      # directory for text files with links to matches of european leagues
 DATABASE = 'Matches_DB.db'  # .db file with SQLite database

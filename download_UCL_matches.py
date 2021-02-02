@@ -26,7 +26,7 @@ browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', opti
 ##### important structures #####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 number_of_downloaded_matches = 0  # it helps to number the downloaded files
-MATCHES_FOLDER = 'Games'
+MATCHES_FOLDER = 'FakeMatches'
 
 ########## functions ##########
 def create_directory_for_files(folder):
@@ -150,11 +150,11 @@ def save_file(is_preview, html_code):
     :param html_code: str, contains html code od current downloaded website. """
     global number_of_downloaded_matches, directory
     if not is_preview:
-        with open(f"{directory}\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
+        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_squad.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
     else:
-        with open(f"{directory}\\{season}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
+        with open(f"{directory}\\Match_{str(number_of_downloaded_matches + 1)}_preview.html", 'w',
                   encoding="utf-8") as file:
             file.write(str(html_code))
             number_of_downloaded_matches += 1
@@ -170,7 +170,7 @@ sleep(uniform(8, 10))
 cookies_accept()
 for current_season in ALL_SEASONS:              # all UEFA Champions League matches from all seasons are downloaded
     season = current_season.replace("/", "_")   # name of directory can't include "/"
-    directory = f"\\{MATCHES_FOLDER}\\{season}"
+    directory = f"{MATCHES_FOLDER}\\{season}"
     create_directory_for_files(directory)
     select_season(current_season)
     select_stage("Champions League Group Stages")
