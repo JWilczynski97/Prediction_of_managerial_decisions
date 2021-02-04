@@ -48,7 +48,7 @@ LEAGUES = {'England': 'https://www.whoscored.com/Regions/252/Tournaments/2/',
            'Scotland': 'https://www.whoscored.com/Regions/253/Tournaments/20/'}
 MONTHS = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
           "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-MATCHES_FOLDER = 'FakeMatches'
+MATCHES_FOLDER = 'Matches'
 LOGS_FOLDER = 'Logs'        # directory for files with logs of program
 LINKS_FOLDER = 'Links'      # directory for text files with links to matches of european leagues
 DATABASE = 'Matches_DB.db'  # .db file with SQLite database
@@ -92,7 +92,7 @@ def is_element_clickable(element):
 
 
 def check_league_and_season(ucl_season, league_name):
-    """Preview section on whoscored.com is available only for few league and correct seasons.
+    """Preview section on whoscored.com is available only for few leagues and correct seasons.
     This function checks this condition and returns answer True/False. \n
     :param ucl_season: str, name of checked season
     :param league_name: str, name of checked league"""

@@ -5,6 +5,7 @@
 import sqlite3 as lite
 import logging
 import datetime
+import sys
 from os import listdir, path
 from time import asctime, localtime
 
@@ -28,15 +29,15 @@ class Database:
         self.log(f"Connected to the database {self.name}.")
 
     def __enter__(self):
-        return self
+            return self
 
     def __exit__(self, ext_type, exc_value, traceback):
-        self.cursor.close()
-        if isinstance(exc_value, Exception):
-            self.rollback()
-        else:
-            self.commit()
-        self.close()
+            self.cursor.close()
+            if isinstance(exc_value, Exception):
+                self.rollback()
+            else:
+                self.commit()
+            self.close()
 
     def commit(self):
         self.connection.commit()
@@ -74,14 +75,17 @@ class Database:
         self.cursor.execute(f"UPDATE {table} {query_set} WHERE {column} = {condition}", (*values.values(),))
         self.commit()
 
-    def select(self, table, order_by='',
+    def select(self, table, order_by='', option_order='',
                **conditions):  # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
         """Method to execute SELECT statement in the database with given conditions.\n
         :param table: str, name of table
         :param order_by: str, data are sorted by this column name
+        :param option_order: str, default = ASC (ascending), other: DESC (descending)
         :param conditions: tuple, <column_name>=<value> conditions"""
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
-        order = f' ORDER BY {order_by}' if order_by != '' else ''
+        order = f' ORDER BY {order_by} {option_order}' if order_by != ''!= "ASC" else ''
+        if option_order not in ('', 'ASC', 'DESC'):
+            raise Exception("Error! Incorrect option of ordering.")
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
         return rows.fetchall()
 
@@ -89,8 +93,6 @@ class Database:
         self.cursor.execute(f"CREATE TABLE if not exists {table_name} ({','.join(['?' for _ in columns])})",
                             (*columns,))
         self.commit()
-
-
 
     def is_element_in_db(self, table, **conditions):
         """The method to check the given element is already in the database.\n
@@ -120,3 +122,5 @@ class Logger:
             self.log.log(level, message)
         if self.std_output is True:
             print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
+
+print("Module tools.py imported.")

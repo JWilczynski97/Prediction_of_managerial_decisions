@@ -105,16 +105,7 @@ log.write("RESULTS:\nAll predicted performances: " + str(all_predictions))
 log.write("Correct predicted performances: " + str(correct_predictions))
 log.write("WhoScored.com effectiveness: " + str(correct_predictions / all_predictions))
 
-y_true = [1]*correct_predictions + [0]*(all_predictions - correct_predictions)
-random.shuffle(y_true)
-y_pred = len(y_true)*[whoscored_effectiveness]
-
-score_WhoScored = log_loss(y_true, y_pred)
-log.write(f"Evaluation of WhoScored predictions with loss function: {score_WhoScored}")
-#used loss function is Log Loss function from sklearn library
-
 # RESULTS:
 # All predicted performances: 24486
 # Correct predicted performances: 20109
 # Result: 0.8212447929429062
-# Evaluation of WhoScored predictions with Log Loss function: 0.46950068966188735

@@ -26,7 +26,7 @@ browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', opti
 ##### important structures #####
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015', '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 number_of_downloaded_matches = 0  # it helps to number the downloaded files
-MATCHES_FOLDER = 'FakeMatches'
+MATCHES_FOLDER = 'Matches'
 
 ########## functions ##########
 def create_directory_for_files(folder):
