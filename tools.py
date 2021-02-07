@@ -13,7 +13,7 @@ from time import asctime, localtime
 class Database:
     """Object to represent the SQLite database in 'file'."""
 
-    def __init__(self, file, logger=None):
+    def __init__(self, file, logger=None, by_column=True):
         """ Function to create connection to the database and cursor. \n
         :param path: str, path to .db file with sqlite database
         :param logger: Logger, object of class Logger (not necessary)"""
@@ -23,21 +23,22 @@ class Database:
                      f"The file {file} doesn't exist.", level=logging.ERROR)
             sys.exit(1)
         self.name = file
-        self.connection = lite.connect(self.name)  # Connection object
-        self.connection.row_factory = lite.Row  # to access valeus by column name
-        self.cursor = self.connection.cursor()  # Cursor object
+        self.connection = lite.connect(self.name)       # Connection object
+        if by_column:
+            self.connection.row_factory = lite.Row          # to access values by column name
+        self.cursor = self.connection.cursor()
         self.log(f"Connected to the database {self.name}.")
 
     def __enter__(self):
-            return self
+        return self
 
     def __exit__(self, ext_type, exc_value, traceback):
-            self.cursor.close()
-            if isinstance(exc_value, Exception):
-                self.rollback()
-            else:
-                self.commit()
-            self.close()
+        self.cursor.close()
+        if isinstance(exc_value, Exception):
+            self.rollback()
+        else:
+            self.commit()
+        self.close()
 
     def commit(self):
         self.connection.commit()
@@ -45,8 +46,17 @@ class Database:
     def rollback(self):
         self.connection.rollback()
 
-    def __del__(self):
+    def connect(self, by_column=True):
+        """Method to create the connection to the database and cursor object.
+        :param by_column: to access values by column name (if True)"""
+        self.connection = lite.connect(self.name)       # Connection object
+        if by_column:
+            self.connection.row_factory = lite.Row
+        self.cursor = self.connection.cursor()          # Cursor object
+
+    def disconnect(self):
         """Method to close the connection to the database."""
+        self.cursor.close()
         self.cursor.close()
         self.connection.close()
         self.log(f"Disconnected from the database {self.name}.")
@@ -83,7 +93,7 @@ class Database:
         :param option_order: str, default = ASC (ascending), other: DESC (descending)
         :param conditions: tuple, <column_name>=<value> conditions"""
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
-        order = f' ORDER BY {order_by} {option_order}' if order_by != ''!= "ASC" else ''
+        order = f' ORDER BY {order_by} {option_order}' if order_by != '' != "ASC" else ''
         if option_order not in ('', 'ASC', 'DESC'):
             raise Exception("Error! Incorrect option of ordering.")
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
@@ -122,5 +132,3 @@ class Logger:
             self.log.log(level, message)
         if self.std_output is True:
             print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
-
-print("Module tools.py imported.")
