@@ -6,6 +6,7 @@ import sqlite3 as lite
 import logging
 import datetime
 import sys
+from unidecode import unidecode
 from os import listdir, path
 from time import asctime, localtime
 
@@ -128,7 +129,10 @@ class Logger:
             self.write("Logger created.")
 
     def write(self, message, level=logging.INFO):
-        if self.log_folder:
-            self.log.log(level, message)
-        if self.std_output is True:
-            print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
+        try:
+            if self.log_folder:
+                self.log.log(level, message)
+            if self.std_output is True:
+                print(f'{asctime(localtime())} - {logging.getLevelName(level)} - {message}')
+        except UnicodeEncodeError:
+            self.write(unidecode(message), level)
