@@ -1,0 +1,1147 @@
+<html lang="en" style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths no-touch"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Footstats - Full </title>
+<meta name="title" content="Footstats - Complete analysis of UK Premiership, Championship and League Football Statistics for supporters, fans, punters and gamblers. Now includes statistics from the European Leagues including Scottish, Italian Serie A, Spanish La Liga and German Bundisliga.">
+<meta name="description" content="Footstats - The premier statistics and analysis site for understanding and review of the UK League results and history including Premiership, Championship and the other English leagues. Review the League Tables, Discuss the Form Guide, Look at The Game, Find your Team and Judge those Referees.">
+<meta name="keywords" content="football, statistics, stats, analysis, fans, gamblers, betting, information, data, tables, results, past form, teams, players, results, soccer, league, epl, premier league, premiership, championship, form, form guide, referees, bookings, cards, fouls, goals, shots, grounds, directions, fans, supporters, howlers, news, history, positions, punter, fun, forecasts, Scottish, Italian Serie A, Spanish La Liga, German Bundisliga,French Le Championnat,Dutch KPN Eredivisie,Belgian Jupiler League,Portugal Liga,Turkish Ligi,Greek Ethniki Katigoria">
+<meta name="version" content="December 2013">
+<!--
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="distribution" content="global">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="robots" content="all,index,follow">
+-->
+<meta name="revisit-after" content="1 days">
+<meta name="rating" content="general">
+<meta name="author" content="Footweb Ltd">
+<meta name="Publisher" content="FootWeb Ltd ©">
+<meta name="Copyright" content="Copyright © FootWeb Ltd. All Rights Reserved">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<!-- Bootstrap core CSS use 3.1.1 and up framework :: this is the base css without any color changes -->
+<link href="headcontent/footstats/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!-- Way Better Bootstrap Modals INSTRUCTIONS: https://github.com/jschr/bootstrap-modal/ -->
+<!-- DEMO:: http://jschr.github.io/bootstrap-modal/bs3.html -->
+<link href="headcontent/footstats/css/bootstrap-modal.css" rel="stylesheet" type="text/css">
+<!-- Google Font(s) -->
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,900,900italic,700,700italic,600,600italic,200,200italic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Ruda" rel="stylesheet" type="text/css">
+<!-- Wrapper and Supporting Styles -->
+<link href="headcontent/footstats/css/different_base.css" rel="stylesheet" type="text/css">
+<!-- Put your color css last class 'base-color' is only used for demo -->
+<link href="headcontent/footstats/css/colors/bluegray.css" class="base-color" rel="stylesheet" type="text/css">
+<link href="headcontent/footstats/css/custom.css" rel="stylesheet">
+<!-- datatables styles -->
+<link href="https://cdn.datatables.net/1.10.8/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<!-- SCRIPTS IN HEAD ============================================== -->
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script src="https://connect.facebook.net/en_GB/all.js?hash=9b88fcd6f79f304abbb4019326382982&amp;ua=modern_es6" async="" crossorigin="anonymous"></script><script id="facebook-jssdk" src="//connect.facebook.net/en_GB/all.js#xfbml=1"></script><script src="headcontent/footstats/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<!--	NOTE:: jquery 2.x does not support IE 8 so version 1.9.1 is used for older versions of IE
+:: calling jQuery in the head for ajax work if necessary.
+-->
+<!--[if gt IE 8]><!-->
+<script src="headcontent/footstats/js/jquery.min.2.0.3.js"></script>
+<!--<![endif]-->
+<!--[if lt IE 9]>
+<script src="headcontent/footstats/js/1.9.1-jquery.min.js"></script>
+<![endif]-->
+<!-- WINDOWS 8 Phones BUG FIX -->
+<script src="headcontent/footstats/js/windows-fix.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="headcontent/footstats/js/selectivizr.js"></script>
+<![endif]-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="cart/shopping.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHewA4mJFu8GGjTE5E_InyFeY8pDQC9HA&amp;v=3.exp&amp;sensor=false&amp;libraries=weather"></script>
+<script type="text/javascript">_cf_loadingtexthtml="<img alt=' ' src='/cf_scripts/ajax/resources/cf/images/loading.gif'/>";
+_cf_contextpath="";
+_cf_ajaxscriptsrc="/cf_scripts/ajax";
+_cf_jsonprefix='//';
+_cf_clientid='b76cb45a-e6f9-4a82-8eea-44ab6deae863';</script><script type="text/javascript" src="/cf_scripts/ajax/messages/cfmessage.js"></script>
+<script type="text/javascript" src="/cf_scripts/ajax/package/cfajax.js"></script>
+<script type="text/javascript" src="/cf_scripts/cfform.js"></script>
+<script type="text/javascript" src="/cf_scripts/masks.js"></script>
+<script type="text/javascript" src="/cf_scripts/cfformhistory.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/43/8/intl/pl_ALL/common.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/43/8/intl/pl_ALL/util.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/43/8/intl/pl_ALL/geocoder.js"></script><style type="text/css" data-fbcssmodules="css:fb.css.basecss:fb.css.dialog css:fb.css.iframewidget">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+<body style=""><span></span>
+<div class="page-container">
+<div id="site-wrapper">
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<style>
+.twitter-share-button[style] { vertical-align: middle !important; }
+</style>
+<!-- ____________ HEADER _______________ -->
+<header class="header clearfix hidden-print">
+<!-- ____________ BEGIN NAV BAR WRAPPER _______________ -->
+<div class="nav-wrapper">
+<div class="mobile-menu-bar clearfix visible-xs">
+<a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+</div>
+<!-- this tool-bar is only on tablets and desktop device widths -->
+<div class="tool-bar hidden-xs">
+<ul>
+<li class="tb-phone tb-right"><a href="index.cfm?task=terms">T&amp;C</a></li>
+<li class="divider tb-right"><!-- divider --></li>
+<li class="tb-phone tb-right"><a href="index.cfm?task=contactus">Contact</a></li>
+<li class="divider tb-right"><!-- divider --></li>
+<li class="tb-phone tb-right"><a href="index.cfm?task=links">Links</a></li>
+<li class="divider tb-right"><!-- divider --></li>
+<li class="tb-phone tb-right"><a href="index.cfm?task=news">News</a></li>
+<li class="divider tb-right"><!-- divider --></li>
+<li class="tb-phone tb-right"><a href="index.cfm?task=grounds">Grounds</a></li>
+</ul>
+</div>
+<!-- /.signup-panel-->
+<!-- ____________ PRIMARY MENU _______________ -->
+<!-- 7 main links max with short titles as per most sites in English if you add more or longer titles the CSS will need to be adjusted per media query -->
+<nav class="nav-bar" id="nav" role="navigation">
+<ul class="primary-nav">
+<li>
+<a href="index.cfm?task=home">Welcome</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=leagues" class="dcjq-parent">Tables <span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li class="active">
+<a href="index.cfm?task=league_full">Full </a>
+</li>
+<li>
+<a href="index.cfm?task=league_fouls">Fouls</a>
+</li>
+<li>
+<a href="index.cfm?task=league_corners">Corners</a>
+</li>
+<li>
+<a href="index.cfm?task=league_goals">Goals</a>
+</li>
+<li>
+<a href="index.cfm?task=league_shots">Shots per Game</a>
+</li>
+<li>
+<a href="index.cfm?task=league_shots_perc">Shots %</a>
+</li>
+<li>
+<a href="index.cfm?task=league_cards">Cards</a>
+</li>
+<li>
+<a href="index.cfm?task=league_other">Other Definitions</a>
+</li>
+<li>
+<a href="index.cfm?task=league_dashboard">Dashboard</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=formguide" class="dcjq-parent">Form <span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=form_basic">Basic Form</a>
+</li>
+<li>
+<a href="index.cfm?task=form_advanced">Advanced Form</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=games" class="dcjq-parent">The Game <span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=games_list">List</a>
+</li>
+<li>
+<a href="index.cfm?task=games_grid">Grid</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=teams" class="dcjq-parent">Teams <span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=team_results">Results</a>
+</li>
+<li>
+<a href="index.cfm?task=team_progress">Progress</a>
+</li>
+<li>
+<a href="index.cfm?task=team_dashboard">Dashboard</a>
+</li>
+<li>
+<a href="index.cfm?task=headtohead">Head to Head</a>
+</li>
+</ul></li>
+<li>
+<a href="index.cfm?task=referees">Refs</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=forecasts" class="dcjq-parent">Predict <span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">English Games <i class="icon-angle-down"></i><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=forecast_premier">Premiership</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_championship">Championship</a>
+</li>
+</ul></li>
+<li>
+<a href="index.cfm?task=forecast_games">All Games</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_simulation">League Simulation</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_model">Results Model</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_adhoc">Long Term Analysis</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">World <i class="icon-angle-down"></i><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=world_league">League</a>
+</li>
+<li>
+<a href="index.cfm?task=world_form">Form</a>
+</li>
+<li>
+<a href="index.cfm?task=world_games">The Game</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">Teams <i class="icon-angle-down"></i><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=world_team_results">Results</a>
+</li>
+<li>
+<a href="index.cfm?task=world_headtohead">Head to Head</a>
+</li>
+</ul></li></ul></li>
+</ul>
+</nav>
+</div>
+<!-- /nav-wrapper -->
+<!-- ____________ LOGO _______________ -->
+<div class="logo-wrapper clearfix">
+<a href="#" class="clearfix">
+<img src="images/footstats_logo.png" alt="footstats" name="logo" id="logo">
+</a>
+<span><!--logo embelishment --></span>
+</div>
+<!-- /logo-wrapper clearfix -->
+<!-- ____________ SUB BAR _______________ -->
+<ul class="sub-bar clearfix">
+<!-- tagline hides at 767px -->
+<li class="tagline sb-right hidden-xs">Now incorporating <img src="images/eurostats_logo.png" alt="">
+<img src="images/2.gif" width="24" height="24" alt="English and Scottish Premiership, Championship, League One, Two and Conference Statistics" title="English and Scottish Premiership, Championship, League One, Two and Conference Statistics">
+<img src="images/9.gif" width="24" height="24" alt="German Bundesliga" title="German Bundesliga">
+<img src="images/6.gif" width="24" height="24" alt="Italian Serie A and B" title="Italian Serie A and B">
+<img src="images/8.gif" width="24" height="24" alt="Spanish La Liga" title="Spanish La Liga">
+<img src="images/4.gif" width="24" height="24" alt="French Le Championnat" title="French Le Championnat">
+<img src="images/27.gif" width="24" height="24" alt="Dutch KPN Eredivisie" title="Dutch KPN Eredivisie">
+<img src="images/34.gif" width="24" height="24" alt="Belgian Jupiler League" title="Belgian Jupiler League">
+<img src="images/30.gif" width="24" height="24" alt="Portugal Liga I " title="Portugal Liga I ">
+<img src="images/51.gif" width="24" height="24" alt="Turkish Ligi 1 " title="Turkish Ligi 1 ">
+<img src="images/14.gif" width="24" height="24" alt="Greek Ethniki Katigoria" title="Greek Ethniki Katigoria">
+</li>
+<li class="visible-xs sb-left"><a href="index.cfm?task=contactus"><i class="fa fa-envelope-o fw"></i> Contact</a></li>
+<li class="visible-xs sb-left"><a href="index.cfm?task=links"><i class="fa fa-envelope-o fw"></i> Links</a></li>
+<li class="visible-xs sb-left"><a href="index.cfm?task=grounds"><i class="fa fa-envelope-o fw"></i> Get to the Ground</a></li>
+</ul>
+<!-- /sub-bar -->
+</header>
+<!-- /header -->
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<h2 class="h1 font-weight-normal no-margin-top display-text">Full </h2>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+</div>
+</div>
+<script language="JavaScript" type="text/javascript" src="/lucee/formtag-form.cfm"></script><script language="JavaScript" type="text/javascript">
+function _CF_checkleagueForm() { return lucee_form_1i4u5.check();}
+</script><form onsubmit="return lucee_form_1i4u5.check();" name="leagueForm" action="/index.cfm?task=league_full" method="post">
+<div class="row hidden-print options">
+<div class="col-sm-4">
+<div class="form-group">
+<label for="name">League:</label>
+<select name="league" id="league">
+<option value="E0">English Premier</option>
+<option value="E1">English Championship</option>
+<option value="E2">English League One</option>
+<option value="E3">English League Two</option>
+<option value="EC">National League</option>
+<option value="SC0">Scottish Premiership</option>
+<option value="SC1">Scottish Championship</option>
+<option value="SC2">Scottish League One</option>
+<option value="SC3">Scottish League Two</option>
+<option value="D1">German Bundesliga 1</option>
+<option value="D2">German Bundesliga 2</option>
+<option value="I1">Italian Serie A</option>
+<option value="I2">Italian Serie B</option>
+<option value="SP1">Spanish La Liga 1</option>
+<option value="SP2">Spanish La Liga 2</option>
+<option value="F1">French Le Championnat</option>
+<option value="F2">French Division 2</option>
+<option value="N1" selected="">Dutch KPN Eredivisie</option>
+<option value="B1">Belgian Jupiler League</option>
+<option value="P1">Portugal Liga I</option>
+<option value="T1">Turkish Ligi 1</option>
+<option value="G1">Greek Ethniki Katigoria</option>
+</select>
+</div>
+<div class="form-group">
+<label for="name">Venue:</label>
+<select name="venue">
+<option value="T" selected="">All</option>
+<option value="H">Home</option>
+<option value="A">Away</option>
+</select>
+</div>
+</div>
+<div class="col-sm-3">
+</div>
+<div class="col-sm-3">
+<div class="form-group">
+<label for="name">Season:</label>
+<select name="season" id="season">
+<option value="14/02/2021">2020/2021</option>
+<option value="31/07/2020">2019/2020</option>
+<option value="31/07/2019">2018/2019</option>
+<option value="31/07/2018">2017/2018</option>
+<option value="31/07/2017">2016/2017</option>
+<option value="31/07/2016">2015/2016</option>
+<option value="31/07/2015" selected="">2014/2015</option>
+<option value="31/07/2014">2013/2014</option>
+<option value="31/07/2013">2012/2013</option>
+<option value="31/07/2012">2011/2012</option>
+<option value="31/07/2011">2010/2011</option>
+<option value="31/07/2010">2009/2010</option>
+<option value="31/07/2009">2008/2009</option>
+<option value="31/07/2008">2007/2008</option>
+<option value="31/07/2007">2006/2007</option>
+<option value="31/07/2006">2005/2006</option>
+<option value="31/07/2005">2004/2005</option>
+<option value="31/07/2004">2003/2004</option>
+<option value="31/07/2003">2002/2003</option>
+<option value="31/07/2002">2001/2002</option>
+<option value="31/07/2001">2000/2001</option>
+</select>
+</div>
+<div class="form-group">
+<label for="dateproposal">Date:</label>
+<div class="input-group date" id="datetimepicker1">
+<input type="text" class="form-control" name="thisdate" id="thisdate" value="26/09/2014" placeholder="Enter Date" title="Please enter the date of interest">
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span>
+</div>
+</div>
+</div>
+<div class="col-sm-2">
+<input name="go" type="submit" value="Go!">
+<br><br>
+<strong>Don't forget to press the <span style="color:#ff0000">Go!</span> button above!</strong>
+</div>
+<div class="col-sm-12 ">
+<div class="alert alert-success">
+<b>Help on using the table</b>
+<p>Remember all tables can be sorted by individual columns by just clicking on them.</p>
+</div>
+</div>
+</div>
+</form><!-- name:leagueForm --><script>
+lucee_form_1i4u5=new LuceeForms('leagueForm',null);
+</script>
+<div class="row">
+<div class="col-lg-12">
+<div id="sleague_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="sleague" class="table table-condensed table-bordered dataTable" role="grid">
+<caption><h3>League Tables - Dutch KPN Eredivisie - All - 2014/2015</h3></caption>
+<thead>
+<tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Position: activate to sort column descending" style="width: 155px;">Position</th><th class="sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="Team: activate to sort column ascending" style="width: 252px;">Team</th><th class="sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="Played: activate to sort column ascending" style="width: 132px;">Played</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="W: activate to sort column ascending" style="width: 52px;">W</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="D: activate to sort column ascending" style="width: 48px;">D</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="L: activate to sort column ascending" style="width: 40px;">L</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="F: activate to sort column ascending" style="width: 42px;">F</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="A: activate to sort column ascending" style="width: 43px;">A</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="GD: activate to sort column ascending" style="width: 69px;">GD</th><th class="text-right sorting" tabindex="0" aria-controls="sleague" rowspan="1" colspan="1" aria-label="Pts: activate to sort column ascending" style="width: 76px;">Pts</th></tr>
+</thead>
+<tfoot>
+<tr><td colspan="10" rowspan="1">
+<b>Notes:</b><br>
+</td></tr>
+
+
+</tfoot>
+<tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr role="row" class="odd">
+<td class="sorting_1">1</td>
+<td>PSV Eindhoven</td>
+<td>6</td>
+<td class="text-right">5</td>
+<td class="text-right">0</td>
+<td class="text-right">1</td>
+<td class="text-right">19</td>
+<td class="text-right">6</td>
+<td class="text-right">13</td>
+<td class="text-right">15</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">2</td>
+<td>Ajax</td>
+<td>6</td>
+<td class="text-right">4</td>
+<td class="text-right">0</td>
+<td class="text-right">2</td>
+<td class="text-right">11</td>
+<td class="text-right">8</td>
+<td class="text-right">3</td>
+<td class="text-right">12</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">3</td>
+<td>Zwolle</td>
+<td>6</td>
+<td class="text-right">4</td>
+<td class="text-right">0</td>
+<td class="text-right">2</td>
+<td class="text-right">10</td>
+<td class="text-right">7</td>
+<td class="text-right">3</td>
+<td class="text-right">12</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">4</td>
+<td>Heerenveen</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">2</td>
+<td class="text-right">1</td>
+<td class="text-right">9</td>
+<td class="text-right">5</td>
+<td class="text-right">4</td>
+<td class="text-right">11</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">5</td>
+<td>Cambuur</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">2</td>
+<td class="text-right">1</td>
+<td class="text-right">10</td>
+<td class="text-right">9</td>
+<td class="text-right">1</td>
+<td class="text-right">11</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">6</td>
+<td>Twente</td>
+<td>6</td>
+<td class="text-right">2</td>
+<td class="text-right">4</td>
+<td class="text-right">0</td>
+<td class="text-right">10</td>
+<td class="text-right">6</td>
+<td class="text-right">4</td>
+<td class="text-right">10</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">7</td>
+<td>Utrecht</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">1</td>
+<td class="text-right">2</td>
+<td class="text-right">6</td>
+<td class="text-right">7</td>
+<td class="text-right">-1</td>
+<td class="text-right">10</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">8</td>
+<td>Willem II</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">0</td>
+<td class="text-right">3</td>
+<td class="text-right">9</td>
+<td class="text-right">8</td>
+<td class="text-right">1</td>
+<td class="text-right">9</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">9</td>
+<td>AZ Alkmaar</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">0</td>
+<td class="text-right">3</td>
+<td class="text-right">8</td>
+<td class="text-right">8</td>
+<td class="text-right">0</td>
+<td class="text-right">9</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">10</td>
+<td>Groningen</td>
+<td>6</td>
+<td class="text-right">3</td>
+<td class="text-right">0</td>
+<td class="text-right">3</td>
+<td class="text-right">8</td>
+<td class="text-right">10</td>
+<td class="text-right">-2</td>
+<td class="text-right">9</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">11</td>
+<td>Excelsior</td>
+<td>6</td>
+<td class="text-right">2</td>
+<td class="text-right">2</td>
+<td class="text-right">2</td>
+<td class="text-right">9</td>
+<td class="text-right">10</td>
+<td class="text-right">-1</td>
+<td class="text-right">8</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">12</td>
+<td>NAC Breda</td>
+<td>6</td>
+<td class="text-right">2</td>
+<td class="text-right">2</td>
+<td class="text-right">2</td>
+<td class="text-right">8</td>
+<td class="text-right">11</td>
+<td class="text-right">-3</td>
+<td class="text-right">8</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">13</td>
+<td>Den Haag</td>
+<td>6</td>
+<td class="text-right">1</td>
+<td class="text-right">3</td>
+<td class="text-right">2</td>
+<td class="text-right">8</td>
+<td class="text-right">7</td>
+<td class="text-right">1</td>
+<td class="text-right">6</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">14</td>
+<td>Go Ahead Eagles</td>
+<td>6</td>
+<td class="text-right">1</td>
+<td class="text-right">2</td>
+<td class="text-right">3</td>
+<td class="text-right">7</td>
+<td class="text-right">9</td>
+<td class="text-right">-2</td>
+<td class="text-right">5</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">15</td>
+<td>Feyenoord</td>
+<td>6</td>
+<td class="text-right">1</td>
+<td class="text-right">2</td>
+<td class="text-right">3</td>
+<td class="text-right">4</td>
+<td class="text-right">6</td>
+<td class="text-right">-2</td>
+<td class="text-right">5</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">16</td>
+<td>Dordrecht</td>
+<td>6</td>
+<td class="text-right">1</td>
+<td class="text-right">2</td>
+<td class="text-right">3</td>
+<td class="text-right">5</td>
+<td class="text-right">8</td>
+<td class="text-right">-3</td>
+<td class="text-right">5</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">17</td>
+<td>Vitesse</td>
+<td>6</td>
+<td class="text-right">1</td>
+<td class="text-right">2</td>
+<td class="text-right">3</td>
+<td class="text-right">8</td>
+<td class="text-right">12</td>
+<td class="text-right">-4</td>
+<td class="text-right">5</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">18</td>
+<td>Heracles</td>
+<td>6</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">6</td>
+<td class="text-right">4</td>
+<td class="text-right">16</td>
+<td class="text-right">-12</td>
+<td class="text-right">0</td>
+</tr></tbody>
+</table></div></div><div class="row"><div class="col-sm-5"></div><div class="col-sm-7"></div></div></div>
+<p><button id="btn-export" class="btn btn-success pull-right">Export to Excel</button></p>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+</div>
+<!-- /#site-wrapper -->
+<!-- ______________ BEGIN FOOTER ______________ -->
+<!-- footer uses a jquery script on the columns to make them responsive equal heights -->
+<!-- THIS USES CUSTOM COLUMNS -->
+<footer class="footer clearfix hidden-print" id="footer">
+<hr class="no-padding-bottom">
+<div class="container-fluid">
+<p class="small margin-top-bottom-20px text-center text-right-min-width-768px">
+<a href="index.cfm?task=home">Welcome</a> |
+<a href="index.cfm?task=leagues">Tables</a> |
+<a href="index.cfm?task=formguide">Form </a> |
+<a href="index.cfm?task=games">The Game</a> |
+<a href="index.cfm?task=teams">Teams</a> |
+<a href="index.cfm?task=referees">Refs</a> |
+<a href="index.cfm?task=forecasts">Predict</a> |
+<a href="index.cfm?task=world_stuff">World</a> |
+<a href="http://www.footweb.co.uk" target="_new"><img src="images/footweb_logo_small_trans.gif" alt="Powered by FootWeb " title="Powered by FootWeb"></a> © 2021
+<br>Source: <a href="http://www.football-data.co.uk" target="_new">football-data.co.uk</a>
+</p>
+</div>
+</footer>
+<!-- ______________ END FOOTER ______________ -->
+<!--scroll-menu the primary-nav clones here -->
+<div id="scroll-menu" title="menu" style="display: none;">
+<a href="#" class="scroll-menu-toggle"><i class="fa fa-bars"></i></a>
+<div id="menu-clone"><ul class="scroll-nav">
+<li>
+<a href="index.cfm?task=home">Welcome</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=leagues" class="dcjq-parent">Tables <span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li class="active">
+<a href="index.cfm?task=league_full">Full </a>
+</li>
+<li>
+<a href="index.cfm?task=league_fouls">Fouls</a>
+</li>
+<li>
+<a href="index.cfm?task=league_corners">Corners</a>
+</li>
+<li>
+<a href="index.cfm?task=league_goals">Goals</a>
+</li>
+<li>
+<a href="index.cfm?task=league_shots">Shots per Game</a>
+</li>
+<li>
+<a href="index.cfm?task=league_shots_perc">Shots %</a>
+</li>
+<li>
+<a href="index.cfm?task=league_cards">Cards</a>
+</li>
+<li>
+<a href="index.cfm?task=league_other">Other Definitions</a>
+</li>
+<li>
+<a href="index.cfm?task=league_dashboard">Dashboard</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=formguide" class="dcjq-parent">Form <span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=form_basic">Basic Form</a>
+</li>
+<li>
+<a href="index.cfm?task=form_advanced">Advanced Form</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=games" class="dcjq-parent">The Game <span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=games_list">List</a>
+</li>
+<li>
+<a href="index.cfm?task=games_grid">Grid</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=teams" class="dcjq-parent">Teams <span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=team_results">Results</a>
+</li>
+<li>
+<a href="index.cfm?task=team_progress">Progress</a>
+</li>
+<li>
+<a href="index.cfm?task=team_dashboard">Dashboard</a>
+</li>
+<li>
+<a href="index.cfm?task=headtohead">Head to Head</a>
+</li>
+</ul></li>
+<li>
+<a href="index.cfm?task=referees">Refs</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="index.cfm?task=forecasts" class="dcjq-parent">Predict <span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">English Games <i class="icon-angle-down"></i><span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=forecast_premier">Premiership</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_championship">Championship</a>
+</li>
+</ul></li>
+<li>
+<a href="index.cfm?task=forecast_games">All Games</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_simulation">League Simulation</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_model">Results Model</a>
+</li>
+<li>
+<a href="index.cfm?task=forecast_adhoc">Long Term Analysis</a>
+</li>
+</ul></li>
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">World <i class="icon-angle-down"></i><span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=world_league">League</a>
+</li>
+<li>
+<a href="index.cfm?task=world_form">Form</a>
+</li>
+<li>
+<a href="index.cfm?task=world_games">The Game</a>
+</li>
+<li class="has-children dcjq-parent-li">
+<a href="#" class="dcjq-parent">Teams <i class="icon-angle-down"></i><span class="dcjq-icon"></span><span class="dcjq-icon"></span></a>
+<ul style="display: none;">
+<li>
+<a href="index.cfm?task=world_team_results">Results</a>
+</li>
+<li>
+<a href="index.cfm?task=world_headtohead">Head to Head</a>
+</li>
+</ul></li></ul></li>
+</ul></div>
+</div>
+<!--to top -->
+<div id="toTop" title="up" style="display: none;">
+<i class="fa fa-arrow-circle-o-up"></i>
+</div>
+</div> <!-- /.page-container -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-2095092-8', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="headcontent/footstats/js/bootstrap.min.js"></script>
+<script src="headcontent/footstats/js/jquery.different_base.js"></script>
+<!-- Way Better Bootstrap Modals INSTRUCTIONS: https://github.com/jschr/bootstrap-modal/ -->
+<!-- DEMO:: http://jschr.github.io/bootstrap-modal/bs3.html -->
+<script src="headcontent/footstats/js/bootstrap-modalmanager.js"></script>
+<script src="headcontent/footstats/js/bootstrap-modal.js"></script>
+<!-- form -->
+<script type="text/javascript" src="headcontent/footstats/js-plugin/neko-contact-ajax-plugin/js/jquery.form.js"></script>
+<script type="text/javascript" src="headcontent/footstats/js-plugin/neko-contact-ajax-plugin/js/jquery.validate.min.js"></script>
+<script src="headcontent/footstats/js/contact.js"></script>
+<script src="headcontent/footstats/js/destroy-modal.js"></script>
+<!-- Datatables inserts -->
+<script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.8/js/dataTables.bootstrap.min.js"></script>
+<script src="headcontent/footstats/js/jquery.table2excel.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('.carousel').carousel({
+interval: 8000
+})
+});
+</script>
+<script type="text/javascript">
+$(function () {
+$('#datetimepicker1').datetimepicker({
+format: 'DD/MM/YYYY'
+});
+});
+</script>
+<script>
+$(document).ready(function(){
+$( "#season" ).change(function() {
+var ww = $( "#season" ).val();
+/*alert(ww);*/
+$( "#thisdate" ).val(ww);
+});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('#games').dataTable(
+{"order": [[ 0, 'desc' ]],
+"pageLength": 50,
+aLengthMenu: [
+[25, 50, 100, 200, -1],
+[25, 50, 100, 200, "All"]
+]
+}
+);
+} );
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('#sleague').dataTable(
+{
+"paging": false,
+"ordering": true,
+"info": false,
+"filter": false
+}
+);
+} );
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('#pleague').dataTable(
+{
+"order": [[ 0, 'desc' ]],
+"paging": false,
+"ordering": true,
+"info": false,
+"filter": false
+}
+);
+} );
+</script>
+<script>
+$(function() {
+$("#btn-export").click(function(){
+$("#sleague").table2excel({
+exclude: ".noExl",
+name: "League Table"
+});
+});
+});
+</script>
+<script>
+$(function() {
+$("#btn-export").click(function(){
+$("#games").table2excel({
+exclude: ".noExl",
+name: "Games"
+});
+});
+});
+</script>
+<script>
+var geocoder;
+var map;
+var marker;
+var directionDisplay;
+var directionsService = new google.maps.DirectionsService();
+function initialize() {
+geocoder = new google.maps.Geocoder();
+directionsDisplay = new google.maps.DirectionsRenderer();
+var mapOptions = {
+zoom: 14,
+mapTypeId: google.maps.MapTypeId.ROADMAP,
+center: new google.maps.LatLng(51.511214, -0.119824)
+};
+map = new google.maps.Map(document.getElementById('map-canvas'),
+mapOptions);
+directionsDisplay.setMap(map);
+directionsDisplay.setPanel(document.getElementById('directions-panel'));
+}
+function calcRoute(start,end) {
+var request = {
+origin: start,
+destination: end,
+travelMode: google.maps.DirectionsTravelMode.DRIVING
+};
+directionsService.route(request, function(response, status) {
+if (status == google.maps.DirectionsStatus.OK) {
+directionsDisplay.setDirections(response);
+}
+});
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+$(document).ready(function($) {
+var list_target_id = 'TeamName'; //first select list ID
+var list_select_id = 'league'; //second select list ID
+var list_season_id = 'season'; //third select list ID
+/*
+var initial_target_html = '<option value="">Please select a team...</option>'; //Initial prompt for target select
+$('#'+list_target_id).html(initial_target_html); //Give the target select the prompt option
+*/
+$('#'+list_select_id).change(function(e) {
+//Grab the chosen value on first select list change
+var selectvalue = $(this).val();
+var othervalue = $('#'+list_season_id).val();
+if (othervalue === undefined) {
+othervalue = "";
+}
+//Display 'loading' status in the target select list
+$('#'+list_target_id).html('<option value="">Loading...</option>');
+if (selectvalue == "") {
+//Display initial prompt in target select if blank value selected
+$('#'+list_target_id).html(initial_target_html);
+} else {
+//Make AJAX request, using the selected value as the GET
+$.ajax({url: 'football/_getteams.cfm?league='+selectvalue+'&season='+othervalue,
+success: function(output) {
+//alert(output);
+$('#'+list_target_id).html(output);
+},
+error: function (xhr, ajaxOptions, thrownError) {
+alert(xhr.status + " "+ thrownError);
+}});
+}
+});
+$('#'+list_season_id).change(function(e) {
+//Grab the chosen value on first select list change
+var selectvalue = $(this).val();
+var othervalue = $('#'+list_select_id).val();
+//Display 'loading' status in the target select list
+$('#'+list_target_id).html('<option value="">Loading...</option>');
+if (selectvalue == "") {
+//Display initial prompt in target select if blank value selected
+$('#'+list_target_id).html(initial_target_html);
+} else {
+//Make AJAX request, using the selected value as the GET
+$.ajax({url: 'football/_getteams.cfm?league='+othervalue+'&season='+selectvalue,
+success: function(output) {
+//alert(output);
+$('#'+list_target_id).html(output);
+},
+error: function (xhr, ajaxOptions, thrownError) {
+alert(xhr.status + " "+ thrownError);
+}});
+}
+});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function($) {
+var list_target_id = 'to'; //first select list ID
+var list_select_id = 'league'; //second select list ID
+/*
+var initial_target_html = '<option value="">Please select a team...</option>'; //Initial prompt for target select
+$('#'+list_target_id).html(initial_target_html); //Give the target select the prompt option
+*/
+$('#'+list_select_id).change(function(e) {
+//Grab the chosen value on first select list change
+var selectvalue = $(this).val();
+//Display 'loading' status in the target select list
+$('#'+list_target_id).html('<option value="">Loading...</option>');
+if (selectvalue == "") {
+//Display initial prompt in target select if blank value selected
+$('#'+list_target_id).html(initial_target_html);
+} else {
+//Make AJAX request, using the selected value as the GET
+$.ajax({url: 'football/_getteampostcode.cfm?league='+selectvalue,
+success: function(output) {
+//alert(output);
+$('#'+list_target_id).html(output);
+},
+error: function (xhr, ajaxOptions, thrownError) {
+alert(xhr.status + " "+ thrownError);
+}});
+}
+});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function($) {
+var list_target_id = 'otherTeamName'; //first select list ID
+var list_select_id = 'otherleague'; //second select list ID
+/*
+var initial_target_html = '<option value="">Please select a team...</option>'; //Initial prompt for target select
+$('#'+list_target_id).html(initial_target_html); //Give the target select the prompt option
+*/
+$('#'+list_select_id).change(function(e) {
+//Grab the chosen value on first select list change
+var selectvalue = $(this).val();
+//Display 'loading' status in the target select list
+$('#'+list_target_id).html('<option value="">Loading...</option>');
+if (selectvalue == "") {
+//Display initial prompt in target select if blank value selected
+$('#'+list_target_id).html(initial_target_html);
+} else {
+//Make AJAX request, using the selected value as the GET
+$.ajax({url: 'football/_getteams.cfm?league='+selectvalue,
+success: function(output) {
+//alert(output);
+$('#'+list_target_id).html(output);
+},
+error: function (xhr, ajaxOptions, thrownError) {
+alert(xhr.status + " "+ thrownError);
+}});
+}
+});
+});
+</script>
+<div id="photos-modal" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-body"></div>
+</div>
+<div id="events-modal" class="modal fade user-modal" tabindex="-1" data-width="760" style="display: none;">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+</div>
+<!-- /.modal-body-->
+</div>
+<!-- /.modal #myModal -->
+<div id="places-modal" class="modal fade user-modal" tabindex="-1" data-width="760" style="display: none;">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+<div class="row">
+</div>
+<!-- /.row-->
+</div>
+<!-- /.modal-body-->
+</div>
+<!-- /.modal #places-modal -->
+<script>
+$(document).ready(function() {
+$('#contactForm')
+.bootstrapValidator({
+message: 'This value is not valid',
+feedbackIcons: {
+valid: 'glyphicon glyphicon-ok',
+invalid: 'glyphicon glyphicon-remove',
+validating: 'glyphicon glyphicon-refresh'
+},
+fields: {
+contactname: {
+validators: {
+notEmpty: {
+message: 'The name is required'
+}
+}
+},
+email: {
+validators: {
+notEmpty: {
+message: 'The email is required'
+},
+emailAddress: {
+message: 'The value is not a valid email address'
+}
+}
+},
+yourmessage: {
+validators: {
+notEmpty: {
+message: 'The message is required'
+}
+}
+}
+}
+})
+.on('success.form.bv', function(e) {
+// Prevent form submission
+e.preventDefault();
+// Get the form instance
+var $form = $(e.target);
+// Get the BootstrapValidator instance
+var bv = $form.data('bootstrapValidator');
+// Use Ajax to submit form data
+$.post('utilities/_ajaxsendmessage.cfm', $form.serialize(), function(result) {
+$('#contactResult').html(result);
+}, 'html');
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#newsSubscribeForm')
+.bootstrapValidator({
+message: 'This value is not valid',
+feedbackIcons: {
+valid: 'glyphicon glyphicon-ok',
+invalid: 'glyphicon glyphicon-remove',
+validating: 'glyphicon glyphicon-refresh'
+},
+fields: {
+email: {
+validators: {
+notEmpty: {
+message: 'The email is required'
+},
+emailAddress: {
+message: 'The value is not a valid email address'
+}
+}
+}
+}
+})
+.on('success.form.bv', function(e) {
+// Prevent form submission
+e.preventDefault();
+// Get the form instance
+var $form = $(e.target);
+// Get the BootstrapValidator instance
+var bv = $form.data('bootstrapValidator');
+// Use Ajax to submit form data
+$.post('utilities/_ajaxsubscribe.cfm', $form.serialize(), function(result) {
+$('#newsSubscribeResult').html(result);
+}, 'html');
+});
+});
+</script>
+
+</body></html>

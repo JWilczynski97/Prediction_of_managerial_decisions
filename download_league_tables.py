@@ -112,6 +112,18 @@ def create_table(db, table_name):
     db.commit()
 
 
+def cookies_accept():
+    """Function to click the 'cookies accept' button on the page if they exist."""
+    try:
+        cookies_button = browser.find_element_by_xpath('/html/body/div[4]/div[2]/div[1]/div[2]/div[2]/button[1]/p')
+        is_element_clickable(cookies_button)
+        cookies_button.click()
+    except NoSuchElementException:
+        pass
+    else:
+        wait(1, 2) # time sleep generator
+       
+
 def download_russia_websites(seas):
     for week in list(range(1, 24)):
         html_file = f"{FOLDER}\\{seas.replace('/', '_')}\\Russia\\Russia_{seas.replace('/', '_')}_week_{str(week)}.html"
@@ -123,28 +135,37 @@ def download_russia_websites(seas):
         log.write(f"Launching the website in address {link}...")
         browser.get(link)
         wait(2, 3)
-        if week == 1:
-            browser.find_element_by_xpath('/html/body/div[4]/div[2]/div[1]/div[2]/div[2]/button[1]/p').click()
-            log.write("Cookies button on worldfootball.net clicked.")
-            wait(3, 5)
+        cookies_accept()
         save_file(browser.page_source, html_file)
 
 
 def save_russia_data_into_db(db, sea):
+
     for w in list(range(1, 24)):
-        with open(f"League_tables\\{sea.replace('/', '_')}\\Russia_{sea.replace('/', '_')}_week_{w}", "r",
+        with open(f"League_tables\\{sea.replace('/', '_')}\\Russia\\Russia_{sea.replace('/', '_')}_week_{w}.html", "r",
                   encoding="UTF-8") as f:
             soup = BeautifulSoup(f.read(), 'html.parser')
             table_matches = soup.find_all("table", class_="standard_tabelle")[0].find("tbody")
             term = [element.find("td").string for element in table_matches.find_all("tr")][0]
             assert len(term) == 10
             day, month, year = term.split("/")
-            day = f"{year}-{month}-{day}"
-            table = f"Russia_{sea.replace('/', '_')}_day_{day.replace('-','_')}"
+            match_day = f"{year}-{month}-{day}"
+            table = f"Russia_{sea.replace('/', '_')}_day_{match_day.replace('-','_')}"
             create_table(db, table)
+            if len(db.select(table)) > 10:
+                continue
             table_league = soup.find_all("table", class_="standard_tabelle")[1].find("tbody")
             rows = table_league.find_all("tr")[1:]
-            assert len(rows) == 10
+            assert len(rows) == 16
+            print(day, month, year)
+            if w == 1:
+                before_season = str(datetime.date(int(year), int(month), int(day)) - datetime.timedelta(days=2))
+                tab = f"Russia_{sea.replace('/', '_')}_day_{str(before_season).replace('-','_')}"
+                create_table(db, tab)
+                for team in rows:
+                    position = rows.index(team) + 1
+                    name = team.find_all("td")[2].find("a")['title']
+                    db.insert(tab, True, position, name, 0, 0, 0, 0, 0, 0, 0, 0)
             for row in rows:
                 data = row.find_all("td")
                 position = rows.index(row) + 1
@@ -152,7 +173,9 @@ def save_russia_data_into_db(db, sea):
                 games = [int(num.string) for num in data[3:7]]
                 scored, conceded = data[7].string.split(":")
                 db.insert(table, True, position, name, 0, games[0], games[1], games[2],
-                          games[3], scored, conceded, data[8].string)
+                          games[3], scored, conceded, data[9].string)
+                if not db.is_element_in_db("League_Teams", Team_name=name):
+                    db.insert("League_Teams", True, name, 0, 'Russia')
             log.write(f"The data about league table in Russia in the season {sea} and week {w} saved into the db.")
 
 
@@ -205,9 +228,10 @@ def save_data_into_db(db, edition, competition):
             for row in rows:
                 data = [element.string for element in row.find_all("td")]
                 db.insert(table, True, data[0], data[1], 0, data[2], data[3], data[4], data[5], data[6], data[7], data[9])
-        if len(db.select(table)) < NUM_TEAMS[competition]:  # Warning: in a few tables can be missing data (no names of teams with 0 matches).
-            for _ in range(0, NUM_TEAMS[competition] - len(db.select(table))):
-                db.insert(table, True, 0, '', 0, 0, 0, 0, 0, 0, 0, 0)
+                if not db.is_element_in_db("League_Teams", Team_name=data[1]):
+                    db.insert("League_Teams", True, data[1], 0, competition)
+        while len(db.select(table)) < NUM_TEAMS[competition]:  # Warning: in a few tables can be missing data (no names of teams with 0 matches).
+            db.insert(table, True, 0, '', 0, 0, 0, 0, 0, 0, 0, 0)
         log.write(f"The data about league table in {competition} in the season {edition} from day {new_date} saved into the db.")
 
 
