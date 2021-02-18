@@ -1,6 +1,5 @@
 # Copyright (c) Jakub Wilczyński 2020
-# Module with key classes in the project.
-# classes: Player, Match, Team, Performance
+# classes: Match, PrevMatch, Team, Performance, PrevPerformance, Incident, Position
 
 from tools import Database, Logger
 
@@ -11,34 +10,12 @@ from bs4 import BeautifulSoup
 import sqlite3
 from unidecode import unidecode
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.expected_conditions import element_to_be_clickable
-from selenium.common.exceptions import NoSuchElementException
-
-###### WEBDRIVER OPTIONS #####
-options = Options()
-options.add_argument('start-maximized')  # maximize of the browser window
-options.add_experimental_option("excludeSwitches",
-                                ['enable-automation'])  # process without information about the automatic test
-options.add_argument("chrome.switches")
-options.add_argument("--disable-extensions")
-""" browser = webdriver.Chrome(executable_path='Chromedriver\chromedriver.exe', options=options)
- browser.get(self.link)
- sleep(uniform(2,3))
- try:
-     more_options_cookies_button = browser.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
-     is_element_clickable(more_options_cookies_button)
-     more_options_cookies_button.click()
- except NoSuchElementException:
-     pass
- sleep(uniform(2, 3)) """
-
 ALL_SEASONS = ['2010/2011', '2011/2012', '2012/2013', '2013/2014', '2014/2015',
                '2015/2016', '2016/2017', '2017/2018', '2018/2019', '2019/2020']
 logger = Logger(log_folder=r"Logs/save_performances_data_to_db", std_output=True)
 database = Database("Matches_DB_copy.db", logger)
-league_db = Database("League_Tables.db", logger)
+league_tables = Database("League_Tables.db", logger)
+
 
 class Match:
     matches = dict()
@@ -151,6 +128,7 @@ class Match:
         if league_name == 'Portugal' and ucl_season in ALL_SEASONS[-4:]:  # Portugal - from 2016/2017
             return True
         return False
+
 
 class PrevMatch:
     prev_matches = dict()
@@ -273,12 +251,18 @@ class PrevMatch:
         return score_home, score_away
 
     def get_league_data(self):
-        table = f"{self.league}_{self.season}_week_{self.week}"
+        tables = [x['name'] for x in league_tables.select("sqlite_master", type="table")
+                  if f"{self.league}_{self.season.replace('/', '_')}_day_" in x['name']]
+        dates = [tab.split("_day_")[-1] for tab in tables].append(self.date.replace("-", "_"))
+        dates = dates.sort()
+        idx = dates.index(self.date.replace("-", "_"))
+        table = f"{self.league}_{self.season.replace('/', '_')}_day_{dates[idx-1]}"
         team = league_db.select(table, Team_ID=self.team.whoscored_id)[0]
-        rival = league_db.select(table, Team_ID=rival_id)[0]
+        rival = league_db.select(table, Team_ID=self.rival)[0]
         best_team = list(sorted(league_db.select(table), key=lambda x: x["Points"]))[-1]
         difference = team["Points"] - best_team["Points"]
-        ratio = round(team["Points"]/rival["Points"], 3) if rival["Points"] != 0 else 5.000
+        ratio = round((team["Points"]/team["Matches"])/(rival["Points"]/rival["Matches"]), 3) \
+            if 0 not in (rival["Points"], rival["Matches"]) else 5.000
         return {"team position": team["Position"], "rival position": rival["Position"],
                 "team points": team["Points"], "rival points": rival["Points"],
                 "difference": difference, "ratio": ratio}
@@ -579,7 +563,9 @@ class Performance:
         self.feature_starting_in_prev_matches()
         self.season_minutes, self.season_percentage, self.last_minutes, self.last_percentage = self.feature_minutes()
         self.in_team_news = 1 if self.name in self.team.team_news or unidecode(self.name) in self.team.team_news else 0
-        self.features_league_table()
+        self.features_league_tables()
+        self.feature_missing_in_prev_matches()
+        self.feature_ratings_in_prev_matches()
 
         # saving all data about this performance into database
         self.save_performance_data_into_db()
@@ -641,7 +627,8 @@ class Performance:
                             self.predicted, self.starting, self.bench_no_sub, self.substitute, self.missing,
                             self.prev_1_start, self.prev_2_start, self.prev_3_start, self.prev_4_start, self.prev_5_start,
                             self.prev_1_missing, self.prev_2_missing, self.prev_3_missing, self.prev_4_missing,
-                            self.prev_5_missing, self.season_percentage, self.in_team_news)
+                            self.prev_5_missing, self.prev_1_rating, self.prev_2_rating, self.prev_3_rating, 
+                            self.prev_4_rating, self.prev_5_rating, self.season_percentage, self.in_team_news)
 
     def is_missing(self):
         status = ''
@@ -706,10 +693,18 @@ class Performance:
         return (season_player_minutes, round(season_player_minutes/season_matches_minutes, 3),
                 last_player_minutes, round(last_player_minutes/last_matches_minutes, 3))
 
-    def features_league_table(self):
+    def features_league_tables(self):
         for num, prev_performance in self.prev_performances.items():
             exec(f"self.prev_{num}_diff_points = prev_performance.prev_match.league_diff")
             exec(f"self.prev_{num}_ratio_points = prev_performance.prev_match.ratio_points")
+
+    def feature_missing_in_prev_matches(self):
+        for num, prev_performance in self.prev_performances.items():
+            exec(f"self.prev_{num}_missing = prev_performance.prev_match['Missing']")
+
+    def feature_ratings_in_prev_matches(self):
+        for num, prev_performance in self.prev_performances.items():
+            exec(f"self.prev_{num}_rating = prev_performance['Rating']")
 
 
 class Prev_Performance:
@@ -739,10 +734,11 @@ class Prev_Performance:
         self.bench_no_sub = 1 if self.on_bench() and self.substitute == 0 else 0
         self.missing = self.is_missing()
 
-        self.incidents = self.get_performance_incidents()
+        self.incidents = [incident for incident in self.team.incidents if incident.player_id == self.whoscored_id]
         self.play_data = self.analyze_incidents()
         self.duration_of_match = self.prev_match.duration
         self.played_minutes = self.get_played_minutes()
+        self.rating = self.get_rating()
 
         if not database.is_element_in_db("Prev_Performances", Prev_Performance_ID=self.prev_performance_id):
             self.save_prev_performance_data_into_db()
@@ -797,7 +793,7 @@ class Prev_Performance:
         """update needed"""
         database.insert("Prev_Performances", True, self.prev_performance_id, self.whoscored_id, self.name,
                         self.ucl_performance_id, self.team_id, self.starting, self.bench_no_sub, self.substitute,
-                        self.missing, self.duration_of_match, self.played_minutes)
+                        self.missing, self.duration_of_match, self.played_minutes, self.rating)
 
     def is_missing(self):
         status = ''
@@ -832,9 +828,6 @@ class Prev_Performance:
         if self.whoscored_id in Team.teams[self.team_id].substitutes:
             return True
         return False
-
-    def get_performance_incidents(self):
-        return [incident for incident in self.team.incidents if incident.player_id == self.whoscored_id]
 
     def analyze_incidents(self):
         data = {'sub out': None, 'sub in': None, 'goals': 0, 'assists': 0, 'own goal': 0, 'errors': 0, 'bonuses': 0,
@@ -882,6 +875,20 @@ class Prev_Performance:
             played_minutes = 0
         return played_minutes
 
+    def get_rating(self):
+        with open(self.prev_match.centre_file, "r", encoding="utf-8") as file:
+            soup = BeautifulSoup(file.read(), 'html.parser')
+            if self.starting == 1: 
+                pitch_element = soup.find_all("div", attrs={'class': 'pitch-field', 'data-field': self.team.type})
+                player_elem = pitch_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
+                rating = float(player_element.find("span", class_='player-stat-value').string)
+            elif self.substitute == 1:
+                bench_element = soup.find("div", attrs={'class': 'substitutes', 'data-field': self.team.type})
+                player_elem = bench_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
+                rating = float(player_element.find("span", class_='player-stat-value').string)
+            else:
+                rating = 0
+        return rating
 
 class Position:
     all_position = []
@@ -897,7 +904,8 @@ class Position:
     def set_position_class(self):
         pass
 
-for game in ("1017506",):
+
+for game in database.select("UCL_Matches", order_by="Date"):
     test = Match.analyze_match(game)
     logger.write(f"Match with ID {game} analyzed.")
     Match.delete_all_matches()
