@@ -109,9 +109,8 @@ class Database:
         """The method to check the given element is already in the database.\n
         :param table: str, name of table in the database
         :param conditions: tuple, <column_name>=<value> conditions"""
-        found = self.select(table, **conditions)
-        answer = False if len(found) == 0 else True
-        return answer
+        return len(self.select(table, **conditions)) > 0
+ 
 
 
 class Logger:
