@@ -6,6 +6,8 @@ import sqlite3 as lite
 import logging
 import datetime
 import sys
+from typing import Dict
+
 from unidecode import unidecode
 from os import listdir, path
 from time import asctime, localtime
@@ -73,13 +75,14 @@ class Database:
         :param commit: bool, changes in database are commited if it is True
         :param args: tuple, <column_name>=<value> conditions"""
         self.cursor.execute(f"INSERT INTO {table} VALUES({','.join(['?' for _ in args])})", (*args,))
-        self.log(f"table {table} -> new row added: {args}")
+        self.log(f"{self.name}: table {table} -> new row added: {args}")
         if commit is True:
             self.commit()
 
-    def update(self, table, column, value, **condition):
+    def update(self, table, column, value, commit=True, **condition):
         self.cursor.execute(f"UPDATE {table} SET {column} = {value} WHERE {condition} = ?", (*condition.values(),))
-        self.commit()
+        if commit is True:
+            self.commit()
 
     def many_columns_update(self, table, column, condition, **values):
         query_set = f" SET {' AND '.join([f'{value}=?' for value in values])}" if len(values) != 0 else ''
@@ -112,7 +115,6 @@ class Database:
         return len(self.select(table, **conditions)) > 0
  
 
-
 class Logger:
     """Object to log text using the `logging` module.
     The messages can be wrote to the standard output and saved to the files on the local disk in directory log_folder."""
@@ -122,8 +124,8 @@ class Logger:
         self.std_output = std_output
         if log_folder:
             num, now = len(listdir(log_folder)) + 1, datetime.datetime.now()
-            logging.basicConfig(filename=f'{log_folder}\\{now.date()}_Log_{num}.txt',
-                                filemode='w', format=f'%(asctime)s - %(levelname)s - %(message)s', level="NOTSET")
+            logging.basicConfig(handlers=[logging.FileHandler(f'{log_folder}\\{now.date()}_Log_{num}.txt', 'w', "utf8")],
+                                format=f'%(asctime)s - %(levelname)s - %(message)s', level="NOTSET")
             self.log = logging.getLogger('')
             self.write("Logger created.")
 

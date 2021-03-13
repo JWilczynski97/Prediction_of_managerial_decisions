@@ -5,6 +5,7 @@ from tools import Database, Logger
 
 from time import sleep, asctime
 import datetime
+import logging
 from statistics import mean
 from random import uniform
 from bs4 import BeautifulSoup
@@ -27,10 +28,11 @@ class Match:
         self.match_id = f"UCL_{self.whoscored_id}"
         Match.matches[self.match_id] = self     # adding match to the dictionary of all exciting match objects
 
-        self.log(f"Match with ID {self.match_id} created.")
+        self.log(f"-> Analysis of Match with ID {self.match_id}...")
 
         # getting match data from database
         match_data = self.get_match_data_from_db()
+        self.match_id_in_database = match_data["UCL_Match_ID"]
         self.season = match_data["Season"]
         self.date = match_data["Date"]
         self.centre_file = match_data["Centre_file"]
@@ -44,6 +46,8 @@ class Match:
             if Match.check_team(match_data["Team_1_ID"], match_data["Season"]) else match_data["Team_1_ID"]
         self.team_away = Team(match_data["Team_2_ID"], "away", self.match_id) \
             if Match.check_team(match_data["Team_2_ID"], match_data["Season"]) else match_data["Team_2_ID"]
+
+        self.log(f"-> Analysis of Match with ID {self.match_id} completed.")
 
     def delete_match(self):
         Match.log(f"Match with ID {self.match_id} deleted.")
@@ -104,7 +108,7 @@ class Match:
 
     @staticmethod
     def is_already_analyzed(id_match):
-        return id_match in [match['Performance_ID'].split("_")[-1] for match in database.select("Performanses")]
+        return id_match in [match['Performance_ID'].split("_")[-1] for match in database.select("Performances")]
 
 
 class PrevMatch:
@@ -120,7 +124,7 @@ class PrevMatch:
         self.ucl_match = Match.matches[ucl_match]
         self.match_id = f"Prev_{str(self.whoscored_id)}_{ucl_match}" if self.comp != "ucl" else f"Prev_UCL_{str(self.whoscored_id)}_{ucl_match}"
         PrevMatch.prev_matches[self.match_id] = self  # adding match to the dictionary of all exciting match objects
-        self.log(f"PrevMatch with ID {self.match_id} created.")
+        self.log(f"->  Analysis of PrevMatch with ID {self.match_id}...")
 
         # getting match data from database
         match_data = self.get_match_data_from_db()
@@ -134,8 +138,8 @@ class PrevMatch:
 
         self.log(f"Data of PrevMatch with ID {self.match_id} got from the database.")
 
-        self.team_id = match_data["Team_1_ID"] if self.whoscored_id == match_data["Team_1_ID"] else match_data["Team_2_ID"]
-        self.rival_id = match_data["Team_1_ID"] if self.team_id == match_data["Team_2_ID"] else match_data["Team_2_ID"]
+        self.team_id = match_data["Team_1_ID"] if int(self.team_ucl.whoscored_id) == int(match_data["Team_1_ID"]) else int(match_data["Team_2_ID"])
+        self.rival_id = match_data["Team_1_ID"] if int(self.team_id) == int(match_data["Team_2_ID"]) else int(match_data["Team_2_ID"])
 
         league_data = self.get_league_data() if self.comp == "league" else 0
         self.league_diff_best = league_data["diff best"] if league_data != 0 else 200
@@ -146,6 +150,8 @@ class PrevMatch:
         self.team_away = Team(match_data["Team_2_ID"], "away", self.match_id, prev=True) if str(match_data["Team_2_ID"]) == self.team_whoscored_id else str(match_data["Team_2_ID"])
         self.team = self.team_home if type(self.team_home) == Team else self.team_away
         self.rival = self.team_home if type(self.team_away) == Team else self.team_away
+
+        self.log(f"->  Analysis of PrevMatch with ID {self.match_id} completed.")
 
     def delete_match(self):
         PrevMatch.log(f"PrevMatch with ID {self.match_id} deleted.")
@@ -237,7 +243,10 @@ class Team:
         self.match = PrevMatch.prev_matches[match_id] if self.prev is True else Match.matches[match_id]
         self.match_id = match_id
 
-        self.team_id = f"Team_{self.type}_" + str(whoscored_id) + "_" + match_id
+        self.team_id = (f"Team_{self.type}_" + str(whoscored_id) + "_" + match_id)
+        if self.prev:
+            self.team_id = "_".join(self.team_id.split("_")[:-2])
+
         Team.teams[self.team_id] = self
 
         # getting data about Team from database
@@ -246,7 +255,7 @@ class Team:
         self.league = team_data["League"]
         self.link = team_data["Link"]
 
-        self.log(f"Team {self.team_name} in match {self.match.match_id} with ID {self.team_id} created.")
+        self.log(f"-->  Team {self.team_name} in match {self.match.match_id} with ID {self.team_id} is creating...")
         self.log(f"Data of team with ID {self.team_id} got from the database.")
 
         # getting data about team in match from database or html files
@@ -255,7 +264,12 @@ class Team:
             if database.is_element_in_db(table, Team_Match_ID=self.team_id) else None
         self.predicted = self.get_predicted_squad() if data is None else data["Predicted"].split(",")
         self.starting = self.get_lineup() if data is None else data["Starting"].split(",")
-        assert len(self.predicted) == 11 and len(self.starting) == 11
+        try:
+            assert len(self.predicted) == 11 and len(self.starting) == 11
+        except AssertionError as e:
+            logger.write(f"Team -> {self.team_id} -> AssertionError len(self.predicted) == 11 and len(self.starting) == 11. Content: {e}", level=logging.ERROR)
+            logger.write(f"predicted: {len(self.predicted)}\nstarting: {len(self.starting)}")
+            logger.write(50*"-")
         bench = self.get_bench() if data is None else (data["Bench"].split(","), data["Substitutes"].split(","))
         self.bench = bench[0]
         self.substitutes = bench[1]
@@ -274,29 +288,24 @@ class Team:
         if self.prev is False:
             for id_player in self.all_squad:
                 self.save_player_data_into_db(id_player)
-            self.prev_matches = self.get_prev_matches() # getting all previous matches for team
+            self.prev_matches, self.prev_ucl_matches = self.get_prev_matches() # getting all previous matches for team
             # self.last_matches = {num: prev for num, prev in self.prev_matches.items() if num <= Team.num_last_matches}
             if data is None:
                 self.save_team_UCL_into_db()
             for num, prev_match_id in self.prev_matches.copy().items():
-                if num == 0 and prev_match_id is None:
-                    self.prev_matches[num] = None
-                    continue
-                comp = 'ucl' if num == 0 else 'league'
-                self.prev_matches[num] = PrevMatch(str(prev_match_id), ucl_match=self.match_id, team=str(self.team_id), competition=comp).team
-            if self.prev_matches[0] is None:
-                self.prev_matches[0] = self.choose_most_important_match()
+                self.prev_matches[num] = PrevMatch(str(prev_match_id), ucl_match=self.match_id, team=str(self.team_id), competition='league').team
+            for num, prev_ucl_match_id in self.prev_ucl_matches.copy().items():
+                self.prev_ucl_matches[num] = PrevMatch(str(prev_ucl_match_id), ucl_match=self.match_id, team=str(self.team_id), competition='ucl').team
+            self.log(f"Previous matches analyzed: {[x.whoscored_id for x in self.prev_matches.values() if x]}")
+            self.log(f"All players: {self.all_squad}")
             self.players = {idx: Performance(idx, self.team_id) for idx in self.all_squad}
-            self.log(f"{self.team_id} -> previous matches: {[x.whoscored_id for x in self.prev_matches.values()]}")
-            self.log(f"{self.team_id} -> performances of players: {list(self.players.keys())}")
-
+            
         else: # for instance of Team in PrevMatch -> getting a few last matches of team and previous performances of players
             if data is None:
                 self.save_team_into_db()
             self.prev_players = {idx: Prev_Performance(idx, self.team_id, self.match.team_ucl.team_id) for idx in self.match.team_ucl.all_squad}
-            self.log(f"{self.team_id} -> previous performances of players: {list(self.prev_players.keys())}")
-
-        self.log(f"Data about previous performances for players of team with ID {self.team_id} got from the database/html files.")
+            self.log(f"Previous performances for players of team {self.team_id} analyzed.")
+        self.log(f"--> Analysis of team {self.team_id} complete.")
 
     def delete_match(self):
         Team.log(f"Team with ID {self.team_id} deleted.")
@@ -320,31 +329,32 @@ class Team:
             del cls.teams[team_id]
 
     def save_team_UCL_into_db(self):
-        database.insert("Teams_in_UCL_Matches", True, self.team_id, self.whoscored_id, self.type, self.match_id,
+        database.insert("Teams_in_UCL_Matches", False, self.team_id, self.whoscored_id, self.match.date, self.match_id,
                         ",".join(self.all_squad), ",".join(self.predicted), ",".join(self.starting),
                         ",".join(self.bench), ",".join(self.substitutes),
                         ",".join([f"{k}:{v}" for k, v in self.missing.items()]),
-                        ",".join(self.prev_matches.values()))  # (...)
-        self.log(f"Data about team {self.team_id} in match {self.match_id} saved into the database.")
+                        ",".join(self.prev_matches.values()), ",".join(self.prev_ucl_matches.values()))  # (...)
+        self.log(f"Data about team {self.team_id} saved into the database.")
 
     def save_team_into_db(self):
         miss = ",".join([f"{k}:{v}" for k, v in self.missing.items()]) if len(self.missing.keys()) != 0 else ''
         subs = ",".join(self.substitutes) if len(self.substitutes) != 0 else ''
-        database.insert("Teams_in_Matches", True, self.team_id, self.whoscored_id, self.type, self.match_id,
+        database.insert("Teams_in_Matches", False, self.team_id, self.whoscored_id, self.match.date, self.match_id,
                         ",".join(self.all_squad), ",".join(self.predicted), ",".join(self.starting),
                         ",".join(self.bench), subs, miss)  # (...)
-        self.log(f"Data about team {self.team_id} in match {self.match_id} saved into the database.")
+        self.log(f"Data about team {self.team_id} saved into the database.")
 
     def get_predicted_squad(self):
         with open(self.match.preview_file, "r", encoding="utf-8") as file:
             soup = BeautifulSoup(file.read(), 'html.parser')
-            all_elements = soup.find_all("ul", class_="player")
-            all_predicted = []
+            pitch = soup.find("div", attrs={'id': 'preview'})
+            team_pitch = pitch.find_all("div", class_=self.type)[1]
+            all_elements = team_pitch.find_all("ul", class_="player")
+            predicted = []
             for player in all_elements:
-                all_predicted.append(player.get('data-playerid'))
-            team_preview = all_predicted[:11] if self.type == "home" else all_predicted[11:]
-            self.log(f"{self.team_id} -> predicted squad got from html file.")
-            return team_preview
+                predicted.append(player.get('data-playerid'))
+            self.log(f"Predicted squad got from html file.")
+            return predicted
 
     def get_lineup(self):
         num = 0 if self.type == "home" else 1  # 1 if type == "away"
@@ -355,7 +365,7 @@ class Team:
             team_elements = pitch_element[num].find_all("div", class_="player")
             for player in team_elements:
                 team_squad.append(player.get('data-player-id'))
-            self.log(f"{self.team_id} -> line-up got from html file.")
+            self.log(f"Line-up of team {self.team_id} got from html file.")
             return team_squad
 
     def get_bench(self):
@@ -369,7 +379,7 @@ class Team:
                 team_bench.append(player.get('data-player-id'))
                 if player.get('data-subbed-in') == "true":
                     team_substitues.append(player.get('data-player-id'))
-            self.log(f"{self.team_id} -> data about players on the bench got from html file.")
+            self.log(f"Data about substitues of team {self.team_id} got from html file.")
             return team_bench, team_substitues
 
     def get_missing_players(self):
@@ -387,7 +397,7 @@ class Team:
                 except AttributeError:
                     continue
                 missing[player_id] = player_status
-            self.log(f"{self.team_id} -> data about missing players got from html file.")
+            self.log(f"Data about missing players of team {self.team_id} got from html file.")
             return missing
 
     def save_player_data_into_db(self, id_player):
@@ -411,39 +421,43 @@ class Team:
                     if div_missing is None:
                         continue
                     missing = div_missing.find_all("a", class_="player-link")
-                    print(missing)
                     for player_miss in missing:
                         if str(id_player) in player_miss['href']:
                             player_name = player_miss.string
             if player_name == '':
                 raise Exception(
                     f"Error! Name of player with ID {id_player} for team {self.team_id} not downloaded...")
-            database.insert("Players", True, id_player, player_name,
+            database.insert("Players", False, id_player, player_name,
                             f"www.whoscored.com/Players/{id_player}/")
+            self.log(f"Data about player {player_name} ({id_player}) saved into database.")
 
     def get_prev_matches(self):
         all_league_prev_ids = [prev_match['Match_WhoScored_ID'] for prev_match
                                in database.select("UCL_Matches_Matches", UCL_Match_WhoScored_ID=self.match.whoscored_id)]
         league_prev_matches = [database.select("Matches", Match_WhoScored_ID=match_id)[0] for match_id in all_league_prev_ids]
         league_prev_matches = list(filter(lambda m: str(self.whoscored_id) in (m['Team_1_ID'], m['Team_2_ID']), league_prev_matches))
+        prev_league = list(sorted(league_prev_matches, key=lambda x: x['Date'], reverse=True))
+        prev_league = [str(prev_match["Match_WhoScored_ID"]) for prev_match in prev_league]
 
         all_ucl_matches = database.select("UCL_Matches", order_by="Date", option_order="DESC", Season=self.match.season)
         team_ucl_matches = list(filter(lambda x: self.whoscored_id in (x['Team_1_ID'], x['Team_2_ID']), all_ucl_matches))
         prev_ucl_matches = list(filter(lambda g: g['Date'] < self.match.date, team_ucl_matches))
+        prev_ucl_matches = list(sorted(prev_ucl_matches, key=lambda x: x['Date'], reverse=True))
+        prev_ucl = [str(prev_match["UCL_Match_WhoScored_ID"]) for prev_match in prev_ucl_matches]
 
-        prev_league = list(sorted(league_prev_matches, key=lambda x: x['Date'], reverse=True))
-        prev_league = [str(prev_match["Match_WhoScored_ID"]) for prev_match in prev_league]
-        previous_matches = {key: val for key, val in enumerate(prev_league, start=1)}
-        previous_matches[0] = str(prev_ucl_matches[0]['UCL_Match_WhoScored_ID']) if len(prev_ucl_matches) > 0 else None
-        return previous_matches
+        previous_league_matches = {key: val for key, val in enumerate(prev_league, start=1)}
+        previous_ucl_matches = {key: val for key, val in enumerate(prev_ucl, start=1)}
+        self.log(f"Previous matches of team {self.team_id} got from database.")
+        return previous_league_matches, previous_ucl_matches
 
     def choose_most_important_match(self):
-        league_prev_matches = {num: prev.diff_rival for num, prev in self.prev_matches.items() if num != 0}
-        min_diff, choice = -100, 0
-        for num, rival_diff in league_prev_matches:
+        league_prev_matches = {num: prev.match.league_diff_rival for num, prev in self.prev_matches.items() if num != 0}
+        min_diff, choice = 100, 0
+        for num, rival_diff in league_prev_matches.items():
             if rival_diff < min_diff:
                 min_diff = rival_diff
                 choice = num
+        self.log(f"Previous UCL match not exists, data about previous match number {choice} got.")
         return self.prev_matches[choice]
 
     def get_incidents(self):
@@ -461,11 +475,11 @@ class Team:
                     player_id = elem["data-player-id"]
                     name = elem["title"]
                 except KeyError:
-                    if elem['data-type'] == "17" and elem['data-card-type'] == "31":
-                        name = "Yellow Card"
-                    else:
-                        continue
+                    if 'yellow card' not in elem:
+                        logger.write(f"KeyError in Team.get_incidents()) in element: {elem}")
+                    continue
                 incidents.append(Incident(self.team_id, minute, player_id, name))
+            self.log(f"Data about incidents of team {self.team_id} got from html file.")
             return incidents
 
     def get_team_news(self):
@@ -479,6 +493,7 @@ class Team:
                 teams_news = soup.find("div", class_="preview-news-items")
                 comments = teams_news.find_all("ul", class_="items")[num].find_all("li")
             news = ' '.join([comment.string for comment in comments])
+        self.log(f"Team news section of team {self.team_id} got from html file.")
         return news
 
 
@@ -510,8 +525,8 @@ class Performance:
         self.performance_id = str(self.whoscored_id) + "_" + str(self.ucl_match.whoscored_id)     # Performance ID
         Performance.players[self.performance_id] = self
 
-        """if not database.is_element_in_db("Players", Player_WhoScored_ID=self.whoscored_id):
-            self.save_player_data_into_db()"""
+        self.log(f"---->  Performance of player {self.performance_id} is analysing...") 
+
         data = database.select("Players", Player_WhoScored_ID=self.whoscored_id)[0]
 
         self.name = data["Name"]
@@ -520,21 +535,23 @@ class Performance:
         self.predicted = 1 if self.in_predicted_squad() else 0
         self.starting = 1 if self.in_lineup() else 0
 
-        self.prev_performances = self.get_prev_performances()
+        self.prev_performances, self.prev_ucl_performances = self.get_prev_performances()
         self.last_performances = {num: prev for num, prev in self.prev_performances.items() if num <= Performance.num_last_matches and num != 0}
-        self.last_ucl_performance = self.prev_performances[0]
+        self.last_ucl_performance = self.prev_ucl_performances[1]
+        self.log(f"Data about player and his previous performances got from database.")
 
         # features
         self.missing = self.is_missing()
         self.feature_starting_and_missing_in_prev_matches()
-        self.season_minutes, self.season_percentage, self.last_minutes, self.last_percentage = self.feature_minutes()
+        self.season_percentage = self.feature_minutes()
         self.in_team_news = 1 if self.name in self.team.team_news or unidecode(self.name) in self.team.team_news else 0
-        self.feature_missing_in_prev_matches()
+        # self.feature_missing_in_prev_matches()
         self.feature_ratings_in_prev_matches()
         self.feature_stats_prev_matches()
 
         # saving all data about this performance into database
         self.save_performance_data_into_db()
+        self.log(f"----> Analysis of performance {self.performance_id} completed. Data saved into database.")
 
     def __del__(self):
         Performance.players.pop(self.performance_id, None)
@@ -553,40 +570,10 @@ class Performance:
         for performance_id in list(cls.players):
             del cls.players[performance_id]
 
-    def save_player_data_into_db(self):
-        player_name = ''
-        for website in (self.ucl_match.centre_file, self.ucl_match.preview_file):
-            with open(website, "r", encoding="utf-8") as file:
-                soup = BeautifulSoup(file.read(), 'html.parser')
-                player_div = soup.find("div", attrs={"class": "player", "data-player-id": self.whoscored_id})
-                player_div = soup.find("div", attrs={"class": "player is-man-of-the-match", "data-player-id": self.whoscored_id}) \
-                    if player_div is None else player_div
-                if player_div is not None:
-                    player_info = player_div.find("div", class_="player-info")
-                    player_name = player_info.find("div", attrs={"class": "player-name-wrapper"})['title']
-                    break
-                player_ul = soup.find("ul", attrs={"class": "player", "data-playerid": self.whoscored_id})
-                if player_ul is not None:
-                    player_name = player_ul['title'].split("(")[0]
-                    break
-                div_missing = soup.find("div", id="missing-players")
-                if div_missing is None:
-                    continue
-                missing = div_missing.find_all("a", class_="player-link")
-                print(missing)
-                for player_miss in missing:
-                    if str(self.whoscored_id) in player_miss['href']:
-                        player_name = player_miss.string
-        if player_name == '':
-            raise Exception(
-                f"Error! Name of player with ID {self.whoscored_id} for team {self.team_id} not downloaded...")
-        database.insert("Players", True, self.whoscored_id, player_name,
-                        f"www.whoscored.com/Players/{self.whoscored_id}/")
-
     def save_performance_data_into_db(self):
         """update needed"""
         if not database.is_element_in_db("Performances", Performance_ID=self.performance_id):
-            database.insert("Performances", True, self.performance_id, self.whoscored_id, self.name, self.team_id,
+            database.insert("Performances", False, self.performance_id, self.name, self.team_id, self.ucl_match.season,
                             self.prev_1_start, self.prev_1_missing, self.prev_1_rating, self.prev_1_diff_rival,
                             self.prev_1_diff_best, self.prev_2_start, self.prev_2_missing, self.prev_2_rating, self.prev_2_diff_rival,
                             self.prev_2_diff_best, self.prev_3_start, self.prev_3_missing, self.prev_3_rating, self.prev_3_diff_rival,
@@ -616,7 +603,7 @@ class Performance:
         return False
 
     def get_prev_performances(self):
-        prev_performances = dict()
+        prev_performances, prev_ucl_performances = dict(), dict()
         for num, prev_match_team in self.team.prev_matches.items():
             prev_performance_id = f"Prev_{self.whoscored_id}_{prev_match_team.team_id}"
             if database.is_element_in_db("Prev_Performances", Prev_Performance_ID=prev_performance_id):
@@ -624,7 +611,14 @@ class Performance:
                 prev_performances[num] = prev_perf
             else:
                 raise Exception(f"Error! Prev_Performance for performance {prev_performance_id} not found in the database!")
-        return prev_performances
+        for num, prev_match_team in self.team.prev_ucl_matches.items():
+            prev_performance_id = f"Prev_{self.whoscored_id}_{prev_match_team.team_id}"
+            if database.is_element_in_db("Prev_Performances", Prev_Performance_ID=prev_performance_id):
+                prev_perf = database.select("Prev_Performances", Prev_Performance_ID=prev_performance_id)[0]
+                prev_ucl_performances[num] = prev_perf
+            else:
+                raise Exception(f"Error! Prev_Performance for performance {prev_performance_id} not found in the database!")
+        return prev_performances, prev_ucl_performances
 
     def feature_starting_and_missing_in_prev_matches(self):
         for num, last_perf in self.last_performances.items():
@@ -632,39 +626,52 @@ class Performance:
             exec(f'self.prev_{num}_missing = int({last_perf["Missing"]})')
         exec(f'self.prev_ucl_start = self.last_ucl_performance["Starting"]')
         exec(f'self.prev_ucl_missing = self.last_ucl_performance["Missing"]')
+        # no all last matches for first ucl matches of season -> values 99 for p
+        for num in range(1, Performance.num_last_matches + 1):
+            try:
+                exec(f"a = self.prev_{num}_start")
+            except AttributeError:
+                exec(f'self.prev_{num}_start = 99')
+                exec(f'self.prev_{num}_missing = 99')
+                exec(f"self.prev_{num}_rating = 99")
+                exec(f"self.prev_{num}_diff_rival = 99")
+                exec(f"self.prev_{num}_diff_best = 99")
 
     def feature_minutes(self):
         """ This function calculates the sum of played minutes in the all current season for the player and
         percentage of possible minutes. The same for few last matches."""
-        season_player_minutes, season_matches_minutes, last_player_minutes, last_matches_minutes = 0, 0, 0, 0
+        player_minutes, matches_minutes = 0, 0
         for num, prev_performance in self.prev_performances.items():
-            if prev_performance['Missing'] == 0:
-                season_matches_minutes += int(prev_performance["Duration_of_match"])
-            season_player_minutes += int(prev_performance["Played_minutes"])
-            if num <= Performance.num_last_matches:
-                if prev_performance['Missing'] == 0:
-                    last_player_minutes += int(prev_performance["Played_minutes"])
-                last_matches_minutes += int(prev_performance["Duration_of_match"])
-        if season_matches_minutes == 0:
-            last_matches_minutes,  season_matches_minute = 1, 1
-        return (season_player_minutes, round(season_player_minutes/season_matches_minutes, 3),
-                last_player_minutes, round(last_player_minutes/last_matches_minutes, 3))
-
-    def feature_missing_in_prev_matches(self):
-        for num, prev_performance in self.last_performances.items():
-            exec(f"self.prev_{num}_missing = prev_performance['Missing']")
-        exec(f"self.prev_ucl_missing = self.last_ucl_performance['Missing']")
+            if int(prev_performance['Missing']) == 0:
+                matches_minutes += int(prev_performance["Duration_of_match"])
+            else:
+                if int(prev_performance["Played_minutes"]) > 0:
+                    matches_minutes += int(prev_performance["Duration_of_match"])
+            player_minutes += int(prev_performance["Played_minutes"])
+        for num, prev_performance in self.prev_ucl_performances.items():
+            if int(prev_performance['Missing']) == 0:
+                matches_minutes += int(prev_performance["Duration_of_match"])
+            else:
+                if int(prev_performance["Played_minutes"]) > 0:
+                    matches_minutes += int(prev_performance["Duration_of_match"])
+            player_minutes += int(prev_performance["Played_minutes"])
+        if matches_minutes == 0:
+            assert player_minutes == 0
+            matches_minutes = 1
+        minutes_percentage = round(player_minutes/matches_minutes, 3)
+        assert 0 <= minutes_percentage <= 1.000
+        return minutes_percentage
 
     def feature_ratings_in_prev_matches(self):
         all_ratings = {num: match['Rating'] for num, match in self.last_performances.items() if num != 0}
         for num, prev_rating in all_ratings.items():
             exec(f"self.prev_{num}_rating = prev_rating")
         zeros = [num for num, rat in all_ratings.items() if rat == 0]
-        if len(zeros) in (4, 5):                        # default ratings inplace zero-ratings
+        if len(zeros) in (4, 5) or len(zeros) == len(all_ratings):  # default ratings inplace zero-ratings
             for num in zeros:
                 exec(f"self.prev_{num}_rating = 5.0")
         elif len(zeros) in (1, 2, 3):                   # average of other ratings inplace zero-ratings
-            avg = round(mean([rat for num, rat in all_ratings.items() if rat != 0]), 1)
+            avg = float(round(mean([rat for num, rat in all_ratings.items() if rat != 0]), 1))
             assert type(avg) is float and avg > 0
             for num in zeros:
                 exec(f"self.prev_{num}_rating = avg")
@@ -694,6 +701,8 @@ class Prev_Performance:
         self.prev_performance_id = "Prev_" + str(self.whoscored_id) + "_" + str(self.team_id)
         Prev_Performance.prev_players[self.prev_performance_id] = self
 
+        self.log(f"--->  Previous performance of player {self.prev_performance_id} is analysing...") 
+
         if not database.is_element_in_db("Players", Player_WhoScored_ID=self.whoscored_id):
             self.save_player_data_into_db()
 
@@ -718,6 +727,7 @@ class Prev_Performance:
             self.save_prev_performance_data_into_db()
         else:
             self.get_data_from_db()
+        self.log(f"--->  Analysis of previous performance {self.prev_performance_id} completed.") 
 
     def __del__(self):
         Prev_Performance.prev_players.pop(self.prev_performance_id, None)
@@ -747,31 +757,27 @@ class Prev_Performance:
                 if player_div is not None:
                     player_info = player_div.find("div", class_="player-info")
                     player_name = player_info.find("div", attrs={"class": "player-name-wrapper"})['title']
-                    print("Name got from CENTRE. ", self.prev_performance_id)
                     break
                 player_ul = soup.find("ul", attrs={"class": "player", "data-playerid": self.whoscored_id})
                 if player_ul is not None:
                     player_name = player_ul['title'].split("(")[0]
-                    print("Name got from PREVIEW. ", self.prev_performance_id)
                     break
                 div_missing = soup.find("div", id="missing-players")
                 if div_missing is None:
                     continue
                 missing = div_missing.find_all("a", class_="player-link")
-                print(missing)
                 for player_miss in missing:
                     if str(self.whoscored_id) in player_miss['href']:
                         player_name = player_miss.string
-                        print(f"Name -{player_name}- got from MISSING. ", self.prev_performance_id)
         if player_name == '':
             raise Exception(
                 f"Error! Name of player with ID {self.whoscored_id} for team {self.team_id} not downloaded...")
-        database.insert("Players", True, self.whoscored_id, player_name,
+        database.insert("Players", False, self.whoscored_id, player_name,
                         f"www.whoscored.com/Players/{self.whoscored_id}/")
 
     def save_prev_performance_data_into_db(self):
         """update needed"""
-        database.insert("Prev_Performances", True, self.prev_performance_id, self.whoscored_id, self.name,
+        database.insert("Prev_Performances", False, self.prev_performance_id, self.whoscored_id, self.name,
                         self.ucl_performance_id, self.team_id, self.starting, self.bench_no_sub, self.substitute,
                         self.missing, self.duration_of_match, self.played_minutes, self.rating, self.diff_rival, self.diff_best)
 
@@ -841,16 +847,20 @@ class Prev_Performance:
     def get_rating(self):
         with open(self.prev_match.centre_file, "r", encoding="utf-8") as file:
             soup = BeautifulSoup(file.read(), 'html.parser')
-            if self.starting == 1:
-                pitch_element = soup.find("div", attrs={'class': 'pitch-field', 'data-field': self.team.type})
-                player_elem = pitch_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
-                rating = float(player_elem.find("span", class_='player-stat-value').string)
-            elif self.substitute == 1:
-                bench_element = soup.find("div", attrs={'class': 'substitutes', 'data-field': self.team.type})
-                player_elem = bench_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
-                rating = float(player_elem.find("span", class_='player-stat-value').string)
-            else:
-                rating = 0
+            try:
+                if self.starting == 1:
+                    pitch_element = soup.find("div", attrs={'class': 'pitch-field', 'data-field': self.team.type})
+                    player_elem = pitch_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
+                    rating = float(player_elem.find("span", class_='player-stat-value').string)
+                elif self.substitute == 1:
+                    bench_element = soup.find("div", attrs={'class': 'substitutes', 'data-field': self.team.type})
+                    player_elem = bench_element.find("div", attrs={'class': 'player', 'data-player-id': self.whoscored_id})
+                    rating = float(player_elem.find("span", class_='player-stat-value').string)
+                else:
+                    rating = 0
+            except TypeError:
+                logger.write(f"TypeError in get_rating(). Rating returned as 0. Prev_Performance: {self.prev_performance_id}", level=logging.ERROR)
+                rating = 0 
         return rating
 
     def analyze_incidents(self):
@@ -876,21 +886,31 @@ class Prev_Performance:
                 data['yellow card'] += 1
                 data['errors'] += 1
         if self.substitute == 1:
-            assert self.substitute == 1 and data["sub in"] is not None
+            try:
+                assert self.substitute == 1 and data["sub in"] is not None
+            except AssertionError as e:
+                warnings.write(f"{self.prev_performance_id} -> AssertionError assert self.substitute == 1 and data['sub in'] is not None. Content: {e}")
+                warning.write(f"data: {data}. substitute: {self.substitute}")
         return data
 
-already_analyzed_matches = [match['Performance_ID'].split("_")[-1] for match in database.select("Performances")]
+already_analyzed_matches = [match['UCL_Match_WhoScored_ID'] for match in database.select("Analyzed_UCL_Matches")]
 
 # for game in database.select("UCL_Matches", order_by="Date"):
-for game in database.select("UCL_Matches", order_by="Date")[34:35]:
-    if game in already_analyzed_matches:
-        logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} is already analyzed.")
-        continue
-    test = Match.analyze_match(game['UCL_Match_WhoScored_ID'])
-    logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} analyzed.")
+for game in (1370007, 1017562):
+    '''if game['UCL_Match_WhoScored_ID'] in already_analyzed_matches:
+                    logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} was already analyzed.")
+                    continue'''
+    # analysis = Match.analyze_match(game['UCL_Match_WhoScored_ID'])
+    analysis = Match.analyze_match(game)
+    database.insert("Analyzed_UCL_Matches", True, analysis.match_id_in_database, analysis.whoscored_id)
+    database.commit()
+    # logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} analyzed.")
+    logger.write(f"Match with ID {game} analyzed.")
+    Match.delete_all_matches()
     Match.delete_all_matches()
     PrevMatch.delete_all_prev_matches()
     Team.delete_all_teams()
     Performance.delete_all_performances()
     Prev_Performance.delete_all_prev_performances()
+    logger.write(70*"-")
 database.disconnect()
