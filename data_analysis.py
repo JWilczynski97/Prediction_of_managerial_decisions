@@ -296,6 +296,8 @@ class Team:
                 self.prev_matches[num] = PrevMatch(str(prev_match_id), ucl_match=self.match_id, team=str(self.team_id), competition='league').team
             for num, prev_ucl_match_id in self.prev_ucl_matches.copy().items():
                 self.prev_ucl_matches[num] = PrevMatch(str(prev_ucl_match_id), ucl_match=self.match_id, team=str(self.team_id), competition='ucl').team
+            if len(self.prev_ucl_matches) == 0:
+                self.prev_ucl_matches[1] = self.choose_most_important_match()
             self.log(f"Previous matches analyzed: {[x.whoscored_id for x in self.prev_matches.values() if x]}")
             self.log(f"All players: {self.all_squad}")
             self.players = {idx: Performance(idx, self.team_id) for idx in self.all_squad}
@@ -303,6 +305,7 @@ class Team:
         else: # for instance of Team in PrevMatch -> getting a few last matches of team and previous performances of players
             if data is None:
                 self.save_team_into_db()
+
             self.prev_players = {idx: Prev_Performance(idx, self.team_id, self.match.team_ucl.team_id) for idx in self.match.team_ucl.all_squad}
             self.log(f"Previous performances for players of team {self.team_id} analyzed.")
         self.log(f"--> Analysis of team {self.team_id} complete.")
@@ -451,7 +454,7 @@ class Team:
         return previous_league_matches, previous_ucl_matches
 
     def choose_most_important_match(self):
-        league_prev_matches = {num: prev.match.league_diff_rival for num, prev in self.prev_matches.items() if num != 0}
+        league_prev_matches = {num: prev.match.league_diff_rival for num, prev in self.prev_matches.items() if num < 6}
         min_diff, choice = 100, 0
         for num, rival_diff in league_prev_matches.items():
             if rival_diff < min_diff:
@@ -536,7 +539,7 @@ class Performance:
         self.starting = 1 if self.in_lineup() else 0
 
         self.prev_performances, self.prev_ucl_performances = self.get_prev_performances()
-        self.last_performances = {num: prev for num, prev in self.prev_performances.items() if num <= Performance.num_last_matches and num != 0}
+        self.last_performances = {num: prev for num, prev in self.prev_performances.items() if num <= Performance.num_last_matches}
         self.last_ucl_performance = self.prev_ucl_performances[1]
         self.log(f"Data about player and his previous performances got from database.")
 
@@ -618,6 +621,8 @@ class Performance:
                 prev_ucl_performances[num] = prev_perf
             else:
                 raise Exception(f"Error! Prev_Performance for performance {prev_performance_id} not found in the database!")
+        print(self.team.prev_ucl_matches)
+        print(prev_performances, prev_ucl_performances)
         return prev_performances, prev_ucl_performances
 
     def feature_starting_and_missing_in_prev_matches(self):
@@ -663,23 +668,22 @@ class Performance:
         return minutes_percentage
 
     def feature_ratings_in_prev_matches(self):
-        all_ratings = {num: match['Rating'] for num, match in self.last_performances.items() if num != 0}
+        all_ratings = {num: match['Rating'] for num, match in self.last_performances.items() if match['Rating'] != 99}
         for num, prev_rating in all_ratings.items():
             exec(f"self.prev_{num}_rating = prev_rating")
-        zeros = [num for num, rat in all_ratings.items() if rat == 0]
+        zeros = [num for num, rat in all_ratings.items() if rat == 99]
         if len(zeros) in (4, 5) or len(zeros) == len(all_ratings):  # default ratings inplace zero-ratings
             for num in zeros:
                 exec(f"self.prev_{num}_rating = 5.0")
         elif len(zeros) in (1, 2, 3):                   # average of other ratings inplace zero-ratings
-            avg = float(round(mean([rat for num, rat in all_ratings.items() if rat != 0]), 1))
+            avg = float(round(mean([rat for num, rat in all_ratings.items() if rat != 99]), 1))
             assert type(avg) is float and avg > 0
             for num in zeros:
                 exec(f"self.prev_{num}_rating = avg")
-        if self.last_ucl_performance['Rating'] != 0:
-            exec(f"self.prev_ucl_rating = self.last_ucl_performance['Rating']")
-        else:
-            exec(f"self.prev_ucl_rating = round(mean({(self.prev_1_rating, self.prev_2_rating, self.prev_3_rating, self.prev_4_rating, self.prev_5_rating)}), 1)")
+        
+        exec(f"self.prev_ucl_rating = self.last_ucl_performance['Rating']")
 
+            
     def feature_stats_prev_matches(self):
         for num, prev_performance in self.last_performances.items():
             exec(f"self.prev_{num}_diff_rival = prev_performance['Diff_rival']")
@@ -895,17 +899,14 @@ class Prev_Performance:
 
 already_analyzed_matches = [match['UCL_Match_WhoScored_ID'] for match in database.select("Analyzed_UCL_Matches")]
 
-# for game in database.select("UCL_Matches", order_by="Date"):
-for game in (1370007, 1017562):
-    '''if game['UCL_Match_WhoScored_ID'] in already_analyzed_matches:
+for game in database.select("UCL_Matches", order_by="Date"):
+    if game['UCL_Match_WhoScored_ID'] in already_analyzed_matches:
                     logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} was already analyzed.")
-                    continue'''
-    # analysis = Match.analyze_match(game['UCL_Match_WhoScored_ID'])
-    analysis = Match.analyze_match(game)
+                    continue
+    analysis = Match.analyze_match(game['UCL_Match_WhoScored_ID'])
     database.insert("Analyzed_UCL_Matches", True, analysis.match_id_in_database, analysis.whoscored_id)
     database.commit()
-    # logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} analyzed.")
-    logger.write(f"Match with ID {game} analyzed.")
+    logger.write(f"Match with ID {game['UCL_Match_WhoScored_ID']} analyzed.")
     Match.delete_all_matches()
     Match.delete_all_matches()
     PrevMatch.delete_all_prev_matches()

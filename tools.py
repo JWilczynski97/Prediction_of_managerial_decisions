@@ -80,7 +80,7 @@ class Database:
             self.commit()
 
     def update(self, table, column, value, commit=True, **condition):
-        self.cursor.execute(f"UPDATE {table} SET {column} = {value} WHERE {condition} = ?", (*condition.values(),))
+        self.cursor.execute(f"""UPDATE {table} SET '{column}' = '{value}' WHERE "{condition}" = ?""", (*condition.values(),))
         if commit is True:
             self.commit()
 
