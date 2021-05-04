@@ -14,7 +14,7 @@ from time import asctime, localtime
 
 
 class Database:
-    """Object to represent the SQLite database in 'file'."""
+    """Class to represent the SQLite database in 'file'."""
 
     def __init__(self, file, logger=None, by_column=True):
         """ Function to create connection to the database and cursor. \n
@@ -31,17 +31,6 @@ class Database:
             self.connection.row_factory = lite.Row          # to access values by column name
         self.cursor = self.connection.cursor()
         self.log(f"Connected to the database {self.name}.")
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, ext_type, exc_value, traceback):
-        self.cursor.close()
-        if isinstance(exc_value, Exception):
-            self.rollback()
-        else:
-            self.commit()
-        self.close()
 
     def commit(self):
         self.connection.commit()
@@ -84,11 +73,6 @@ class Database:
         if commit is True:
             self.commit()
 
-    def many_columns_update(self, table, column, condition, **values):
-        query_set = f" SET {' AND '.join([f'{value}=?' for value in values])}" if len(values) != 0 else ''
-        self.cursor.execute(f"UPDATE {table} {query_set} WHERE {column} = {condition}", (*values.values(),))
-        self.commit()
-
     def select(self, table, order_by='', option_order='',
                **conditions):  # (SELECT * FROM <table> WHERE column_1=value_1 AND column_2=value_2 ORDER BY <column>)
         """Method to execute SELECT statement in the database with given conditions.\n
@@ -98,8 +82,7 @@ class Database:
         :param conditions: tuple, <column_name>=<value> conditions"""
         where = f" WHERE {' AND '.join([f'{condition}=?' for condition in conditions])}" if len(conditions) != 0 else ''
         order = f' ORDER BY {order_by} {option_order}' if order_by != '' != "ASC" else ''
-        if option_order not in ('', 'ASC', 'DESC'):
-            raise Exception("Error! Incorrect option of ordering.")
+        assert option_order in ('', 'ASC', 'DESC')
         rows = self.cursor.execute(f"SELECT * FROM {table}" + where + order, (*conditions.values(),))
         return rows.fetchall()
 
@@ -116,7 +99,7 @@ class Database:
  
 
 class Logger:
-    """Object to log text using the `logging` module.
+    """Object to log text using the logging module.
     The messages can be wrote to the standard output and saved to the files on the local disk in directory log_folder."""
 
     def __init__(self, log_folder=None, std_output=False):

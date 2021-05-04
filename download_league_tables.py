@@ -152,7 +152,7 @@ def save_russia_data_into_db(db, sea):
             match_day = f"{year}-{month}-{day}"
             table = f"Russia_{sea.replace('/', '_')}_day_{match_day.replace('-','_')}"
             create_table(db, table)
-            if len(db.select(table)) > 10:
+            if len(db.select(table)) > 0:
                 continue
             table_league = soup.find_all("table", class_="standard_tabelle")[1].find("tbody")
             rows = table_league.find_all("tr")[1:]
