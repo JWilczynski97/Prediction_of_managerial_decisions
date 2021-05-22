@@ -17,7 +17,7 @@ players = pd.read_csv("C:/Users/Jakub Wilczyński/PycharmProjects/Prediction of 
                                     "Prev_3_diff_rival", "Prev_3_diff_best", "Prev_4_start", "Prev_4_missing", "Prev_4_rating",
                                     "Prev_4_diff_rival", "Prev_4_diff_best", "Prev_5_start", "Prev_5_missing", "Prev_5_rating",
                                     "Prev_5_diff_rival", "Prev_5_diff_best", "Prev_CL_start", "Prev_CL_missing", "Prev_CL_rating",
-                                    "Missing", "Predicted", "Season_minutes", "Team_news", "Starting", "Team_ID"])
+                                    "Missing", "Predicted", "WhoScored_Prediction", "Season_minutes", "Team_news", "Starting", "Team_ID"])
 
 # index reset
 players.reset_index(drop=True, inplace=True)
@@ -39,19 +39,21 @@ X = players[players["Prev_5_start"] != 99]
 
 team_res = {}
 
-for team in ["Team_home_847_UCL_1238298", "Team_home_36_UCL_1152950", "Team_home_67_UCL_1152953"]:
+# for team in ["Team_home_847_UCL_1238298", "Team_home_36_UCL_1152950", "Team_home_67_UCL_1152953"]:
+for team in ["Team_home_847_UCL_1238298"]:
     if team in team_res:
         continue
     X_test = X[X["Team_ID"] == team]
-    y_test = X_test.drop(["Starting"], axis=1)
+    #y_test = X_test.drop(["Starting"], axis=1)
     y_test = X_test['Starting']
     
     X_train = X[X["Team_ID"] != team]
-    y_train = X_train.drop(["Starting"], axis=1)
+    # y_train = X_train.drop(["Starting"], axis=1)
     y_train = X_train['Starting']
     
     whoscored_prediction = X_test['WhoScored_Prediction']
     X_train_with_team = X_train
+    X_test_with_team = X_test 
     X_train = X_train.drop(["Performance_ID", "Player_name",'WhoScored_Prediction', "Starting", "Team_ID"], axis=1)
     X_test = X_test.drop(["Performance_ID", "Player_name",'WhoScored_Prediction', "Starting", "Team_ID"], axis=1)
     
